@@ -1,0 +1,1 @@
+Feed source diversity rules to avoid over-weighting one provider.

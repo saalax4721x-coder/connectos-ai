@@ -1,0 +1,2 @@
+# Professional data provider boundary
+Professional discovery uses permitted public records and provider APIs, with location, category, source, rating context, and freshness normalized into one safe interface.

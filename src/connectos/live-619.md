@@ -1,0 +1,1 @@
+Webhook/event ingestion boundary for providers that support push updates.

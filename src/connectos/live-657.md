@@ -1,0 +1,1 @@
+Live feed personalization feedback event contract.

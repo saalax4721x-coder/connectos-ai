@@ -1,0 +1,1 @@
+Live market snapshot state for dashboard cards.

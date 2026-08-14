@@ -1,0 +1,1 @@
+Company comparison freshness and source-confidence fields.

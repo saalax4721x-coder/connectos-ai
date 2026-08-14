@@ -1,0 +1,1 @@
+Strategy briefing adapter using fresh market and company context.

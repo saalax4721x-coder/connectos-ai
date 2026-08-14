@@ -1,0 +1,1 @@
+Provider health model with availability and freshness states.

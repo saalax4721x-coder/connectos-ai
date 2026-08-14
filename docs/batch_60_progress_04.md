@@ -1,0 +1,1 @@
+ConnectOS progress marker: search and discovery preparation.

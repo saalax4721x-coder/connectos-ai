@@ -1,0 +1,1 @@
+Market-data adapter contract with quote and timestamp fields.

@@ -1,0 +1,1 @@
+X public-data provider boundary and permission-aware adapter.

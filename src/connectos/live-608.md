@@ -1,0 +1,1 @@
+Normalized public-data record schema for people, companies, news, and markets.

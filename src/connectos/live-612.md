@@ -1,0 +1,1 @@
+Instagram official-API boundary for permitted public metadata.

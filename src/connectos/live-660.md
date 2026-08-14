@@ -1,0 +1,1 @@
+Live-data integration checkpoint tying provider outputs into ConnectOS intelligence surfaces.

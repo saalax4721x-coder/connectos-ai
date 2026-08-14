@@ -1,0 +1,1 @@
+Live data consent and source preference state.

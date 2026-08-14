@@ -1,0 +1,1 @@
+Background refresh queue contract for eligible intelligence updates.

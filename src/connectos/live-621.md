@@ -1,0 +1,1 @@
+Personalized feed query model using goals, industries, interests, and location.

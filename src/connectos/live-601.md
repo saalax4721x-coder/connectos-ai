@@ -1,0 +1,1 @@
+Live data foundation: provider registry and lifecycle contracts.

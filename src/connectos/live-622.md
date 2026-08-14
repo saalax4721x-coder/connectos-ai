@@ -1,0 +1,1 @@
+Personalized company intelligence query contract.

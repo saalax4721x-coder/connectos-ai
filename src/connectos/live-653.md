@@ -1,0 +1,1 @@
+Live professional availability metadata contract using permitted public fields.

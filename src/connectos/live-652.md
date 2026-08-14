@@ -1,0 +1,1 @@
+Live company activity stream contract.

@@ -1,0 +1,1 @@
+Professional-data adapter for permitted public directory information.

@@ -1,0 +1,1 @@
+Live opportunity freshness state for opportunity cards.

@@ -1,0 +1,2 @@
+# Typography system
+Use a strong display face for hero statements, a highly legible sans for product text, controlled letter spacing, and generous line height. Typography should carry hierarchy before decoration does.

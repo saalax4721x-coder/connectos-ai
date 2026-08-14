@@ -1,0 +1,2 @@
+# Luxury visual foundation
+Define a premium intelligence-terminal visual language: editorial typography, disciplined spacing, deep surfaces, high contrast, restrained metallic accents, and cinematic composition. Reject generic AI dashboard styling.

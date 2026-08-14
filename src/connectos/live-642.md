@@ -1,0 +1,1 @@
+Provider error classification for authentication, rate limits, timeouts, and upstream failures.

@@ -1,0 +1,1 @@
+AI assistant context adapter for current live intelligence.

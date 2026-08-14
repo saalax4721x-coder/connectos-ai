@@ -1,0 +1,1 @@
+Personalized professional discovery query contract.

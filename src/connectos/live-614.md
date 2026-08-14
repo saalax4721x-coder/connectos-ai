@@ -1,0 +1,1 @@
+News provider adapter with source, publish time, and canonical URL metadata.

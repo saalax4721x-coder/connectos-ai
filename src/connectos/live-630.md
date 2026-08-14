@@ -1,0 +1,1 @@
+Search freshness and ranking metadata.

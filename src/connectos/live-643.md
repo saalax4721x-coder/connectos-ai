@@ -1,0 +1,1 @@
+Provider circuit-breaker state to prevent cascading failures.

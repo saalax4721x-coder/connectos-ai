@@ -1,0 +1,2 @@
+# End-to-end matching checkpoint
+Connect problem intake, specialty classification, geographic expansion, transparent ranking, contact, scheduling, and follow-up into one Need → Match → Connect journey.

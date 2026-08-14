@@ -1,0 +1,1 @@
+Personalized opportunity discovery query contract.

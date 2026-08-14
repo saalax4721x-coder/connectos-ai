@@ -1,0 +1,1 @@
+Company-data adapter for public corporate information.

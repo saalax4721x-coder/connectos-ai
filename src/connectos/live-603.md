@@ -1,0 +1,1 @@
+Server-side secret boundary for external credentials.

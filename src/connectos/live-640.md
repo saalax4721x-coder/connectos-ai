@@ -1,0 +1,1 @@
+Local discovery query boundary with explicit user location permission.

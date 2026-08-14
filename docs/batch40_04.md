@@ -1,0 +1,1 @@
+ConnectOS batch progress 24/60: networking preparation.

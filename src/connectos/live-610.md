@@ -1,0 +1,1 @@
+Fallback behavior when a live provider is unavailable.

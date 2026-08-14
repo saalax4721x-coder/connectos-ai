@@ -1,0 +1,1 @@
+Search indexing contract for normalized public intelligence.

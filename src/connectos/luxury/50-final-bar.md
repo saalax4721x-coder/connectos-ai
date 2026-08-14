@@ -1,0 +1,2 @@
+# Final luxury quality bar
+ConnectOS should feel like a private intelligence platform: cinematic, calm, expensive, fast, editorial, and highly intentional. Every animation and color accent must serve hierarchy or meaning. Avoid generic AI gradients, clutter, and decorative noise.

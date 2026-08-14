@@ -1,0 +1,1 @@
+Market snapshot aggregation for home and strategy briefing.

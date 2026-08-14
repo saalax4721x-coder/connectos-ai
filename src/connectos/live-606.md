@@ -1,0 +1,1 @@
+Public-source attribution contract for every external intelligence item.

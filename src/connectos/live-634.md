@@ -1,0 +1,1 @@
+Company social activity enrichment boundary with public-only rules.

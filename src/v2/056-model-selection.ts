@@ -1,0 +1,1 @@
+export const selectModel=(routes:{model:string;capabilities:string[]}[],capability:string)=>routes.find(r=>r.capabilities.includes(capability));

@@ -1,0 +1,1 @@
+export type PersonProfile={id:string;name:string;profession?:string;companyId?:string;location?:string;skills:string[]};

@@ -1,0 +1,1 @@
+export type AgentPermission='read-public'|'read-user'|'write-draft'|'external-send'|'financial-action';

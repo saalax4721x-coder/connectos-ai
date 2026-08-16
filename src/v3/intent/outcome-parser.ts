@@ -1,0 +1,1 @@
+export const parseOutcome=(text:string)=>({raw:text.trim()});

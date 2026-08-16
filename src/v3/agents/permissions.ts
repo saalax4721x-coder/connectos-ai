@@ -1,0 +1,1 @@
+export type AgentPermission='read_public'|'read_authorized'|'draft'|'request_approval'|'execute_approved';

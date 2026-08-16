@@ -1,0 +1,1 @@
+export type Voice={tone:'direct'|'warm'|'formal'|'casual';length:'short'|'medium'};

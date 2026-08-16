@@ -1,0 +1,1 @@
+export type Delegation={agent:string;skill:string;input:unknown};

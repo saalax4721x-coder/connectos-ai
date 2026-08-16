@@ -1,0 +1,1 @@
+export const urgencyWeight=(urgency:'low'|'normal'|'high'|'critical')=>({low:.25,normal:.5,high:.8,critical:1}[urgency]);

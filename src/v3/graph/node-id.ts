@@ -1,0 +1,1 @@
+export const nodeId=(type:string,id:string)=>`${type}:${id}`;

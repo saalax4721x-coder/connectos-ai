@@ -1,0 +1,1 @@
+export interface AgentDefinition{id:string;name:string;version:string;domain:string;skills:string[];tools:string[];permissions:string[];memory:string[];inputSchema:string;outputSchema:string;status:'active'|'disabled'|'experimental';}

@@ -1,0 +1,1 @@
+export interface WatchRule{id:string;entityId:string;signals:string[];channel:'in-app'|'email';enabled:boolean;}

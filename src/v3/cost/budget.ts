@@ -1,0 +1,1 @@
+export const withinBudget=(spent:number,estimate:number,budget:number)=>spent+estimate<=budget;

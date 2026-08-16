@@ -1,0 +1,1 @@
+export type ValueBand='low'|'medium'|'high'|'unknown';

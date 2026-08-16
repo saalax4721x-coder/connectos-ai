@@ -1,0 +1,1 @@
+export const rankSearch=(score:number,relevance:number,freshness:number)=>.6*score+.25*relevance+.15*freshness;

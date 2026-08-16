@@ -1,0 +1,1 @@
+export const pathScore=(length:number,trust:number)=>trust/Math.max(1,length);

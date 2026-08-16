@@ -1,0 +1,1 @@
+export const approvalRequired=(risk:'low'|'medium'|'high',sideEffect:boolean)=>sideEffect||risk==='high';

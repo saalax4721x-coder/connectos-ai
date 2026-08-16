@@ -1,0 +1,1 @@
+export type NexusResult={status:'complete'|'needs_approval'|'failed';summary:string;nextAction?:string};

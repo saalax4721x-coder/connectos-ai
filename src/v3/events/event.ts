@@ -1,0 +1,1 @@
+export type ConnectEvent={id:string;name:string;startsAt:number;location?:string;attendeeIds:string[]};

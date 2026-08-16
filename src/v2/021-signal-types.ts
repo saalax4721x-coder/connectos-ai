@@ -1,0 +1,1 @@
+export type SignalType='funding'|'hiring'|'expansion'|'leadership'|'launch'|'acquisition'|'partnership'|'event';

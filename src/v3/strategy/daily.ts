@@ -1,0 +1,1 @@
+export type DailyBrief={topOpportunity?:string;topPerson?:string;topFollowup?:string;topSignal?:string;nextAction?:string};

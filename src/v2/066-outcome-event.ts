@@ -1,0 +1,1 @@
+export interface OutcomeEvent{type:string;entityId:string;source:string;at:string;value?:number;}

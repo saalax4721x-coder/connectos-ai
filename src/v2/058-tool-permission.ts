@@ -1,0 +1,1 @@
+export const canUseTool=(scope:string,allowed:string[])=>allowed.includes(scope);

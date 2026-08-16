@@ -1,0 +1,1 @@
+export const isFresh=(at:number,now=Date.now(),maxAgeMs=86400000)=>now-at<=maxAgeMs;

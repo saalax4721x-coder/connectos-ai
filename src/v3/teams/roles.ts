@@ -1,0 +1,1 @@
+export type TeamRole='owner'|'admin'|'member'|'viewer';

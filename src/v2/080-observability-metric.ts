@@ -1,0 +1,1 @@
+export interface Metric{key:string;value:number;unit?:string;at:string;tags:Record<string,string>;}

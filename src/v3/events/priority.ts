@@ -1,0 +1,1 @@
+export const eventPriority=(relevance:number,proximity:number)=>.7*relevance+.3*proximity;

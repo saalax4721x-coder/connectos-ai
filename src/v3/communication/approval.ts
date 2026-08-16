@@ -1,0 +1,1 @@
+export const requiresApproval=(kind:string)=>['email','message','public_post','deal','financial_commitment'].includes(kind);

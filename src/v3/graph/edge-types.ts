@@ -1,0 +1,1 @@
+export type EdgeType='knows'|'works_with'|'invested_in'|'partnered_with'|'can_introduce'|'shared_project';

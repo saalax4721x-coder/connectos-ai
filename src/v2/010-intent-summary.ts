@@ -1,0 +1,1 @@
+export const intentSummary=(goal:string,location?:string)=>location?`${goal} in ${location}`:goal;

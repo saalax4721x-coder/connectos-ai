@@ -1,0 +1,1 @@
+export const shouldRetain=(expiresAt?:number,now=Date.now())=>expiresAt==null||expiresAt>now;

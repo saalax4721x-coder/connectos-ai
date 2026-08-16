@@ -1,0 +1,1 @@
+export type ConstraintSet={required?:string[];excluded?:string[];limit?:number};

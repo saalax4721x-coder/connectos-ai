@@ -1,0 +1,1 @@
+export interface GraphEdge{from:string;to:string;type:string;confidence:number;source?:string;}

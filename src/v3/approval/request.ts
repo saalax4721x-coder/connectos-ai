@@ -1,0 +1,1 @@
+export type ApprovalRequest={id:string;action:string;reason:string;expiresAt:number};

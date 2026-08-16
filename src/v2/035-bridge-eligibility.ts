@@ -1,0 +1,1 @@
+export const eligibleBridge=(consent:boolean,confidence:number)=>consent&&confidence>=.7;

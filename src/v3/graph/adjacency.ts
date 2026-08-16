@@ -1,0 +1,1 @@
+export const addEdge=(g:Map<string,Set<string>>,a:string,b:string)=>{if(!g.has(a))g.set(a,new Set());g.get(a)!.add(b);return g};

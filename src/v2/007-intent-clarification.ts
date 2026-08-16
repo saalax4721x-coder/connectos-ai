@@ -1,0 +1,1 @@
+export const clarificationNeeded=(confidence:number,missing:string[])=>confidence<0.7&&missing.length>0;

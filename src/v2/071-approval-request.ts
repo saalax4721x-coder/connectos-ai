@@ -1,0 +1,1 @@
+export interface ApprovalRequest{id:string;action:string;reason:string;risk:'low'|'medium'|'high';expiresAt?:string;}

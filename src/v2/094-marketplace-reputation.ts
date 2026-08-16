@@ -1,0 +1,1 @@
+export const reputationScore=(verified:number,projects:number,reviews:number)=>Math.min(1,.5*verified+.3*Math.min(1,projects/10)+.2*Math.min(1,reviews/20));

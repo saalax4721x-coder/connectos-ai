@@ -1,0 +1,1 @@
+export const dependencyOrder=(skills:Record<string,string[]>)=>Object.keys(skills).sort((a,b)=>(skills[a]?.length??0)-(skills[b]?.length??0));

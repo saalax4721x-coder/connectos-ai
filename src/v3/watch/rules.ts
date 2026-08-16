@@ -1,0 +1,1 @@
+export type WatchRule={subjectId:string;events:string[];enabled:boolean};

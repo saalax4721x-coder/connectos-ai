@@ -1,0 +1,1 @@
+export const estimateCredits=(units:number,rate:number)=>Math.max(0,Math.ceil(units*rate));

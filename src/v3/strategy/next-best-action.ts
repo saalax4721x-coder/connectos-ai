@@ -1,0 +1,1 @@
+export const nextBestAction=(actions:string[])=>actions.filter(Boolean)[0];

@@ -1,0 +1,1 @@
+export type MatchFeedback='accepted'|'rejected'|'contacted'|'successful'|'failed';

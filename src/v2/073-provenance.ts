@@ -1,0 +1,1 @@
+export interface Provenance{source:string;sourceType:'public'|'user'|'team'|'system';observedAt:string;confidence:number;}

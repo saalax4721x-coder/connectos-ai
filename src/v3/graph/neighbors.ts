@@ -1,0 +1,1 @@
+export const neighbors=(g:Map<string,Set<string>>,id:string)=>[...(g.get(id)||[])];

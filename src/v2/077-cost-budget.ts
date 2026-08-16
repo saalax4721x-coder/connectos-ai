@@ -1,0 +1,1 @@
+export interface CostBudget{credits:number;spent:number;reserved:number;} export const remaining=(b:CostBudget)=>Math.max(0,b.credits-b.spent-b.reserved);

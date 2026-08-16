@@ -1,0 +1,1 @@
+export interface EventIntelligence{eventId:string;peopleToMeet:string[];companies:string[];topics:string[];opportunities:string[];}

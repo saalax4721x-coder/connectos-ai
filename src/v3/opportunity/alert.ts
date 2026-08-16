@@ -1,0 +1,1 @@
+export type OpportunityAlert={query:string;channels:string[];enabled:boolean};

@@ -1,0 +1,1 @@
+export interface TraceSpan{id:string;operation:string;startedAt:string;durationMs?:number;status:'running'|'ok'|'error';}

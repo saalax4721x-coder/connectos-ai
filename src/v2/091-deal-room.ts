@@ -1,0 +1,1 @@
+export interface DealRoom{id:string;title:string;members:string[];status:'draft'|'active'|'closed';createdAt:string;}

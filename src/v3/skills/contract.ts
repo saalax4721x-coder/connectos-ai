@@ -1,0 +1,1 @@
+export type SkillContract={id:string;version:string;description:string;dependencies:string[]};

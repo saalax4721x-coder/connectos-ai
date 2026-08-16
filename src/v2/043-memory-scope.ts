@@ -1,0 +1,1 @@
+export type MemoryScope='user'|'relationship'|'company'|'opportunity'|'project'|'deal'|'agent'|'workflow';

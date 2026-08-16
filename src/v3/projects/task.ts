@@ -1,0 +1,1 @@
+export type ProjectTask={id:string;title:string;assigneeId?:string;status:'todo'|'doing'|'done'};

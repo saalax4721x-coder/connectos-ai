@@ -1,0 +1,1 @@
+export const isExpired=(expiresAt?:string,now=Date.now())=>Boolean(expiresAt&&Date.parse(expiresAt)<=now);

@@ -1,0 +1,1 @@
+export interface RegressionCase{id:string;input:unknown;expected:unknown;tags:string[];}

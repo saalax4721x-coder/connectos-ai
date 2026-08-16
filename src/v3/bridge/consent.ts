@@ -1,0 +1,1 @@
+export const canRequestIntro=(consent:'allowed'|'blocked'|'unknown')=>consent==='allowed';

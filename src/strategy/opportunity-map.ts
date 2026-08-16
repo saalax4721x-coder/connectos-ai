@@ -1,0 +1,1 @@
+export interface OpportunityMap{peopleToMeet:string[];companiesToWatch:string[];opportunities:string[];signals:string[];followups:string[];projects:string[];careerMoves:string[];partnerships:string[];updatedAt:string;}

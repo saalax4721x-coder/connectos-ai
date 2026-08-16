@@ -1,0 +1,1 @@
+export interface CostEstimate{credits:number;operations:number;model?:string;} export const withinBudget=(e:CostEstimate,budget:number)=>e.credits<=budget;

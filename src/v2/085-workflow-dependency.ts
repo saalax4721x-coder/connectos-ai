@@ -1,0 +1,1 @@
+export const ready=(step:string,deps:string[],done:Set<string>)=>step.length>0&&deps.every(d=>done.has(d));

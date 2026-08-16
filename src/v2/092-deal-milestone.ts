@@ -1,0 +1,1 @@
+export interface DealMilestone{id:string;title:string;dueAt?:string;completedAt?:string;owner?:string;}

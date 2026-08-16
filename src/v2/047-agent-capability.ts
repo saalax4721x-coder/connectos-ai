@@ -1,0 +1,1 @@
+export interface AgentCapability{name:string;input:string;output:string;sideEffect:boolean;}

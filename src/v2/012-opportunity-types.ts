@@ -1,0 +1,1 @@
+export type OpportunityType='job'|'client'|'investment'|'partnership'|'supplier'|'buyer'|'project'|'funding'|'introduction'|'event';

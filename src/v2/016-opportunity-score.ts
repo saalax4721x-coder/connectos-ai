@@ -1,0 +1,1 @@
+export const weightedScore=(parts:Record<string,number>,weights:Record<string,number>)=>{let s=0,w=0;for(const k of Object.keys(weights)){s+=(parts[k]??0)*weights[k];w+=weights[k]}return w?s/w:0};

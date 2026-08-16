@@ -1,0 +1,1 @@
+export type BridgePath={nodes:string[];confidence:number}; export const pathConfidence=(scores:number[])=>scores.length?scores.reduce((a,b)=>a*b,1):0;

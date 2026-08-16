@@ -1,0 +1,1 @@
+export type Outcome='response'|'meeting'|'collaboration'|'hire'|'deal'|'completed'|'failed'|'ignored';

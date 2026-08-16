@@ -1,0 +1,1 @@
+export const rank=(items:{score:number}[])=>items.slice().sort((a,b)=>b.score-a.score);

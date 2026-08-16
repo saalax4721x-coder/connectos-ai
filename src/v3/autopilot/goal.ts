@@ -1,0 +1,1 @@
+export type AutopilotGoal={goal:string;targetCount?:number;deadline?:number;approved:boolean};

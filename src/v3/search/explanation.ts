@@ -1,0 +1,1 @@
+export const explainMatch=(reasons:string[])=>reasons.filter(Boolean).slice(0,5);

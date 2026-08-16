@@ -1,0 +1,1 @@
+export const relationshipStrength=(recency:number,trust:number,relevance:number)=>Math.max(0,Math.min(1,.4*recency+.35*trust+.25*relevance));

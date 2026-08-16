@@ -1,0 +1,1 @@
+export type MessageContext={goal:string;recipient:string;commonGround?:string[];offer?:string};

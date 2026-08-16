@@ -1,0 +1,1 @@
+export type CompanyProfile={id:string;name:string;industry?:string;locations:string[];markets:string[]};

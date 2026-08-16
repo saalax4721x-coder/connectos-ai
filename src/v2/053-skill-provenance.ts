@@ -1,0 +1,1 @@
+export interface SkillProvenance{origin:'native'|'adapted';sources:string[];license:string;reviewedAt:string;}

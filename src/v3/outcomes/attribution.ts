@@ -1,0 +1,1 @@
+export const attributeOutcome=(signals:string[])=>[...new Set(signals)];

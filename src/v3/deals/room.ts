@@ -1,0 +1,1 @@
+export type DealRoom={id:string;title:string;memberIds:string[];status:'open'|'closed'};

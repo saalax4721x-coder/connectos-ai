@@ -1,0 +1,1 @@
+export const redact=(value:Record<string,unknown>,blocked:string[])=>Object.fromEntries(Object.entries(value).filter(([k])=>!blocked.includes(k)));

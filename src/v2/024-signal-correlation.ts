@@ -1,0 +1,1 @@
+export const correlate=(a:string[],b:string[])=>a.filter(x=>b.includes(x));

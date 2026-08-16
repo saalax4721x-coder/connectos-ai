@@ -1,0 +1,1 @@
+export const fallbackAgent=(primary:string,fallbacks:string[])=>fallbacks.find(Boolean)||primary;

@@ -1,0 +1,1 @@
+export type RelationshipStage='discovered'|'connected'|'conversation'|'collaboration'|'partnership'|'trusted';

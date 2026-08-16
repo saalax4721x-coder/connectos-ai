@@ -1,0 +1,1 @@
+export interface SkillDefinition{id:string;name:string;category:string;version:string;dependencies:string[];tools:string[];agents:string[];license:string;provenance:string;status:'active'|'draft'|'deprecated';}

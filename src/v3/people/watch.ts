@@ -1,0 +1,1 @@
+export type PeopleWatch={personId:string;events:string[];enabled:boolean};

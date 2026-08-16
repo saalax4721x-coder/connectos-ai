@@ -1,0 +1,1 @@
+export interface PathStep{node:string;via?:string;} export const pathKey=(steps:PathStep[])=>steps.map(s=>s.node).join('>');

@@ -1,0 +1,1 @@
+export type CompanyWatch={companyId:string;events:string[];enabled:boolean};

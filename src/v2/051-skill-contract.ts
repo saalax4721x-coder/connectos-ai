@@ -1,0 +1,1 @@
+export interface SkillContract{id:string;version:string;inputs:string[];outputs:string[];dependencies:string[];}

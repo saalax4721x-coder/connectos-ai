@@ -1,0 +1,1 @@
+export interface RelationshipEvent{type:string;at:string;summary:string;source?:string;}

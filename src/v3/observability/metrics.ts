@@ -1,0 +1,1 @@
+export const metric=(name:string,value:number)=>({name,value,at:Date.now()});

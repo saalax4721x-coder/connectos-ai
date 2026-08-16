@@ -1,0 +1,1 @@
+export interface WorkflowStep{id:string;kind:'agent'|'tool'|'approval'|'condition';name:string;dependsOn:string[];}

@@ -1,0 +1,1 @@
+export const opportunityId=(seed:string)=>`opp_${seed.replace(/[^a-z0-9]/gi,'').slice(0,24).toLowerCase()}`;

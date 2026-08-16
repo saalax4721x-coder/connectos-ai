@@ -1,0 +1,1 @@
+export type SearchQuery={text:string;filters:Record<string,string|string[]>};

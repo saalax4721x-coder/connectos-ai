@@ -1,0 +1,1 @@
+export const followupWindow=(dueAt:string,now=Date.now())=>Date.parse(dueAt)<=now?'overdue':'upcoming';

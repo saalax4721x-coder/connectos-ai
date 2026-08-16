@@ -1,0 +1,1 @@
+export const evaluationScore=(r:Record<string,number>)=>{const v=Object.values(r);return v.length?v.reduce((a,b)=>a+b,0)/v.length:0};

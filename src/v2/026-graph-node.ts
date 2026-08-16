@@ -1,0 +1,1 @@
+export interface GraphNode{id:string;type:'person'|'company'|'project'|'opportunity'|'event';labels:string[];}

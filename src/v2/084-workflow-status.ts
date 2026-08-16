@@ -1,0 +1,1 @@
+export type WorkflowStatus='queued'|'running'|'waiting-approval'|'completed'|'failed'|'cancelled';

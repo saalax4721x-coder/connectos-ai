@@ -1,0 +1,1 @@
+export interface IntentConstraints{location?:string;budget?:number;currency?:string;deadline?:string;mustHave:string[];exclude:string[];}

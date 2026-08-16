@@ -1,0 +1,1 @@
+export type RelationshipEvent={at:number;type:string;note?:string}; export const sortTimeline=(x:RelationshipEvent[])=>[...x].sort((a,b)=>a.at-b.at);

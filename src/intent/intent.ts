@@ -1,0 +1,1 @@
+export interface Intent{goal:string;outcome?:string;urgency?:string;location?:string;industry?:string;peopleTypes:string[];companyTypes:string[];skills:string[];constraints:string[];preferences:string[];confidence:number;}

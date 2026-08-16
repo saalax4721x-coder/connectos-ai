@@ -1,0 +1,1 @@
+export type CreatorOSBridge={projectId:string;needs:string[];offers:string[]};

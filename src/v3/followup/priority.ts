@@ -1,0 +1,1 @@
+export type FollowupPriority='today'|'this_week'|'upcoming'|'overdue'|'high_value';

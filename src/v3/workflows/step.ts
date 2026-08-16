@@ -1,0 +1,1 @@
+export type WorkflowStep={id:string;kind:string;dependsOn:string[];timeoutMs?:number};

@@ -1,0 +1,1 @@
+export interface DailyStrategy{topOpportunity?:string;topPerson?:string;topFollowup?:string;topSignal?:string;nextAction:string;}

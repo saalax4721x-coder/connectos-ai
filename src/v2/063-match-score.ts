@@ -1,0 +1,1 @@
+export const matchScore=(fit:number,access:number,timing:number,confidence:number)=>.4*fit+.25*access+.2*timing+.15*confidence;

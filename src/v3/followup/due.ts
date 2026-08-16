@@ -1,0 +1,1 @@
+export const due=(deadline:number,now=Date.now())=>deadline<=now;

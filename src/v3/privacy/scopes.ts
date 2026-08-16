@@ -1,0 +1,1 @@
+export type PrivacyScope='public'|'connections'|'team'|'private';

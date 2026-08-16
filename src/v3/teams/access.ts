@@ -1,0 +1,1 @@
+export const canEdit=(role:'owner'|'admin'|'member'|'viewer')=>role==='owner'||role==='admin'||role==='member';

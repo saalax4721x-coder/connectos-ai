@@ -1,0 +1,1 @@
+export interface SearchQuery{text:string;intent?:string;location?:string;filters:Record<string,string>;limit:number;}

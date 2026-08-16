@@ -1,0 +1,1 @@
+export type CreatorMode={needs:string[];offers:string[];formats:string[];goals:string[]};

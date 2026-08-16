@@ -1,0 +1,1 @@
+export const whyNow=(signals:string[])=>signals.length?`Active signals: ${signals.slice(0,3).join(', ')}`:'No strong timing signal';

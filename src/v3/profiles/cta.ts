@@ -1,0 +1,1 @@
+export const primaryCta=(context:{canIntro:boolean;canMessage:boolean;canHire:boolean})=>context.canIntro?'request_introduction':context.canMessage?'message':context.canHire?'hire':'connect';

@@ -1,0 +1,1 @@
+export type InvestorMode={sector?:string;stage?:string;geographies:string[];ticket?:string};

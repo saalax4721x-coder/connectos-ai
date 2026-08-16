@@ -1,0 +1,1 @@
+export type Rationale={whyYou:string[];whyThem:string[];whyNow:string[]};

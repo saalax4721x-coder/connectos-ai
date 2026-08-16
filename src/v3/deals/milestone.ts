@@ -1,0 +1,1 @@
+export type Milestone={id:string;title:string;dueAt?:number;complete:boolean};

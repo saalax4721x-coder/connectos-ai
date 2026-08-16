@@ -1,0 +1,1 @@
+export const followupPriority=(value:number,urgency:number)=>Math.max(0,Math.min(1,.6*value+.4*urgency));

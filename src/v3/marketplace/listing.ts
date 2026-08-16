@@ -1,0 +1,1 @@
+export type Listing={id:string;title:string;category:string;ownerId:string;status:'draft'|'published'|'closed'};

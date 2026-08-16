@@ -1,0 +1,1 @@
+export const freshnessStatus=(verifiedAt?:string,days=30)=>!verifiedAt?'unknown':Date.now()-Date.parse(verifiedAt)>days*86400000?'stale':'fresh';

@@ -1,0 +1,1 @@
+export const needsClarification=(fields:Record<string,unknown>)=>Object.entries(fields).filter(([,v])=>v==null).map(([k])=>k);

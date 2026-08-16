@@ -1,0 +1,1 @@
+export type RegressionCase={id:string;input:unknown;expected:unknown};

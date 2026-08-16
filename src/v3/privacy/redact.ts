@@ -1,0 +1,1 @@
+export const redact=(value:string,secret:string)=>secret?value.split(secret).join('[REDACTED]'):value;

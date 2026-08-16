@@ -1,0 +1,1 @@
+export interface ProjectMember{userId:string;role:'owner'|'admin'|'member'|'viewer';joinedAt:string;}

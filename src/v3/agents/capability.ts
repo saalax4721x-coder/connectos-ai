@@ -1,0 +1,1 @@
+export type Capability='research'|'match'|'verify'|'communicate'|'plan'|'execute';

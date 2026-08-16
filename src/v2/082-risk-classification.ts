@@ -1,0 +1,1 @@
+export const riskClass=(score:number):'low'|'medium'|'high'=>score>=.75?'high':score>=.4?'medium':'low';

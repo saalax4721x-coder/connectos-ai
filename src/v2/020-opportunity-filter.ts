@@ -1,0 +1,1 @@
+export const filterByConfidence=<T extends {confidence:number}>(items:T[],min=.5)=>items.filter(item=>item.confidence>=min);

@@ -1,0 +1,1 @@
+export const retentionExpired=(createdAt:string,days:number,now=Date.now())=>now-Date.parse(createdAt)>days*86400000;

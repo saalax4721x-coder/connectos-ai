@@ -1,0 +1,1 @@
+export const needOfferMatch=(need:string,offer:string)=>need.toLowerCase().includes(offer.toLowerCase())||offer.toLowerCase().includes(need.toLowerCase());

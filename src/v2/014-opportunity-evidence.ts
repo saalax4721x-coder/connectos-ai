@@ -1,0 +1,1 @@
+export interface Evidence{source:string;observedAt:string;verifiedAt?:string;confidence:number;claim:string;}

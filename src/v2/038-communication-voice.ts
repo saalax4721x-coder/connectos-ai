@@ -1,0 +1,1 @@
+export type VoiceProfile={tone:'direct'|'warm'|'formal'|'casual';maxWords:number;avoid:string[]};

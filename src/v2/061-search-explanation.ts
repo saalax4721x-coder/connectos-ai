@@ -1,0 +1,1 @@
+export const explainSearch=(terms:string[])=>terms.length?`Matched: ${terms.join(', ')}`:'No strong semantic match';

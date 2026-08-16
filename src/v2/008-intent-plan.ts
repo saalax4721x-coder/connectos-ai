@@ -1,0 +1,1 @@
+export interface IntentPlanStep{id:string;agent:string;action:string;dependsOn:string[];}

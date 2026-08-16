@@ -1,0 +1,1 @@
+export const rankPaths=<T extends {strength:number;confidence:number}>(paths:T[])=>[...paths].sort((a,b)=>(b.strength+b.confidence)-(a.strength+a.confidence));

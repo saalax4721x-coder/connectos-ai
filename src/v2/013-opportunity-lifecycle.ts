@@ -1,0 +1,1 @@
+export const opportunityStages=['discovered','researched','saved','qualified','contacted','conversation','meeting','proposal','negotiation','deal','completed'] as const;

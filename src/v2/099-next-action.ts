@@ -1,0 +1,1 @@
+export type NextAction='connect'|'message'|'introduce'|'collaborate'|'hire'|'partner'|'save'|'investigate';

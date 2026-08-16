@@ -1,0 +1,1 @@
+export interface ModelRoute{provider:string;model:string;capabilities:string[];maxCost:number;maxLatencyMs:number;}

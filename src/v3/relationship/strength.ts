@@ -1,0 +1,1 @@
+export const relationshipStrength=(signals:number[])=>signals.length?signals.reduce((a,b)=>a+b,0)/signals.length:0;

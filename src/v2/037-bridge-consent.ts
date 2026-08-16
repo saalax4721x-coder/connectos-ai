@@ -1,0 +1,1 @@
+export interface BridgeConsent{subject:string;grantedBy:string;scope:string[];expiresAt?:string;}

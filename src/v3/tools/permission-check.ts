@@ -1,0 +1,1 @@
+export const hasToolPermission=(grants:string[],required:string)=>grants.includes(required);

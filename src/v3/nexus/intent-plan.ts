@@ -1,0 +1,1 @@
+export type IntentPlan={goal:string;steps:string[];requiresApproval:boolean};

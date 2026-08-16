@@ -1,0 +1,1 @@
+export const signalConfidence=(sourceQuality:number,recency:number,corroboration:number)=>Math.max(0,Math.min(1,(sourceQuality+recency+corroboration)/3));

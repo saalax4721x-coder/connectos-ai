@@ -1,0 +1,1 @@
+export interface CommunicationContext{sender:string;recipient:string;relationship:string;purpose:string;commonGround:string[];recentSignals:string[];}

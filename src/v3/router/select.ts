@@ -1,0 +1,1 @@
+export const selectModel=(models:{id:string;score:number}[])=>models.slice().sort((a,b)=>b.score-a.score)[0];

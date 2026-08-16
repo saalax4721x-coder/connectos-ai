@@ -1,0 +1,1 @@
+export type ModelCapability='reasoning'|'search'|'vision'|'audio'|'embedding'|'generation';

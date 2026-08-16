@@ -1,0 +1,1 @@
+export interface ToolContract{id:string;description:string;readScopes:string[];writeScopes:string[];sideEffect:boolean;}

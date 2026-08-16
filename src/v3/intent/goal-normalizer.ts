@@ -1,0 +1,1 @@
+export const normalizeGoal=(input:string)=>input.trim().replace(/\s+/g,' ');

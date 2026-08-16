@@ -1,0 +1,1 @@
+export const freshness=(observedAt:string,halfLifeHours=72,now=Date.now())=>Math.exp(-Math.max(0,now-Date.parse(observedAt))/(halfLifeHours*3600000));

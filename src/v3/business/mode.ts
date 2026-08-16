@@ -1,0 +1,1 @@
+export type BusinessMode={needs:string[];offers:string[];markets:string[];goals:string[]};

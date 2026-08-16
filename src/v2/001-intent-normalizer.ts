@@ -1,0 +1,1 @@
+export const normalizeIntentText=(text:string)=>text.trim().replace(/\s+/g,' ');

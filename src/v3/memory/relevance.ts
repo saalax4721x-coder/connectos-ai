@@ -1,0 +1,1 @@
+export const memoryRelevance=(similarity:number,recency:number)=>Math.max(0,Math.min(1,.7*similarity+.3*recency));

@@ -1,0 +1,1 @@
+export const dependencyOrder=(ids:string[],deps:Record<string,string[]>)=>ids.slice().sort((a,b)=>(deps[a]?.length||0)-(deps[b]?.length||0));

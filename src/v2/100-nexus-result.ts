@@ -1,0 +1,1 @@
+export interface NexusResult<T=unknown>{status:'completed'|'needs-approval'|'needs-clarification'|'failed';data?:T;nextAction?:string;confidence:number;}

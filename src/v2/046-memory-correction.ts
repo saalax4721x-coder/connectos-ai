@@ -1,0 +1,1 @@
+export interface MemoryCorrection{memoryId:string;reason:string;correctedBy:string;at:string;}

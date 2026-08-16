@@ -1,0 +1,1 @@
+export type CareerMode={targetRole?:string;industries:string[];locations:string[];goals:string[]};

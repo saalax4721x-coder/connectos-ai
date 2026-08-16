@@ -1,0 +1,1 @@
+export const autopilotCanAct=(approved:boolean,action:string)=>approved&&action!=='financial_commitment';

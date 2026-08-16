@@ -1,0 +1,1 @@
+export interface AgentHandoff{from:string;to:string;taskId:string;context:Record<string,unknown>;createdAt:string;}

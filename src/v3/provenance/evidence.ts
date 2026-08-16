@@ -1,0 +1,1 @@
+export type Evidence={source:string;url?:string;observedAt:number;confidence:number};

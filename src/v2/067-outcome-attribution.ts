@@ -1,0 +1,1 @@
+export const attributionWeight=(confidence:number,sourceCount:number)=>Math.min(1,confidence*(1+Math.log1p(sourceCount))/2);

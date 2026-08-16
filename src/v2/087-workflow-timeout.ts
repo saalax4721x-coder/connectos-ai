@@ -1,0 +1,1 @@
+export const timedOut=(startedAt:string,timeoutMs:number,now=Date.now())=>now-Date.parse(startedAt)>=timeoutMs;

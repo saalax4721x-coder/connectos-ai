@@ -1,0 +1,1 @@
+export type Rubric={accuracy:number;relevance:number;safety:number;sourceQuality:number};

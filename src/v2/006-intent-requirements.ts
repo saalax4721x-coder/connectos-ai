@@ -1,0 +1,1 @@
+export interface IntentRequirements{people:string[];companies:string[];skills:string[];opportunityTypes:string[];}

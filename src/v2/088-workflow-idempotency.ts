@@ -1,0 +1,1 @@
+export const idempotencyKey=(workflow:string,step:string,input:string)=>`${workflow}:${step}:${input}`;

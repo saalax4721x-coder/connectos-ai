@@ -1,0 +1,1 @@
+export type Reputation={expertise:number;reliability:number;collaboration:number;communication:number};

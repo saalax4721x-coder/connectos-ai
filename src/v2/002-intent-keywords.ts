@@ -1,0 +1,1 @@
+export const intentKeywords=(text:string)=>text.toLowerCase().split(/\W+/).filter(Boolean);

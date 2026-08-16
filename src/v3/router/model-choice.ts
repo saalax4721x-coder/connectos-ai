@@ -1,0 +1,1 @@
+export type ModelChoice={id:string;capabilities:string[];cost:number;latency:number};

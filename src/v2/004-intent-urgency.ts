@@ -1,0 +1,1 @@
+export type Urgency='low'|'normal'|'high'|'critical'; export const isUrgency=(v:string):v is Urgency=>['low','normal','high','critical'].includes(v);

@@ -1,0 +1,1 @@
+export const requiresCommunicationApproval=(channel:string)=>['email','dm','public-post'].includes(channel);

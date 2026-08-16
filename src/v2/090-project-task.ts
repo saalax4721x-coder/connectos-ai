@@ -1,0 +1,1 @@
+export interface ProjectTask{id:string;title:string;assignee?:string;status:'todo'|'doing'|'done';dueAt?:string;}

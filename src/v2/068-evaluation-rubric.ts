@@ -1,0 +1,1 @@
+export interface EvaluationRubric{accuracy:number;relevance:number;safety:number;sourceQuality:number;outcomeQuality:number;}

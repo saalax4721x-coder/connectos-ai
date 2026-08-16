@@ -1,0 +1,1 @@
+export const safetyDecision=(risk:'low'|'medium'|'high',supported:boolean)=>supported&&risk!=='high'?'allow':risk==='high'?'review':'block';

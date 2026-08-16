@@ -1,0 +1,1 @@
+export type CompanySignal={companyId:string;type:string;at:number;source:string};

@@ -1,0 +1,1 @@
+export type Trace={id:string;operation:string;startedAt:number;endedAt?:number};

@@ -1,0 +1,1 @@
+export type SkillProvenance={source:string;license?:string;derivedFrom?:string};

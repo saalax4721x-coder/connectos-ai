@@ -1,0 +1,1 @@
+export interface MatchFeedback{candidateId:string;accepted:boolean;reason?:string;outcome?:string;at:string;}

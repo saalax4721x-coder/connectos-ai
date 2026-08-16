@@ -1,0 +1,1 @@
+export interface BridgePath{nodes:string[];strength:number;confidence:number;reason:string;}

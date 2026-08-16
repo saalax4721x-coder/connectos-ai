@@ -1,0 +1,1 @@
+export type Candidate={id:string;fit:number;access:number;confidence:number};

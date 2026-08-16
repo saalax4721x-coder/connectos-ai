@@ -1,0 +1,1 @@
+export const neighbors=(edges:{from:string;to:string}[],id:string)=>edges.filter(e=>e.from===id||e.to===id);

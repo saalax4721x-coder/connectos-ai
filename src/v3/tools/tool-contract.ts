@@ -1,0 +1,1 @@
+export type ToolContract={id:string;version:string;permissions:string[];execute:(input:unknown)=>Promise<unknown>};

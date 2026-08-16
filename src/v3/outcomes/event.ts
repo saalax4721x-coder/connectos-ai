@@ -1,0 +1,1 @@
+export type OutcomeEvent={type:string;subjectId:string;success:boolean;at:number};

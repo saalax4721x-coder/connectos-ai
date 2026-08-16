@@ -1,0 +1,2 @@
+export interface SafetyPolicy{forbidImpersonation:boolean;forbidFabrication:boolean;requireApprovalForExternalActions:boolean;requireProvenance:boolean;}
+export const defaultSafetyPolicy:SafetyPolicy={forbidImpersonation:true,forbidFabrication:true,requireApprovalForExternalActions:true,requireProvenance:true};

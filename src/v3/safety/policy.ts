@@ -1,0 +1,1 @@
+export const blockedActions=['impersonate','expose_private_data','fabricate_relationship','fabricate_credential'];

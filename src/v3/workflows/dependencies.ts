@@ -1,0 +1,1 @@
+export const ready=(step:{dependsOn:string[]},done:Set<string>)=>step.dependsOn.every(x=>done.has(x));

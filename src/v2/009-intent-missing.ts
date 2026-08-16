@@ -1,0 +1,1 @@
+export const missingFields=(value:Record<string,unknown>,fields:string[])=>fields.filter(field=>value[field]===undefined||value[field]===null||value[field]==='');

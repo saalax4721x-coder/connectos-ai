@@ -1,0 +1,1 @@
+export type PrivacyScope='public'|'network'|'team'|'private'; export const canShare=(scope:PrivacyScope,target:PrivacyScope)=>scope==='public'||scope===target;

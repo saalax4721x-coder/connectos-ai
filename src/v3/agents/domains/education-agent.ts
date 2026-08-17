@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const educationAgent:AgentDefinition={id:'education',name:'Education Agent',version:'3.0.0',domain:'education',status:'active',capabilities:[],skills:['institution-discovery','expert-discovery'],tools:['search'],permissions:['research']};

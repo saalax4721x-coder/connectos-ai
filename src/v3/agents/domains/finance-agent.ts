@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const financeAgent:AgentDefinition={id:'finance',name:'Finance Agent',version:'3.0.0',domain:'finance',status:'active',capabilities:[],skills:['financial-research','risk-analysis'],tools:['search'],permissions:['research']};

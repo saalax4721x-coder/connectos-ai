@@ -1,0 +1,1 @@
+export type PrivacyScope='profile'|'network'|'location'|'contacts'|'activity'|'ai-memory'|'connected-accounts'|'team-data'|'marketplace'; export type PrivacyAction='view'|'store'|'share'|'delete'|'export';

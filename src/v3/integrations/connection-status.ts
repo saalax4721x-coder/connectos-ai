@@ -1,0 +1,1 @@
+export type ConnectionStatus='disconnected'|'pending'|'connected'|'expired'|'revoked'|'error'; export interface IntegrationConnection{id:string;userId:string;provider:string;status:ConnectionStatus;scopes:string[];connectedAt?:string;expiresAt?:string;}

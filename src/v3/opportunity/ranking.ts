@@ -1,0 +1,1 @@
+import type {Opportunity} from './opportunity'; import {weighted} from './score'; export const rank=(items:Opportunity[])=>items.map(x=>({...x,rankScore:x.score?weighted(x.score):x.confidence})).sort((a,b)=>b.rankScore-a.rankScore);

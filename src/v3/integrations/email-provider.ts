@@ -1,0 +1,1 @@
+export interface EmailProvider{search(userId:string,query:string):Promise<{id:string;threadId:string;subject:string;from:string;to:string;sentAt:string}[]>;send?(userId:string,input:{to:string;subject:string;body:string}):Promise<{id:string}>;}

@@ -1,0 +1,1 @@
+export interface RelationshipHealth{strength:number;recency:number;responsiveness:number;sharedOutcomes:number;confidence:number;} export const health=(x:RelationshipHealth)=>.3*x.strength+.25*x.recency+.2*x.responsiveness+.25*x.sharedOutcomes;

@@ -1,0 +1,1 @@
+import type {Memory} from './memory'; export class MemoryStore{private items=new Map<string,Memory>();put(m:Memory){this.items.set(m.id,m);}get(id:string){return this.items.get(id);}all(){return [...this.items.values()];}}

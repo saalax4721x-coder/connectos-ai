@@ -1,0 +1,1 @@
+import type {ApprovalStatus} from './approval-status'; export interface ApprovalRequest{id:string;runId:string;action:string;scope:string;requestedBy:string;status:ApprovalStatus;createdAt:string;expiresAt?:string;}

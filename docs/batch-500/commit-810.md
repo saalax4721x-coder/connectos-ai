@@ -1,0 +1,2 @@
+# ConnectOS commit 810
+Implementation contract for the modular opportunity operating system.

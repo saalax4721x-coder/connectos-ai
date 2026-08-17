@@ -1,0 +1,1 @@
+import type {MemoryKind} from './memory-kind'; export interface Memory{id:string;kind:MemoryKind;subjectId:string;content:string;sourceId?:string;confidence:number;importance:number;createdAt:string;expiresAt?:string;}

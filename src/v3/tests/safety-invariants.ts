@@ -1,0 +1,1 @@
+import {invariant} from './invariants'; export const assertNoFabrication=(relationshipVerified:boolean)=>invariant(relationshipVerified,'unverified relationship cannot be exposed as fact'); export const assertApproval=(required:boolean,approved:boolean)=>invariant(!required||approved,'consequential action requires approval');

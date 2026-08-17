@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const constructionAgent:AgentDefinition={id:'construction',name:'Construction Agent',version:'3.0.0',domain:'business',status:'active',capabilities:[],skills:['supplier-discovery','project-discovery'],tools:['search'],permissions:['research']};

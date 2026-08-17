@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const musicAgent:AgentDefinition={id:'music',name:'Music Agent',version:'3.0.0',domain:'media',status:'active',capabilities:[],skills:['collaboration-discovery','client-discovery'],tools:['search'],permissions:['research']};

@@ -1,0 +1,2 @@
+import type {Goal} from './goal'; import type {EntityRequirement} from './entity-requirement'; import type {Constraint} from './constraint'; import type {LocationIntent} from './location'; import type {IntentStatus} from './intent-status';
+export interface Intent{ id:string; raw:string; goal:Goal; requirements:EntityRequirement[]; constraints:Constraint[]; location?:LocationIntent; status:IntentStatus; confidence:number; createdAt:string; }

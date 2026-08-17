@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const founderAgent:AgentDefinition={id:'founder',name:'Founder Agent',version:'3.0.0',domain:'founder',status:'active',capabilities:[],skills:['fundraising','talent-discovery'],tools:['search'],permissions:['research']};

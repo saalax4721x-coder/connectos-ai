@@ -1,0 +1,2 @@
+# ConnectOS Operating Loop
+Formalize the core loop: GOAL → INTENT → DISCOVERY → RESEARCH → MATCH → RANK → CONNECT → COLLABORATE → OUTCOME → LEARNING.

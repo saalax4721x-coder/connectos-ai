@@ -1,0 +1,2 @@
+# ConnectOS commit 333
+Completes this 100-commit ConnectOS implementation batch with an integration contract tying intent, graph data, opportunity ranking, agents, memory, provenance, approvals, evaluation, and outcome learning into one extensible flow.

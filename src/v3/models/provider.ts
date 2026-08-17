@@ -1,0 +1,1 @@
+import type {ModelDefinition} from './model'; export interface ModelProvider{ id:string;list():ModelDefinition[];invoke(modelId:string,input:unknown,options?:Record<string,unknown>):Promise<unknown>; }

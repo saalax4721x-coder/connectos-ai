@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const manufacturingAgent:AgentDefinition={id:'manufacturing',name:'Manufacturing Agent',version:'3.0.0',domain:'manufacturing',status:'active',capabilities:[],skills:['supplier-discovery','moq-analysis'],tools:['search'],permissions:['research']};

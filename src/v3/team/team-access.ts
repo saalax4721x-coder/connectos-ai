@@ -1,0 +1,1 @@
+import type {Team,} from './team'; export const teamCan=(team:Team,userId:string,resource:'network'|'opportunities'|'deals')=>{const m=team.members.find(x=>x.userId===userId);if(!m)return false;if(m.role==='owner'||m.role==='admin')return true;return resource==='network'?team.sharedNetwork:resource==='opportunities'?team.sharedOpportunities:team.sharedDeals;};

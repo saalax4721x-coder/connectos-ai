@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const energyAgent:AgentDefinition={id:'energy',name:'Energy Agent',version:'3.0.0',domain:'energy',status:'active',capabilities:[],skills:['market-intelligence','supplier-discovery'],tools:['search'],permissions:['research']};

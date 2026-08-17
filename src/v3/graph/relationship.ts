@@ -1,0 +1,1 @@
+import type {EdgeKind} from './edge-kind'; import type {GraphProvenance} from './provenance'; export interface Relationship{id:string;from:string;to:string;kind:EdgeKind;strength:number;provenance:GraphProvenance[];}

@@ -1,0 +1,1 @@
+export type Role='owner'|'admin'|'member'|'viewer'; export const rolePermissions:Record<Role,string[]>={owner:['*'],admin:['research','read-network','read-team','read-contacts','write-message','write-email','create-deal'],member:['research','read-network','write-message'],viewer:['research','read-network']};

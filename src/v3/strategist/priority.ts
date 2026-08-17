@@ -1,0 +1,1 @@
+export interface StrategicCandidate{value:number;urgency:number;fit:number;effort:number;confidence:number;} export const strategicPriority=(x:StrategicCandidate)=>.3*x.value+.25*x.urgency+.25*x.fit+.2*x.confidence-.15*x.effort;

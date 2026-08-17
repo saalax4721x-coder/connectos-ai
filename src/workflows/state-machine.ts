@@ -1,0 +1,4 @@
+import type { WorkflowRun, WorkflowState } from './types';
+const terminal=new Set<WorkflowState>(['succeeded','failed','cancelled']);
+export function transition(run:WorkflowRun,next:WorkflowState):WorkflowRun { if(terminal.has(run.state)) throw new Error(`workflow is terminal: ${run.state}`); if(next==='running'&&run.state!=='pending') throw new Error('running is only entered from pending'); if(next==='waiting-approval'&&run.state!=='running') throw new Error('approval wait requires running state'); return {...run,state:next,...(next==='running'?{startedAt:new Date().toISOString()}:{}),...(terminal.has(next)?{finishedAt:new Date().toISOString()}: {})}; }
+export function readySteps(run:WorkflowRun){return run.steps.filter(s=>s.state==='pending'&&s.dependsOn.every(id=>run.steps.find(x=>x.id===id)?.state==='succeeded'));}

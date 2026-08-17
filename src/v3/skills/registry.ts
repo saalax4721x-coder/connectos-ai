@@ -1,0 +1,1 @@
+import type {SkillDefinition} from './skill'; export class SkillRegistry{private items=new Map<string,SkillDefinition>();register(s:SkillDefinition){this.items.set(s.id,s);}get(id:string){return this.items.get(id);}list(category?:string){return [...this.items.values()].filter(s=>!category||s.category===category);}}

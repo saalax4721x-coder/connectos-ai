@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const filmAgent:AgentDefinition={id:'film',name:'Film Agent',version:'3.0.0',domain:'media',status:'active',capabilities:[],skills:['producer-discovery','distribution-discovery'],tools:['search'],permissions:['research']};

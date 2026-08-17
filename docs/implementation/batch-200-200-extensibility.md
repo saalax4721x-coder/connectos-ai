@@ -1,0 +1,2 @@
+# Extensibility contract
+Agents, skills, industries, workflows, models, tools, data sources, and marketplace categories are registered through modular contracts so new capabilities do not require rewriting the core platform.

@@ -1,0 +1,1 @@
+import type {AuditEvent} from './audit-event'; export class AuditLog{private events:AuditEvent[]=[];record(e:AuditEvent){this.events.push(e);}list(actorId?:string){return this.events.filter(e=>!actorId||e.actorId===actorId);}}

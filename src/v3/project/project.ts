@@ -1,0 +1,1 @@
+export interface Project{id:string;name:string;ownerId:string;memberIds:string[];objective:string;taskIds:string[];fileIds:string[];dealRoomIds:string[];opportunityIds:string[];status:'planning'|'active'|'blocked'|'completed'|'archived';}

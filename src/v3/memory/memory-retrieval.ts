@@ -1,0 +1,1 @@
+import type {Memory} from './memory'; export const retrieve=(items:Memory[],subjectId:string,kind?:Memory['kind'])=>items.filter(m=>m.subjectId===subjectId&&(!kind||m.kind===kind)).sort((a,b)=>b.importance*b.confidence-a.importance*a.confidence);

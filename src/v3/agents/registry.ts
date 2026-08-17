@@ -1,0 +1,1 @@
+import type {AgentDefinition} from './agent'; export class AgentRegistry{private items=new Map<string,AgentDefinition>();register(a:AgentDefinition){this.items.set(a.id,a);}get(id:string){return this.items.get(id);}list(domain?:string){return [...this.items.values()].filter(a=>!domain||a.domain===domain);}}

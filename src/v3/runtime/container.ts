@@ -1,0 +1,1 @@
+export class ServiceContainer{private values=new Map<string,unknown>();set<T>(key:string,value:T){this.values.set(key,value);return this;}get<T>(key:string){return this.values.get(key) as T|undefined;}}

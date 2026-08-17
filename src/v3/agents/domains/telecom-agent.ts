@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const telecomAgent:AgentDefinition={id:'telecom',name:'Telecom Agent',version:'3.0.0',domain:'tech',status:'active',capabilities:[],skills:['market-entry','partner-discovery'],tools:['search'],permissions:['research']};

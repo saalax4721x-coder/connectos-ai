@@ -1,0 +1,1 @@
+export interface AccessSignal{direct:boolean;warmPathDepth?:number;sharedContext:number;relationshipStrength:number;} export const accessScore=(s:AccessSignal)=>s.direct?1:Math.max(.1,.55*s.relationshipStrength+.3*s.sharedContext+.15/(s.warmPathDepth??3));

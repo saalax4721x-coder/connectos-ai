@@ -1,0 +1,1 @@
+export type MessageChannel='connect'|'dm'|'email'|'introduction'|'followup'; export interface DraftMessage{channel:MessageChannel;recipientId:string;subject?:string;body:string;contextIds:string[];approvalRequired:boolean;}

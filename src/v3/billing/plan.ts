@@ -1,0 +1,1 @@
+export type Plan='free'|'pro'|'business'|'elite'; export interface PlanLimits{plan:Plan;monthlyCredits:number;maxConcurrentRuns:number;teamMembers:number;deepResearch:boolean;customWorkflows:boolean;}

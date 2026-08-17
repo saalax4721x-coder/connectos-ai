@@ -1,0 +1,1 @@
+export interface OutcomeHook{runId:string;outcomeId:string;learningSignalIds:string[];appliedAt?:string;} export const outcomeHookReady=(h:OutcomeHook)=>Boolean(h.runId&&h.outcomeId&&h.learningSignalIds.length);

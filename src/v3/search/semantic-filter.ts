@@ -1,0 +1,1 @@
+export interface SemanticFilter{field:string;accepted:string[];excluded?:string[];minScore?:number;} export const matches=(value:string,f:SemanticFilter)=>f.accepted.some(x=>value.toLowerCase().includes(x.toLowerCase()))&&!(f.excluded??[]).some(x=>value.toLowerCase().includes(x.toLowerCase()));

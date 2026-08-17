@@ -1,0 +1,1 @@
+import type {GraphNode} from './node'; import type {Relationship} from './relationship'; export interface GraphRepository{getNode(id:string):GraphNode|undefined;putNode(node:GraphNode):void;getEdges(id:string):Relationship[];putEdge(edge:Relationship):void;}

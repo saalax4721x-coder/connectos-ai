@@ -1,0 +1,1 @@
+import type {ForgeStage} from './forge-stage'; export interface ForgeRun{id:string;skillId:string;stage:ForgeStage;sourceUri?:string;licenseApproved:boolean;securityApproved:boolean;testPassed:boolean;evaluationScore?:number;}

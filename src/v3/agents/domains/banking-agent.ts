@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const bankingAgent:AgentDefinition={id:'banking',name:'Banking Agent',version:'3.0.0',domain:'banking',status:'active',capabilities:[],skills:['institution-discovery','financial-research'],tools:['search'],permissions:['research']};

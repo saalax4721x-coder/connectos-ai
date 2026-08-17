@@ -1,0 +1,1 @@
+import type {RunMetric} from './run-metric'; export class MetricStore{private items:RunMetric[]=[];record(m:RunMetric){this.items.push(m);}list(runId?:string){return this.items.filter(x=>!runId||x.runId===runId);}}

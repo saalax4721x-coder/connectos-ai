@@ -1,0 +1,1 @@
+export interface AgentRun{id:string;agentId:string;workflowRunId:string;status:'queued'|'running'|'completed'|'failed'|'blocked';inputRefs:string[];outputRefs:string[];startedAt?:string;completedAt?:string;error?:string;}

@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const engineeringAgent:AgentDefinition={id:'engineering',name:'Engineering Agent',version:'3.0.0',domain:'engineering',status:'active',capabilities:[],skills:['technical-talent','supplier-discovery'],tools:['search'],permissions:['research']};

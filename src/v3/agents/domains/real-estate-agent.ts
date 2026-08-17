@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const realEstateAgent:AgentDefinition={id:'real-estate',name:'Real Estate Agent',version:'3.0.0',domain:'real-estate',status:'active',capabilities:[],skills:['property-discovery','market-comparison'],tools:['search'],permissions:['research']};

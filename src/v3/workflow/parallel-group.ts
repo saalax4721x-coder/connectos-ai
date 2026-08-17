@@ -1,0 +1,1 @@
+export interface ParallelGroup{stepIds:string[];maxConcurrency:number;failFast:boolean;} export const batches=(ids:string[],size:number)=>{const out:string[][]=[];for(let i=0;i<ids.length;i+=size)out.push(ids.slice(i,i+size));return out;};

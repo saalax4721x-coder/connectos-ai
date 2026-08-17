@@ -1,0 +1,1 @@
+import type {MarketplaceListing} from './listing-v3'; export const listingMatch=(listing:MarketplaceListing,skills:string[],location?:string)=>{const skillFit=skills.length?skills.filter(s=>listing.skills.includes(s)).length/skills.length:0;const geo=location&&listing.location===location?1:.5;return .7*skillFit+.3*geo;};

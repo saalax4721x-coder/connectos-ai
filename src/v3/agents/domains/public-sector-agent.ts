@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const publicSectorAgent:AgentDefinition={id:'public-sector',name:'Public Sector Agent',version:'3.0.0',domain:'public-sector',status:'active',capabilities:[],skills:['public-source-research','institution-discovery'],tools:['search'],permissions:['research']};

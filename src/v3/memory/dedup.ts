@@ -1,0 +1,1 @@
+import type {Memory} from './memory'; export const dedupeMemory=(items:Memory[])=>{const seen=new Set<string>();return items.filter(m=>{const k=`${m.kind}:${m.subjectId}:${m.content}`;if(seen.has(k))return false;seen.add(k);return true;});};

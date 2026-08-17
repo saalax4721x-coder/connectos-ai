@@ -1,0 +1,1 @@
+import type {Opportunity} from './opportunity'; export const byType=(items:Opportunity[],type:Opportunity['type'])=>items.filter(x=>x.type===type); export const byConfidence=(items:Opportunity[],min:number)=>items.filter(x=>x.confidence>=min);

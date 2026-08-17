@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const marketingAgent:AgentDefinition={id:'marketing',name:'Marketing Agent',version:'3.0.0',domain:'marketing',status:'active',capabilities:[],skills:['market-segmentation','brand-discovery'],tools:['search'],permissions:['research']};

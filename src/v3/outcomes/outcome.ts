@@ -1,0 +1,1 @@
+import type {OutcomeType} from './outcome-type'; export interface Outcome{id:string;type:OutcomeType;userId:string;opportunityId?:string;personId?:string;runId?:string;value?:number;successful:boolean;notes?:string;createdAt:string;}

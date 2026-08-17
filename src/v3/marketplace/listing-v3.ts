@@ -1,0 +1,1 @@
+export interface MarketplaceListing{id:string;ownerId:string;category:string;title:string;description:string;location?:string;skills:string[];budget?:number;availability?:string;verified:boolean;provenanceIds:string[];createdAt:string;updatedAt:string;}

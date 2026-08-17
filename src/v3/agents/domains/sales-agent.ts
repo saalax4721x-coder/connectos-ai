@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const salesAgent:AgentDefinition={id:'sales',name:'Sales Agent',version:'3.0.0',domain:'sales',status:'active',capabilities:[],skills:['account-discovery','outreach-research'],tools:['search'],permissions:['research']};

@@ -1,0 +1,1 @@
+import type {WorkflowRunStatus} from './run-status'; export interface WorkflowRun{id:string;workflowId:string;status:WorkflowRunStatus;startedAt?:string;completedAt?:string;currentStep?:string;context:Record<string,unknown>;}

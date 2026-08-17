@@ -1,0 +1,1 @@
+export interface PrivateDataPolicy{ownerId:string;allowedActorIds:string[];expiresAt?:string;} export const canReadPrivate=(p:PrivateDataPolicy,actorId:string,now=Date.now())=>p.allowedActorIds.includes(actorId)&&(!p.expiresAt||new Date(p.expiresAt).getTime()>now);

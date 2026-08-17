@@ -1,0 +1,1 @@
+export interface ConnectionBrief{personId:string;whatTheyDo:string;whyRelevant:string;whyNow:string;commonGround:string[];mutualConnections:string[];recentSignals:string[];whatYouOffer:string[];suggestedApproach:string;confidence:number;sourceIds:string[];}

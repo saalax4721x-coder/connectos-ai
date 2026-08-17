@@ -1,0 +1,1 @@
+export interface CompetitionSignal{competitorCount:number;recentActivity:number;marketSaturation:number;confidence:number;} export const competitionIndex=(s:CompetitionSignal)=>Math.min(1,.45*s.marketSaturation+.35*Math.min(1,s.competitorCount/20)+.2*s.recentActivity);

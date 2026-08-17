@@ -1,0 +1,2 @@
+# ConnectOS commit 732
+Implementation contract for the modular opportunity operating system.

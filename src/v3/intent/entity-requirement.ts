@@ -1,0 +1,1 @@
+export type RequirementKind='person'|'company'|'skill'|'location'|'capital'|'service'|'event'; export interface EntityRequirement{kind:RequirementKind;value:string;required:boolean;confidence:number;}

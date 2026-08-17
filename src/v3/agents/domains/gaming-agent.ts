@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const gamingAgent:AgentDefinition={id:'gaming',name:'Gaming Agent',version:'3.0.0',domain:'media',status:'active',capabilities:[],skills:['studio-discovery','talent-discovery'],tools:['search'],permissions:['research']};

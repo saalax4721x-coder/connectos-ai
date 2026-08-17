@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const architectureAgent:AgentDefinition={id:'architecture',name:'Architecture Agent',version:'3.0.0',domain:'engineering',status:'active',capabilities:[],skills:['project-discovery','expert-discovery'],tools:['search'],permissions:['research']};

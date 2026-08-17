@@ -1,0 +1,1 @@
+export type TimelineEventType='message'|'meeting'|'introduction'|'note'|'deal'|'project'|'signal'; export interface TimelineEvent{id:string;personId:string;type:TimelineEventType;at:string;summary:string;sourceId?:string;}

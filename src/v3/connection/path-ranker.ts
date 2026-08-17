@@ -1,0 +1,1 @@
+import type {PathCandidate} from './path-candidate'; export const rankPaths=(paths:PathCandidate[])=>[...paths].filter(p=>p.verified).sort((a,b)=>(.4*b.strength+.25*b.recency+.2*b.confidence+.15*(1/b.nodes.length))-(.4*a.strength+.25*a.recency+.2*a.confidence+.15*(1/a.nodes.length)));

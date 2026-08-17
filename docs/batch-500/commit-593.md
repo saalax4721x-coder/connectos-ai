@@ -1,0 +1,2 @@
+# ConnectOS commit 593
+Implementation contract for the modular opportunity operating system.

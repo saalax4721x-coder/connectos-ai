@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const tradeAgent:AgentDefinition={id:'trade',name:'Trade Agent',version:'3.0.0',domain:'trade',status:'active',capabilities:[],skills:['supplier-discovery','market-entry'],tools:['search'],permissions:['research']};

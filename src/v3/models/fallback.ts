@@ -1,0 +1,1 @@
+import type {ModelDefinition} from './model'; export const fallbackChain=(models:ModelDefinition[],capability:ModelDefinition['capabilities'][number])=>models.filter(m=>m.capabilities.includes(capability)).sort((a,b)=>b.quality-a.quality);

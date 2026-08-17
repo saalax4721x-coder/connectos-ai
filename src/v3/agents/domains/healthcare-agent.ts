@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const healthcareAgent:AgentDefinition={id:'healthcare',name:'Healthcare Agent',version:'3.0.0',domain:'healthcare',status:'active',capabilities:[],skills:['provider-discovery','evidence-review'],tools:['search'],permissions:['research']};

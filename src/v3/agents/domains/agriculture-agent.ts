@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const agricultureAgent:AgentDefinition={id:'agriculture',name:'Agriculture Agent',version:'3.0.0',domain:'business',status:'active',capabilities:[],skills:['supplier-discovery','market-entry'],tools:['search'],permissions:['research']};

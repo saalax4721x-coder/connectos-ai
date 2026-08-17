@@ -1,0 +1,1 @@
+import type {DealStatus} from './deal-status'; export interface DealRoom{id:string;title:string;ownerId:string;memberIds:string[];status:DealStatus;objective:string;documentIds:string[];taskIds:string[];milestoneIds:string[];createdAt:string;}

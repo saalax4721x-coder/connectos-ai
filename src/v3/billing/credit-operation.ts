@@ -1,0 +1,1 @@
+export type CreditOperation='deep-research'|'large-discovery'|'advanced-matching'|'complex-workflow'|'document-analysis'|'advanced-intelligence'; export interface CreditQuote{operation:CreditOperation;credits:number;reason:string;}

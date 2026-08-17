@@ -1,0 +1,1 @@
+import type {ProductMode} from './mode'; export const playbook=(mode:ProductMode)=>({career:['jobs','people','skills'],business:['customers','partners','suppliers'],investor:['funds','thesis','portfolio'],founder:['cofounders','talent','capital'],creator:['clients','brands','collaborators'],event:['attendees','speakers','followups']}[mode]);

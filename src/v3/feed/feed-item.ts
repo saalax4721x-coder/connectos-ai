@@ -1,0 +1,1 @@
+export type FeedCategory='for-you'|'opportunities'|'network'|'industry'|'trending'|'local'|'collaborations'|'people'|'companies'; export interface FeedItem{id:string;category:FeedCategory;entityId:string;reason:string;score:number;sourceIds:string[];createdAt:string;}

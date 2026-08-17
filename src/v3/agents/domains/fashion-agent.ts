@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const fashionAgent:AgentDefinition={id:'fashion',name:'Fashion Agent',version:'3.0.0',domain:'business',status:'active',capabilities:[],skills:['supplier-discovery','brand-discovery'],tools:['search'],permissions:['research']};

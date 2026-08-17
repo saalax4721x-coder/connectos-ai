@@ -1,0 +1,1 @@
+import type {Followup} from './followup'; export const due=(items:Followup[],now=Date.now())=>items.filter(x=>x.status!=='completed'&&x.status!=='dismissed'&&new Date(x.dueAt).getTime()<=now).sort((a,b)=>b.priority-a.priority);

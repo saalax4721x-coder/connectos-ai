@@ -1,0 +1,1 @@
+export interface StrengthSignals{recency:number;frequency:number;sharedWork:number;explicitTrust:number;} export const relationshipStrength=(s:StrengthSignals)=>Math.min(1,.25*s.recency+.2*s.frequency+.25*s.sharedWork+.3*s.explicitTrust);

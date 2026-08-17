@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const scienceAgent:AgentDefinition={id:'science',name:'Science Agent',version:'3.0.0',domain:'education',status:'active',capabilities:[],skills:['research-review','expert-discovery'],tools:['search'],permissions:['research']};

@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const consultingAgent:AgentDefinition={id:'consulting',name:'Consulting Agent',version:'3.0.0',domain:'business',status:'active',capabilities:[],skills:['expert-discovery','project-discovery'],tools:['search'],permissions:['research']};

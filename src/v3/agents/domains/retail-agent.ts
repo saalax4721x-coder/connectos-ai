@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const retailAgent:AgentDefinition={id:'retail',name:'Retail Agent',version:'3.0.0',domain:'business',status:'active',capabilities:[],skills:['buyer-discovery','distribution-discovery'],tools:['search'],permissions:['research']};

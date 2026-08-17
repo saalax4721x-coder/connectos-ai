@@ -1,0 +1,3 @@
+import type { Provenance } from '../core/provenance';
+export type OpportunityType='client'|'job'|'investment'|'partnership'|'collaboration'|'supplier'|'buyer'|'distributor'|'acquisition'|'funding'|'project'|'contract'|'introduction'|'event'|'market-entry'|'talent'|'creator'|'media'|'property';
+export interface Opportunity { id:string; type:OpportunityType; title:string; description:string; people:string[]; companies:string[]; location?:string; industry?:string; value?:number; currency?:string; urgency:number; timestamp:string; source?:string; confidence:number; whyYou:string[]; whyThem:string[]; whyNow:string[]; nextAction:string; provenance:Provenance[]; }

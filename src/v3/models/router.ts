@@ -1,0 +1,1 @@
+import type {ModelDefinition} from './model'; import type {ModelCapability} from './capability'; export const routeModel=(models:ModelDefinition[],capability:ModelCapability,minQuality=.5)=>models.filter(m=>m.capabilities.includes(capability)&&m.quality>=minQuality).sort((a,b)=>a.costPer1k-b.costPer1k)[0];

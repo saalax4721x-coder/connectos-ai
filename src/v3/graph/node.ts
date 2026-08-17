@@ -1,0 +1,1 @@
+import type {NodeKind} from './node-kind'; import type {GraphProvenance} from './provenance'; export interface GraphNode{id:string;kind:NodeKind;label:string;properties:Record<string,unknown>;provenance:GraphProvenance[];}

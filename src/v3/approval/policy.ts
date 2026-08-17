@@ -1,0 +1,1 @@
+export interface ApprovalPolicy{actionsRequiringApproval:string[];autoApproveReads:boolean;maxApprovalAgeMs:number;} export const approvalRequired=(p:ApprovalPolicy,action:string)=>p.actionsRequiringApproval.includes(action);

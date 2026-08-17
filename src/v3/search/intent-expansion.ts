@@ -1,0 +1,1 @@
+const synonyms:Record<string,string[]>= {investor:['investors','fund','venture capital','capital'],manufacturer:['factory','producer','supplier'],client:['customer','buyer','account']}; export const expandTerms=(term:string)=>[term,...(synonyms[term.toLowerCase()]??[])];

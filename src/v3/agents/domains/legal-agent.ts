@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const legalAgent:AgentDefinition={id:'legal',name:'Legal Agent',version:'3.0.0',domain:'legal',status:'active',capabilities:[],skills:['legal-research','document-routing'],tools:['search'],permissions:['research']};

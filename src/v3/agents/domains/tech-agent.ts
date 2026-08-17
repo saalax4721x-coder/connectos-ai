@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const techAgent:AgentDefinition={id:'tech',name:'Technology Agent',version:'3.0.0',domain:'tech',status:'active',capabilities:[],skills:['technical-talent','vendor-discovery'],tools:['search'],permissions:['research']};

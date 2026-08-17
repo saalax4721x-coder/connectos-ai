@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const hospitalityAgent:AgentDefinition={id:'hospitality',name:'Hospitality Agent',version:'3.0.0',domain:'business',status:'active',capabilities:[],skills:['partner-discovery','event-discovery'],tools:['search'],permissions:['research']};

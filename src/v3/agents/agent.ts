@@ -1,0 +1,1 @@
+import type {AgentStatus} from './agent-status'; import type {AgentCapability} from './agent-capability'; export interface AgentDefinition{id:string;name:string;version:string;domain:string;status:AgentStatus;capabilities:AgentCapability[];skills:string[];tools:string[];permissions:string[];}

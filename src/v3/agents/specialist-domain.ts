@@ -1,0 +1,1 @@
+export type SpecialistDomain='business'|'founder'|'finance'|'banking'|'investment'|'legal'|'real-estate'|'tech'|'ai'|'web3'|'marketing'|'sales'|'media'|'manufacturing'|'logistics'|'trade'|'healthcare'|'education'|'engineering'|'energy';

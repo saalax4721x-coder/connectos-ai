@@ -1,0 +1,1 @@
+import type {OpportunityStatus} from './opportunity-status'; export interface OpportunityHistory{id:string;opportunityId:string;from?:OpportunityStatus;to:OpportunityStatus;actor:'system'|'user'|'agent';at:string;reason:string;}

@@ -1,0 +1,2 @@
+# ConnectOS commit 647
+Implementation contract for the modular opportunity operating system.

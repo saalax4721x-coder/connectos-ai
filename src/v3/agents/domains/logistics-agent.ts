@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const logisticsAgent:AgentDefinition={id:'logistics',name:'Logistics Agent',version:'3.0.0',domain:'logistics',status:'active',capabilities:[],skills:['route-analysis','export-research'],tools:['search'],permissions:['research']};

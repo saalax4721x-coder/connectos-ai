@@ -1,0 +1,1 @@
+import type {NeedOffer} from './need-offer'; export const needOfferScore=(need:NeedOffer,offer:NeedOffer)=>{const skills=need.skills.filter(s=>offer.skills.includes(s)).length/Math.max(1,need.skills.length);const geo=need.locations.length&&offer.locations.length&&need.locations.some(x=>offer.locations.includes(x))?1:.5;return .7*skills+.3*geo;};

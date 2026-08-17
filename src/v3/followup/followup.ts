@@ -1,0 +1,1 @@
+import type {FollowupStatus} from './followup-status'; export interface Followup{id:string;personId:string;conversationId?:string;promise?:string;nextAction:string;dueAt:string;status:FollowupStatus;priority:number;}

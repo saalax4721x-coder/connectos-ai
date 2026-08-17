@@ -1,0 +1,1 @@
+import type {Workflow} from './workflow'; export const validateWorkflow=(w:Workflow)=>{const ids=new Set(w.steps.map(s=>s.id));const errors:string[]=[];for(const s of w.steps){for(const d of s.dependsOn)if(!ids.has(d))errors.push(`${s.id}: missing dependency ${d}`);if(s.id===s.dependsOn.find(d=>d===s.id))errors.push(`${s.id}: self dependency`);}return errors;};

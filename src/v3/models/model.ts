@@ -1,0 +1,1 @@
+import type {ModelCapability} from './capability'; export interface ModelDefinition{id:string;provider:string;name:string;capabilities:ModelCapability[];quality:number;latencyMs:number;costPer1k:number;contextTokens:number;}

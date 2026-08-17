@@ -1,0 +1,1 @@
+export type VerificationTarget='identity'|'company'|'role'|'credential'|'relationship'; export interface VerificationRequest{target:VerificationTarget;entityId:string;claims:string[];requiredConfidence:number;}

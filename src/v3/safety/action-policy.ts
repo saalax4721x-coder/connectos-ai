@@ -1,0 +1,1 @@
+export const blockedActions=['impersonate-user','fabricate-relationship','fabricate-credential','expose-private-data','unsupported-allegation']; export const actionBlocked=(action:string)=>blockedActions.includes(action);

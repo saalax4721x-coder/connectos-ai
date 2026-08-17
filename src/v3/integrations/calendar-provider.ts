@@ -1,0 +1,1 @@
+export interface CalendarProvider{listEvents(userId:string,start:string,end:string):Promise<{id:string;title:string;startsAt:string;endsAt:string}[]>;createEvent?(userId:string,input:Record<string,unknown>):Promise<{id:string}>;}

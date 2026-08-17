@@ -1,0 +1,1 @@
+export interface Event{ id:string;name:string;startsAt:string;endsAt?:string;location?:string;virtual?:boolean;topicIds:string[];companyIds:string[];speakerIds:string[];attendeeIds?:string[];sourceIds:string[];}

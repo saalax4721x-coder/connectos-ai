@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const impactAgent:AgentDefinition={id:'impact',name:'Impact Agent',version:'3.0.0',domain:'business',status:'active',capabilities:[],skills:['partner-discovery','project-discovery'],tools:['search'],permissions:['research']};

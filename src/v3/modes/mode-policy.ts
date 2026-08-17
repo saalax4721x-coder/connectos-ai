@@ -1,0 +1,1 @@
+import type {ProductMode} from './mode'; export const consequentialModeActions=(mode:ProductMode)=>mode==='investor'?['financial-action','send-message']:mode==='event'?['send-message']:['send-message'];

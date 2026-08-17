@@ -1,0 +1,1 @@
+export type RegulatedDomain='finance'|'legal'|'healthcare'|'public-sector'|'web3'; export const requiresDomainNotice=(domain:string)=>['finance','legal','healthcare','public-sector','web3'].includes(domain);

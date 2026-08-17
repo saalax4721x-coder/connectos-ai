@@ -1,0 +1,1 @@
+export interface StrategyStep{id:string;title:string;action:string;reason:string;dependencies:string[];requiresApproval:boolean;} export interface GoalStrategy{goalId:string;horizonDays:number;steps:StrategyStep[];successMetric:string;}

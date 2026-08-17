@@ -1,0 +1,1 @@
+import type {ToolDefinition} from './tool'; export class ToolRegistry{private items=new Map<string,ToolDefinition>();register(t:ToolDefinition){this.items.set(t.id,t);}get(id:string){return this.items.get(id);}list(){return [...this.items.values()];}}

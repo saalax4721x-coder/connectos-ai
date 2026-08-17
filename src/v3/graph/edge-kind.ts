@@ -1,0 +1,1 @@
+export type EdgeKind='knows'|'works-with'|'worked-with'|'invested-in'|'advised'|'partnered-with'|'collaborated-with'|'can-introduce'|'shared-project'|'attended-with'|'located-in'|'has-skill'|'owns'|'member-of';

@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const automotiveAgent:AgentDefinition={id:'automotive',name:'Automotive Agent',version:'3.0.0',domain:'business',status:'active',capabilities:[],skills:['supplier-discovery','market-intelligence'],tools:['search'],permissions:['research']};

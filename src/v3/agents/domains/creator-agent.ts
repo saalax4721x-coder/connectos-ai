@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const creatorAgent:AgentDefinition={id:'creator',name:'Creator Agent',version:'3.0.0',domain:'media',status:'active',capabilities:[],skills:['client-discovery','collaboration-discovery'],tools:['search'],permissions:['research']};

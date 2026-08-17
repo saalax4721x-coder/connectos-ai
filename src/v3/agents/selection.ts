@@ -1,0 +1,1 @@
+import type {AgentDefinition} from './agent'; export const selectAgents=(agents:AgentDefinition[],needed:string[])=>agents.filter(a=>a.status==='active'&&a.capabilities.some(c=>needed.includes(c.id)));

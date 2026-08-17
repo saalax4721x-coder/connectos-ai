@@ -1,0 +1,1 @@
+export class CreditWallet{constructor(public balance:number){}quote(cost:number){return this.balance>=cost;}spend(cost:number){if(cost<0||cost>this.balance)return false;this.balance-=cost;return true;}refund(cost:number){this.balance+=Math.max(0,cost);}}

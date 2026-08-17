@@ -1,0 +1,1 @@
+export type TimingSignal='new-role'|'funding'|'promotion'|'expansion'|'product-launch'|'event'|'shared-project'|'hiring'|'market-entry'; export interface TimingSignalRecord{type:TimingSignal;observedAt:string;confidence:number;sourceId:string;}

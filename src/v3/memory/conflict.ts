@@ -1,0 +1,1 @@
+import type {Memory} from './memory'; export interface MemoryConflict{key:string;items:Memory[];resolution:'latest'|'highest-confidence'|'manual';} export const resolveHighestConfidence=(items:Memory[])=>[...items].sort((a,b)=>b.confidence-a.confidence)[0];

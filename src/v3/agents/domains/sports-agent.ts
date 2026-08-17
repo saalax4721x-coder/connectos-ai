@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const sportsAgent:AgentDefinition={id:'sports',name:'Sports Agent',version:'3.0.0',domain:'media',status:'active',capabilities:[],skills:['talent-discovery','sponsorship-discovery'],tools:['search'],permissions:['research']};

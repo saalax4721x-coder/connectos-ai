@@ -1,0 +1,1 @@
+import type {AgentDefinition} from '../agent'; export const cyberAgent:AgentDefinition={id:'cyber',name:'Cyber Agent',version:'3.0.0',domain:'tech',status:'active',capabilities:[],skills:['security-research','vendor-discovery'],tools:['search'],permissions:['research']};

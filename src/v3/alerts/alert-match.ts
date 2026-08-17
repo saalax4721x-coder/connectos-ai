@@ -1,0 +1,1 @@
+import type {Alert} from './alert'; import type {Opportunity} from '../opportunity/opportunity'; export const alertMatches=(a:Alert,o:Opportunity)=>a.enabled&&(`${o.title} ${o.description}`.toLowerCase().includes(a.query.toLowerCase()));

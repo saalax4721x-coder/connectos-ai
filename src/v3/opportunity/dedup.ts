@@ -1,0 +1,1 @@
+import type {Opportunity} from './opportunity'; export const dedupe=(items:Opportunity[])=>{const seen=new Set<string>();return items.filter(x=>{const k=`${x.type}:${x.title.trim().toLowerCase()}:${x.companyIds.slice().sort().join(',')}`;if(seen.has(k))return false;seen.add(k);return true;});};

@@ -1,0 +1,1 @@
+import type {RegressionCase} from './regression-case'; export interface RegressionResult{id:string;caseId:string;passed:boolean;score:number;error?:string;} export const passRate=(r:RegressionResult[])=>r.length?r.filter(x=>x.passed).length/r.length:0;

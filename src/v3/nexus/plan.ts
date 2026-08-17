@@ -1,0 +1,1 @@
+export interface NexusPlanStep{id:string;agentId:string;capability:string;dependsOn:string[];inputRefs:string[];approvalRequired:boolean;} export interface NexusPlan{runId:string;steps:NexusPlanStep[];estimatedCredits:number;estimatedLatencyMs:number;}

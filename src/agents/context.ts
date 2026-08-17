@@ -1,0 +1,2 @@
+export interface AgentContext { requestId:string; actorId:string; goalId?:string; intentId?:string; workflowId?:string; locale?:string; timezone?:string; facts:Readonly<Record<string,unknown>>; constraints:Readonly<string[]>; approvals:Readonly<string[]>; correlationId:string; }
+export function childContext(parent:AgentContext, patch:Partial<AgentContext>):AgentContext { return {...parent,...patch,facts:{...parent.facts,...(patch.facts??{})},constraints:[...parent.constraints,...(patch.constraints??[])]}; }

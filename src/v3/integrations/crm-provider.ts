@@ -1,0 +1,1 @@
+export interface CRMProvider{search(userId:string,query:string):Promise<{id:string;name:string;metadata:Record<string,unknown>}[]>;createRecord?(userId:string,input:Record<string,unknown>):Promise<{id:string}>;}

@@ -1,0 +1,1 @@
+export type OpportunityType='client'|'job'|'investment'|'partnership'|'collaboration'|'supplier'|'buyer'|'distributor'|'acquisition'|'funding'|'project'|'contract'|'introduction'|'event'|'market-entry'|'talent'|'creator'|'media'|'property';

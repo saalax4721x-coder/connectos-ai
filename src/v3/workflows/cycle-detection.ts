@@ -1,0 +1,1 @@
+export function hasCycle(edges:Record<string,string[]>):boolean{const visiting=new Set<string>(),visited=new Set<string>();const walk=(n:string):boolean=>{if(visiting.has(n))return true;if(visited.has(n))return false;visiting.add(n);for(const d of edges[n]||[])if(walk(d))return true;visiting.delete(n);visited.add(n);return false};return Object.keys(edges).some(walk);}

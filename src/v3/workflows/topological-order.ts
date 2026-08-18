@@ -1,0 +1,1 @@
+export function topologicalOrder(edges:Record<string,string[]>):string[]{const out:string[]=[],seen=new Set<string>();const visit=(n:string)=>{if(seen.has(n))return;seen.add(n);for(const d of edges[n]||[])visit(d);out.push(n)};Object.keys(edges).forEach(visit);return out.reverse();}

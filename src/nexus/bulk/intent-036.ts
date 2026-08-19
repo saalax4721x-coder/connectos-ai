@@ -1,0 +1,1 @@
+export const intent036={stage:'safety',rule:'no-private-data-without-authorization'};

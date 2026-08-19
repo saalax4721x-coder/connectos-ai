@@ -1,0 +1,1 @@
+export const intent058={stage:'intent-history',rule:'record-change-reason'};

@@ -1,0 +1,1 @@
+export const intent090={stage:'planning',rule:'stop-on-blocking-constraint'};

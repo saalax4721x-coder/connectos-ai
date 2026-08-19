@@ -1,0 +1,1 @@
+export const intent021={stage:'workflow',rule:'validate-entry-context'};

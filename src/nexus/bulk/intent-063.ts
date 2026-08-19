@@ -1,0 +1,1 @@
+export const intent063={stage:'intent-validation',rule:'trim-goal-whitespace'};

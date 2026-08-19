@@ -1,0 +1,1 @@
+export const intent088={stage:'planning',rule:'research-can-parallelize'};

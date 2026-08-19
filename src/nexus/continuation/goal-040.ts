@@ -1,0 +1,1 @@
+export const goal040={id:'goal-040',signal:'consent-state',priority:'required'};

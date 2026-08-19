@@ -1,0 +1,1 @@
+export const intent082={stage:'requirements',rule:'detect-missing-critical-field'};

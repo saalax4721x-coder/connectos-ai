@@ -1,0 +1,1 @@
+export const goal043={id:'goal-043',signal:'change-log',priority:'medium'};

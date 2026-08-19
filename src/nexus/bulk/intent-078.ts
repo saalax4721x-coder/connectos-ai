@@ -1,0 +1,1 @@
+export const intent078={stage:'industry',rule:'retain-user-term'};

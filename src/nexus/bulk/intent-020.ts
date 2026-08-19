@@ -1,0 +1,1 @@
+export const intent020={stage:'plan-confidence',rule:'confidence-requires-evidence'};

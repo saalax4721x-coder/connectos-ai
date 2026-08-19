@@ -1,0 +1,2 @@
+export interface Ambiguity { field:string; reason:string; severity:'low'|'medium'|'high'; }
+export function detectAmbiguity(fields:Record<string,unknown>):Ambiguity[]{return Object.entries(fields).filter(([,v])=>v===undefined||v===null||v==='').map(([field])=>({field,reason:'missing value',severity:'medium'}));}

@@ -1,0 +1,1 @@
+export const goal016={id:'goal-016',signal:'approval-gate',priority:'required'};

@@ -1,0 +1,1 @@
+export const goal057={id:'goal-057',signal:'contradiction-check',priority:'required'};

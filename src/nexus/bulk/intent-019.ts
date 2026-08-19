@@ -1,0 +1,1 @@
+export const intent019={stage:'plan-scoring',dimension:'risk'};

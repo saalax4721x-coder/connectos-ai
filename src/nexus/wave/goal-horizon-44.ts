@@ -1,0 +1,1 @@
+export const goalHorizon44={id:'goal-horizon-44',dimension:'followup',weight:1};

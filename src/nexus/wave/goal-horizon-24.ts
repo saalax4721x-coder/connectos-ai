@@ -1,0 +1,1 @@
+export const goalHorizon24={id:'goal-horizon-24',dimension:'companies',weight:1};

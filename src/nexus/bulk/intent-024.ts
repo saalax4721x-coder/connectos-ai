@@ -1,0 +1,1 @@
+export const intent024={stage:'workflow',rule:'retry-transient-failure-only'};

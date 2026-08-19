@@ -1,0 +1,1 @@
+export function calibrateConfidence(raw:number, evidenceCount:number): number { const evidenceFactor = Math.min(1, evidenceCount / 5); return Math.max(0, Math.min(1, raw * 0.7 + evidenceFactor * 0.3)); }

@@ -1,0 +1,1 @@
+export const intent081={stage:'requirements',rule:'rank-requirements-by-impact'};

@@ -1,0 +1,1 @@
+export const goalHorizon13={id:'goal-horizon-13',dimension:'sequence',weight:1};

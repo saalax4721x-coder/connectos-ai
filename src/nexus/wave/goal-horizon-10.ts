@@ -1,0 +1,1 @@
+export const goalHorizon10={id:'goal-horizon-10',dimension:'evidence',weight:1};

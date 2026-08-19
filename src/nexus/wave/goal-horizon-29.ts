@@ -1,0 +1,1 @@
+export const goalHorizon29={id:'goal-horizon-29',dimension:'success-metric',weight:1};

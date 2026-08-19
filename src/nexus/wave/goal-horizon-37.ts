@@ -1,0 +1,1 @@
+export const goalHorizon37={id:'goal-horizon-37',dimension:'blocker',weight:1};

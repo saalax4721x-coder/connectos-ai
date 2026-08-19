@@ -1,0 +1,1 @@
+export const intent044={stage:'memory',rule:'expire-context-by-freshness'};

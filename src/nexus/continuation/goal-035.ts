@@ -1,0 +1,1 @@
+export const goal035={id:'goal-035',signal:'geography-scope',priority:'medium'};

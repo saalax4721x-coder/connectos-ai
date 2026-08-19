@@ -1,0 +1,1 @@
+export const intent001={id:'intent-001',stage:'classification'};

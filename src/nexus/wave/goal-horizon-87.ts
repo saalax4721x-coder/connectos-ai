@@ -1,0 +1,1 @@
+export const goalHorizon87={id:'goal-horizon-87',dimension:'accepted-recommendation',weight:1};

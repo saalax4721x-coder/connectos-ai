@@ -1,0 +1,1 @@
+export const goal009={id:'goal-009',signal:'risk-tolerance',priority:'medium'};

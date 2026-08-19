@@ -1,0 +1,1 @@
+export const intent067={stage:'classification',rule:'fallback-to-unknown-domain'};

@@ -1,0 +1,1 @@
+export const intent006={stage:'entity-resolution',entity:'person',strategy:'name-and-context'};

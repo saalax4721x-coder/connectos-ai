@@ -1,0 +1,1 @@
+export const intent072={stage:'urgency',rule:'relative-time-requires-timezone'};

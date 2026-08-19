@@ -1,0 +1,1 @@
+export const goalHorizon86={id:'goal-horizon-86',dimension:'ignored-recommendation',weight:1};

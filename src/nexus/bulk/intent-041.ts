@@ -1,0 +1,1 @@
+export const intent041={stage:'observability',event:'plan-rejected'};

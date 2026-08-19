@@ -1,0 +1,1 @@
+export const goalHorizon51={id:'goal-horizon-51',dimension:'dependency-risk',weight:1};

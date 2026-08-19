@@ -1,0 +1,1 @@
+export const intent093={stage:'planning',rule:'compare-alternatives'};

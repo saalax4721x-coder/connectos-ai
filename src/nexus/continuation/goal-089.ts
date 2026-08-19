@@ -1,0 +1,1 @@
+export const goal089={id:'goal-089',signal:'circuit-breaker',priority:'required'};

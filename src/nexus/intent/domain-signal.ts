@@ -1,0 +1,1 @@
+export type NexusDomain='business'|'career'|'investment'|'collaboration'|'market'|'unknown'; export interface DomainSignal {domain:NexusDomain; confidence:number;} export const rankDomain=(s:DomainSignal)=>Math.max(0,Math.min(1,s.confidence));

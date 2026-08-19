@@ -1,0 +1,1 @@
+export const intent056={stage:'intent-history',rule:'append-only-revision'};

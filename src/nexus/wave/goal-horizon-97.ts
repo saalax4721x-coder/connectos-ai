@@ -1,0 +1,1 @@
+export const goalHorizon97={id:'goal-horizon-97',dimension:'deletion',weight:1};

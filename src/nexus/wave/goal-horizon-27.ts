@@ -1,0 +1,1 @@
+export const goalHorizon27={id:'goal-horizon-27',dimension:'constraints',weight:1};

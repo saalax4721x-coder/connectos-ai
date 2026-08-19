@@ -1,0 +1,2 @@
+export interface ClarificationCandidate { question:string; field:string; priority:number; }
+export function rankClarifications(items:ClarificationCandidate[]):ClarificationCandidate[]{return [...items].sort((a,b)=>b.priority-a.priority);}

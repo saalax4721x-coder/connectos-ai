@@ -1,0 +1,1 @@
+export const intent069={stage:'classification',rule:'rank-domain-candidates'};

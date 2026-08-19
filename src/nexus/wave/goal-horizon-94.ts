@@ -1,0 +1,1 @@
+export const goalHorizon94={id:'goal-horizon-94',dimension:'memory-scope',weight:1};

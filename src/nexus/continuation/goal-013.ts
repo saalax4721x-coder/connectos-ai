@@ -1,0 +1,1 @@
+export const goal013={id:'goal-013',signal:'quality-bar',priority:'high'};

@@ -1,0 +1,1 @@
+export const goalHorizon50={id:'goal-horizon-50',dimension:'reversibility',weight:1};

@@ -1,0 +1,1 @@
+export const intent077={stage:'industry',rule:'map-synonym-to-canonical'};

@@ -1,0 +1,1 @@
+export const goalHorizon59={id:'goal-horizon-59',dimension:'counterfactual',weight:1};

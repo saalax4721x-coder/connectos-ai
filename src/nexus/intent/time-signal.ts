@@ -1,0 +1,1 @@
+export interface TimeSignal {raw:string; urgency:number; deadline?:string;} export const normalizeTimeSignal=(s:TimeSignal)=>({...s,urgency:Math.max(0,Math.min(1,s.urgency)),raw:s.raw.trim()});

@@ -1,0 +1,1 @@
+export const intent010={stage:'requirement-validation',rule:'reject-empty-required-value'};

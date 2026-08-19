@@ -1,0 +1,1 @@
+export type RequirementKind='hard'|'soft'|'derived'|'missing';

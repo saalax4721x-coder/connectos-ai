@@ -1,0 +1,1 @@
+export const goalHorizon71={id:'goal-horizon-71',dimension:'latency-budget',weight:1};

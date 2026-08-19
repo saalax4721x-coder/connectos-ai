@@ -1,0 +1,1 @@
+export const intent009={stage:'requirement-extraction',kind:'timeline',strictness:'explicit-only'};

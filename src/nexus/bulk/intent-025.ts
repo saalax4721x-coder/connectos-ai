@@ -1,0 +1,1 @@
+export const intent025={stage:'workflow',rule:'idempotent-retry-boundary'};

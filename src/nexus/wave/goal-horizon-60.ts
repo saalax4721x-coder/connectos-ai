@@ -1,0 +1,1 @@
+export const goalHorizon60={id:'goal-horizon-60',dimension:'decision-cost',weight:1};

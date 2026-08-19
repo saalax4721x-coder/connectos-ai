@@ -1,0 +1,1 @@
+export const intent055={stage:'decision',rule:'no-objective-fact-conflation'};

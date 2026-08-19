@@ -1,0 +1,1 @@
+export const intent049={stage:'handoff',rule:'preserve-confidence'};

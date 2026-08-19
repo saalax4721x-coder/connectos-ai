@@ -1,0 +1,1 @@
+export const goalHorizon52={id:'goal-horizon-52',dimension:'approval-risk',weight:1};

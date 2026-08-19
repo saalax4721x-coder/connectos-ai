@@ -1,0 +1,1 @@
+export const goalHorizon77={id:'goal-horizon-77',dimension:'rollback',weight:1};

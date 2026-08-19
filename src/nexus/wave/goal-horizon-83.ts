@@ -1,0 +1,1 @@
+export const goalHorizon83={id:'goal-horizon-83',dimension:'outcome-learning',weight:1};

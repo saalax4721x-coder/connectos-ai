@@ -1,0 +1,1 @@
+export const intent057={stage:'intent-history',rule:'revision-has-parent'};

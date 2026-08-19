@@ -1,0 +1,1 @@
+export const intent008={stage:'requirement-extraction',kind:'budget',strictness:'soft-unless-explicit'};

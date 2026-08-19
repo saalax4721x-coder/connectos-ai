@@ -1,0 +1,1 @@
+export const intent089={stage:'planning',rule:'dependent-actions-sequential'};

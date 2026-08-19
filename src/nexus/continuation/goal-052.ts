@@ -1,0 +1,1 @@
+export const goal052={id:'goal-052',signal:'latency-budget',priority:'medium'};

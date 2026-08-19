@@ -1,0 +1,1 @@
+export const goalHorizon45={id:'goal-horizon-45',dimension:'signal',weight:1};

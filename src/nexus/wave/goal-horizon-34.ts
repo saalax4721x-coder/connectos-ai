@@ -1,0 +1,1 @@
+export const goalHorizon34={id:'goal-horizon-34',dimension:'checkpoint',weight:1};

@@ -1,0 +1,1 @@
+export const goalHorizon41={id:'goal-horizon-41',dimension:'relationship',weight:1};

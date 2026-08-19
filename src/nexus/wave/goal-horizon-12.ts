@@ -1,0 +1,1 @@
+export const goalHorizon12={id:'goal-horizon-12',dimension:'dependency',weight:1};

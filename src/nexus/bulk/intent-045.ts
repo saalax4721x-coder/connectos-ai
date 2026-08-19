@@ -1,0 +1,1 @@
+export const intent045={stage:'agent-selection',rule:'capability-must-match-task'};

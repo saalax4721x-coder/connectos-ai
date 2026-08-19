@@ -1,0 +1,1 @@
+export const goal059={id:'goal-059',signal:'stale-data-check',priority:'required'};

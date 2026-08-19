@@ -1,0 +1,1 @@
+export const intent043={stage:'memory',rule:'do-not-promote-inference-to-fact'};

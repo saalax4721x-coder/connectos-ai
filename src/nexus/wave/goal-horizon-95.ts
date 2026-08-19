@@ -1,0 +1,1 @@
+export const goalHorizon95={id:'goal-horizon-95',dimension:'retention',weight:1};

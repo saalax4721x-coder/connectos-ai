@@ -1,0 +1,1 @@
+export const intent075={stage:'location',rule:'canonicalize-country'};

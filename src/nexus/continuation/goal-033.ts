@@ -1,0 +1,1 @@
+export const goal033={id:'goal-033',signal:'resource-limit',priority:'high'};

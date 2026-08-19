@@ -1,0 +1,1 @@
+export const goalHorizon03={id:'goal-horizon-03',dimension:'urgency',weight:1};

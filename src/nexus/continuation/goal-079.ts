@@ -1,0 +1,1 @@
+export const goal079={id:'goal-079',signal:'privacy-weight',priority:'required'};

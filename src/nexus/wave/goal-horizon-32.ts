@@ -1,0 +1,1 @@
+export const goalHorizon32={id:'goal-horizon-32',dimension:'fallback',weight:1};

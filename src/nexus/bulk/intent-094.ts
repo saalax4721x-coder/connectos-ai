@@ -1,0 +1,1 @@
+export const intent094={stage:'planning',rule:'prefer-feasible-plan'};

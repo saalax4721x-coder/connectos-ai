@@ -1,0 +1,1 @@
+export const filterIntentSignals = <T extends { confidence: number }>(signals: T[], minimum = 0) => signals.filter(s => s.confidence >= minimum);

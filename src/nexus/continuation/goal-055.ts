@@ -1,0 +1,1 @@
+export const goal055={id:'goal-055',signal:'verification-depth',priority:'high'};

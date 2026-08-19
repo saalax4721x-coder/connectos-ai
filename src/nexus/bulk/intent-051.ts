@@ -1,0 +1,1 @@
+export const intent051={stage:'decision',rule:'single-primary-next-action'};

@@ -1,0 +1,1 @@
+export const goalHorizon26={id:'goal-horizon-26',dimension:'skills',weight:1};

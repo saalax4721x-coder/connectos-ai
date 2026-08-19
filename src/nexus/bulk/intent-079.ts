@@ -1,0 +1,1 @@
+export const intent079={stage:'requirements',rule:'mark-explicit-as-user-stated'};

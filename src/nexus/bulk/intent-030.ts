@@ -1,0 +1,1 @@
+export const intent030={stage:'context',rule:'separate-inference-from-fact'};

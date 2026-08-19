@@ -1,0 +1,1 @@
+export const intent012={stage:'goal-decomposition',rule:'preserve-parent-success-criteria'};

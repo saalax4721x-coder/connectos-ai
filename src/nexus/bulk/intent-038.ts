@@ -1,0 +1,1 @@
+export const intent038={stage:'observability',event:'intent-normalized'};

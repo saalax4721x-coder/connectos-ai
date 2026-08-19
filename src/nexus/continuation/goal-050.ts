@@ -1,0 +1,1 @@
+export const goal050={id:'goal-050',signal:'model-capability',priority:'high'};

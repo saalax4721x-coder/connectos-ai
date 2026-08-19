@@ -1,0 +1,1 @@
+export const goalHorizon43={id:'goal-horizon-43',dimension:'communication',weight:1};

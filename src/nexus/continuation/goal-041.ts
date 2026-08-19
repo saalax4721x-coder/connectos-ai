@@ -1,0 +1,1 @@
+export const goal041={id:'goal-041',signal:'data-classification',priority:'required'};

@@ -1,0 +1,1 @@
+export const intent022={stage:'workflow',rule:'validate-exit-context'};

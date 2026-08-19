@@ -1,0 +1,1 @@
+export const goalHorizon17={id:'goal-horizon-17',dimension:'freshness',weight:1};

@@ -1,0 +1,1 @@
+export const intent016={stage:'planning',rule:'detect-cyclic-dependencies'};

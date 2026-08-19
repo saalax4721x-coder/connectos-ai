@@ -1,0 +1,1 @@
+export const goal085={id:'goal-085',signal:'query-cap',priority:'medium'};

@@ -1,0 +1,1 @@
+export const mergeIntentSignals = <T extends { key: string }>(signals: T[]) => Array.from(new Map(signals.map(s => [s.key, s])).values());

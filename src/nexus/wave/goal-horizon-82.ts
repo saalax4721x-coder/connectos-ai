@@ -1,0 +1,1 @@
+export const goalHorizon82={id:'goal-horizon-82',dimension:'evaluation',weight:1};

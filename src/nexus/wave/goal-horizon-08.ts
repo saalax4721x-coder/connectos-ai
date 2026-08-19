@@ -1,0 +1,1 @@
+export const goalHorizon08={id:'goal-horizon-08',dimension:'fit',weight:1};

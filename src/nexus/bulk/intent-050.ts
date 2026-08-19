@@ -1,0 +1,1 @@
+export const intent050={stage:'handoff',rule:'reject-context-without-source'};

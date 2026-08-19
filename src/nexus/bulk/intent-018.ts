@@ -1,0 +1,1 @@
+export const intent018={stage:'plan-scoring',dimension:'effort'};

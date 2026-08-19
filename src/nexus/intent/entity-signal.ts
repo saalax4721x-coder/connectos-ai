@@ -1,0 +1,1 @@
+export type EntityKind='person'|'company'|'location'|'industry'|'skill'; export interface EntitySignal {kind:EntityKind; value:string; confidence:number;} export const cleanEntity=(e:EntitySignal)=>({...e,value:e.value.trim(),confidence:Math.max(0,Math.min(1,e.confidence))});

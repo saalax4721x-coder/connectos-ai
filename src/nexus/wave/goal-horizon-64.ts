@@ -1,0 +1,1 @@
+export const goalHorizon64={id:'goal-horizon-64',dimension:'tool-fit',weight:1};

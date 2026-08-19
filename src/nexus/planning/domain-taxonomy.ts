@@ -1,0 +1,1 @@
+export const domains=['business','career','investment','collaboration','unknown'] as const; export type Domain=typeof domains[number];

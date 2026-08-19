@@ -1,0 +1,1 @@
+export const goal092={id:'goal-092',signal:'recovery-state',priority:'high'};

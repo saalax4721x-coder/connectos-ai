@@ -1,0 +1,1 @@
+export const goalHorizon55={id:'goal-horizon-55',dimension:'source-quality',weight:1};

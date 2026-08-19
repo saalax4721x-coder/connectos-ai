@@ -1,0 +1,1 @@
+export const goalHorizon14={id:'goal-horizon-14',dimension:'approval',weight:1};

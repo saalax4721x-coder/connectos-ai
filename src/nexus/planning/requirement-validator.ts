@@ -1,0 +1,1 @@
+import {Requirement} from './requirement-model'; export function validateRequirement(r:Requirement):boolean{return !!r.id&&!!r.category&&r.confidence>=0&&r.confidence<=1;}

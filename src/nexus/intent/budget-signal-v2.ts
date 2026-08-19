@@ -1,0 +1,1 @@
+export interface BudgetSignalV2 {currency?:string; min?:number; max?:number; confidence:number;} export const normalizeBudgetV2=(b:BudgetSignalV2)=>({...b,min:b.min===undefined?undefined:Math.max(0,b.min),max:b.max===undefined?undefined:Math.max(0,b.max),confidence:Math.max(0,Math.min(1,b.confidence))});

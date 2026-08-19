@@ -1,0 +1,1 @@
+export const goal045={id:'goal-045',signal:'rollback-point',priority:'high'};

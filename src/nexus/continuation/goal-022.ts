@@ -1,0 +1,1 @@
+export const goal022={id:'goal-022',signal:'fallback-plan',priority:'high'};

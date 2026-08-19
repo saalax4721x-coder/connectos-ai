@@ -1,0 +1,1 @@
+export const intent023={stage:'workflow',rule:'approval-before-sensitive-action'};

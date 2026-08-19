@@ -1,0 +1,1 @@
+export interface LocationSignalV2 {country?:string; city?:string; radiusKm?:number; confidence:number;} export const normalizeLocation=(s:LocationSignalV2)=>({...s,radiusKm:s.radiusKm===undefined?undefined:Math.max(0,s.radiusKm),confidence:Math.max(0,Math.min(1,s.confidence))});

@@ -1,0 +1,1 @@
+export const goal048={id:'goal-048',signal:'agent-capability',priority:'high'};

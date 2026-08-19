@@ -1,0 +1,1 @@
+export const goal036={id:'goal-036',signal:'industry-scope',priority:'medium'};

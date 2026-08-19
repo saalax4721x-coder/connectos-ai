@@ -1,0 +1,1 @@
+export const intent087={stage:'planning',rule:'verify-before-action'};

@@ -1,0 +1,1 @@
+export const goal060={id:'goal-060',signal:'missing-data-check',priority:'required'};

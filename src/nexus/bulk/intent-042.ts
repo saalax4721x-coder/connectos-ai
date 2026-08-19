@@ -1,0 +1,1 @@
+export const intent042={stage:'memory',rule:'retain-user-goal-preference'};

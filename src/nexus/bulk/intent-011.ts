@@ -1,0 +1,1 @@
+export const intent011={stage:'requirement-conflict',rule:'hard-constraint-dominates-soft'};

@@ -1,0 +1,1 @@
+export const goalHorizon88={id:'goal-horizon-88',dimension:'completed-action',weight:1};

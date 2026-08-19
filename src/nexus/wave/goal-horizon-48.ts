@@ -1,0 +1,1 @@
+export const goalHorizon48={id:'goal-horizon-48',dimension:'leverage',weight:1};

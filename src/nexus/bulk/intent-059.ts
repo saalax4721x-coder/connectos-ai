@@ -1,0 +1,1 @@
+export const intent059={stage:'intent-history',rule:'preserve-original-user-text'};

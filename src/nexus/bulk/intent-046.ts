@@ -1,0 +1,1 @@
+export const intent046={stage:'agent-selection',rule:'permission-before-capability'};

@@ -1,0 +1,1 @@
+export const goalHorizon49={id:'goal-horizon-49',dimension:'optionality',weight:1};

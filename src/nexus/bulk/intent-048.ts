@@ -1,0 +1,1 @@
+export const intent048={stage:'handoff',rule:'preserve-provenance'};

@@ -1,0 +1,1 @@
+export const goal088={id:'goal-088',signal:'timeout-policy',priority:'required'};

@@ -1,0 +1,1 @@
+export const goalHorizon76={id:'goal-horizon-76',dimension:'failure-mode',weight:1};

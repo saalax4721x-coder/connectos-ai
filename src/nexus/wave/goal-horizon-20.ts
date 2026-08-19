@@ -1,0 +1,1 @@
+export const goalHorizon20={id:'goal-horizon-20',dimension:'tradeoff',weight:1};

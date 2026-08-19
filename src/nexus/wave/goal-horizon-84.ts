@@ -1,0 +1,1 @@
+export const goalHorizon84={id:'goal-horizon-84',dimension:'feedback',weight:1};

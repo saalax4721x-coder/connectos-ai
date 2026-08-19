@@ -1,0 +1,1 @@
+export const intent061={stage:'intent-validation',rule:'goal-required'};

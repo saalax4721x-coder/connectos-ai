@@ -1,0 +1,1 @@
+export const goalHorizon70={id:'goal-horizon-70',dimension:'trace',weight:1};

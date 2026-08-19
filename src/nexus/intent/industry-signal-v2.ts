@@ -1,0 +1,1 @@
+export interface IndustrySignalV2 {industry:string; aliases:string[]; confidence:number;} export const normalizeIndustry=(s:IndustrySignalV2)=>({...s,industry:s.industry.trim(),aliases:s.aliases.map(a=>a.trim()).filter(Boolean),confidence:Math.max(0,Math.min(1,s.confidence))});

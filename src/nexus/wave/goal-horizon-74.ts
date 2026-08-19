@@ -1,0 +1,1 @@
+export const goalHorizon74={id:'goal-horizon-74',dimension:'quota',weight:1};

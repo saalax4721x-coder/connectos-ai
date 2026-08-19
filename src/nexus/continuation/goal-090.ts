@@ -1,0 +1,1 @@
+export const goal090={id:'goal-090',signal:'degradation-policy',priority:'required'};

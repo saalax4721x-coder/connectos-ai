@@ -1,0 +1,1 @@
+export const goal006={id:'goal-006',signal:'stakeholder',priority:'high'};

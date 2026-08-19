@@ -1,0 +1,1 @@
+export interface GoalSignal { id:string; label:string; confidence:number; source:'user'|'derived'; } export const normalizeGoalSignal=(s:GoalSignal):GoalSignal=>({...s,confidence:Math.max(0,Math.min(1,s.confidence)),label:s.label.trim()});

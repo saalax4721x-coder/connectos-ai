@@ -1,0 +1,1 @@
+export const goal082={id:'goal-082',signal:'risk-cap',priority:'required'};

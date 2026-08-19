@@ -1,0 +1,1 @@
+export const intent027={stage:'context',rule:'attach-provenance-to-derived-fact'};

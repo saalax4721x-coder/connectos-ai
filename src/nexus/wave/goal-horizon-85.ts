@@ -1,0 +1,1 @@
+export const goalHorizon85={id:'goal-horizon-85',dimension:'user-correction',weight:1};

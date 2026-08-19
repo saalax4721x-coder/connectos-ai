@@ -1,0 +1,1 @@
+export const goal049={id:'goal-049',signal:'tool-permission',priority:'required'};

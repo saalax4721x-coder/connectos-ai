@@ -1,0 +1,1 @@
+export const goalHorizon15={id:'goal-horizon-15',dimension:'privacy',weight:1};

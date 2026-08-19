@@ -1,0 +1,1 @@
+export const goal087={id:'goal-087',signal:'retry-policy',priority:'required'};

@@ -1,0 +1,1 @@
+export const intent007={stage:'entity-resolution',entity:'location',strategy:'canonical-region'};

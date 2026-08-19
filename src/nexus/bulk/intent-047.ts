@@ -1,0 +1,1 @@
+export const intent047={stage:'handoff',rule:'preserve-requirements'};

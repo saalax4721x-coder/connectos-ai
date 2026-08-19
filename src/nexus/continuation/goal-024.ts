@@ -1,0 +1,1 @@
+export const goal024={id:'goal-024',signal:'escalation-rule',priority:'required'};

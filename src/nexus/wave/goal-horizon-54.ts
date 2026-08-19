@@ -1,0 +1,1 @@
+export const goalHorizon54={id:'goal-horizon-54',dimension:'verification',weight:1};

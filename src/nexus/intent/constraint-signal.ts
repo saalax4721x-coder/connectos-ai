@@ -1,0 +1,1 @@
+export type ConstraintMode='hard'|'soft'; export interface ConstraintSignal {id:string; value:string; mode:ConstraintMode; priority:number;} export const normalizeConstraint=(c:ConstraintSignal)=>({...c,priority:Math.max(0,Math.min(100,c.priority)),value:c.value.trim()});

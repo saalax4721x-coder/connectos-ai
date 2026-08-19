@@ -1,0 +1,1 @@
+export type EntityType='person'|'company'|'location'|'industry'|'skill'|'event'|'project'; export interface ExtractedEntity{type:EntityType;value:string;confidence:number;}

@@ -1,0 +1,1 @@
+export const intent066={stage:'classification',rule:'prefer-explicit-domain'};

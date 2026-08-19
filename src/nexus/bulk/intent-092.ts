@@ -1,0 +1,1 @@
+export const intent092={stage:'planning',rule:'preserve-alternative-plan'};

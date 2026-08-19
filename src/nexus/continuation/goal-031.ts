@@ -1,0 +1,1 @@
+export const goal031={id:'goal-031',signal:'decision-record',priority:'required'};

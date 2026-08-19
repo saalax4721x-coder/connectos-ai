@@ -1,0 +1,1 @@
+export const intent026={stage:'context',rule:'scope-context-to-task'};

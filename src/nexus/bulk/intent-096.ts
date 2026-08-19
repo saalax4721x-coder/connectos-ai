@@ -1,0 +1,1 @@
+export const intent096={stage:'evaluation',rule:'record-plan-outcome'};

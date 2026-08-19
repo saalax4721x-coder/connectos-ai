@@ -1,0 +1,1 @@
+export const goalHorizon06={id:'goal-horizon-06',dimension:'risk',weight:1};

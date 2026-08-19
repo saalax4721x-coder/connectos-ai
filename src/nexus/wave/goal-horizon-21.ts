@@ -1,0 +1,1 @@
+export const goalHorizon21={id:'goal-horizon-21',dimension:'location',weight:1};

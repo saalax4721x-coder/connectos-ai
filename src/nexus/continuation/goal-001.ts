@@ -1,0 +1,1 @@
+export const goal001={id:'goal-001',signal:'desired-outcome',priority:'required'};

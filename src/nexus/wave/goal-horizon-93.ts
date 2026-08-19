@@ -1,0 +1,1 @@
+export const goalHorizon93={id:'goal-horizon-93',dimension:'source-conflict',weight:1};

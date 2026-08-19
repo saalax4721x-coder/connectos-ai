@@ -1,0 +1,1 @@
+export const goalHorizon36={id:'goal-horizon-36',dimension:'progress',weight:1};

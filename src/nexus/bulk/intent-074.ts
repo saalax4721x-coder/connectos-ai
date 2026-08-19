@@ -1,0 +1,1 @@
+export const intent074={stage:'budget',rule:'preserve-budget-range'};

@@ -1,0 +1,1 @@
+export function normalizeEntity(value:string):string{return value.trim().replace(/\s+/g,' ');}

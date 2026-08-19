@@ -1,0 +1,1 @@
+export const intent073={stage:'budget',rule:'normalize-currency'};

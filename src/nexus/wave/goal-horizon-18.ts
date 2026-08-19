@@ -1,0 +1,1 @@
+export const goalHorizon18={id:'goal-horizon-18',dimension:'context',weight:1};

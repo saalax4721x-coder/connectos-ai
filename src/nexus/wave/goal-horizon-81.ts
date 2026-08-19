@@ -1,0 +1,1 @@
+export const goalHorizon81={id:'goal-horizon-81',dimension:'regression',weight:1};

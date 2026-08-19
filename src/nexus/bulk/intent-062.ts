@@ -1,0 +1,1 @@
+export const intent062={stage:'intent-validation',rule:'confidence-bounded'};

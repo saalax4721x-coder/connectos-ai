@@ -1,0 +1,1 @@
+export const goal032={id:'goal-032',signal:'alternative-path',priority:'high'};

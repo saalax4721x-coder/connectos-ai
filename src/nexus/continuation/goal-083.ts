@@ -1,0 +1,1 @@
+export const goal083={id:'goal-083',signal:'time-cap',priority:'high'};

@@ -1,0 +1,1 @@
+export const goalHorizon57={id:'goal-horizon-57',dimension:'uncertainty',weight:1};

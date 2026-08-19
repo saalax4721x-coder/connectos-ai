@@ -1,0 +1,1 @@
+export const intent060={stage:'intent-history',rule:'timestamp-every-revision'};

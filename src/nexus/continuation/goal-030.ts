@@ -1,0 +1,1 @@
+export const goal030={id:'goal-030',signal:'reason-code',priority:'required'};

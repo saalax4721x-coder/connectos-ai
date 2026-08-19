@@ -1,0 +1,1 @@
+export const goalHorizon38={id:'goal-horizon-38',dimension:'resource',weight:1};

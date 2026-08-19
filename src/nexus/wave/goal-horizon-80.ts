@@ -1,0 +1,1 @@
+export const goalHorizon80={id:'goal-horizon-80',dimension:'consistency',weight:1};

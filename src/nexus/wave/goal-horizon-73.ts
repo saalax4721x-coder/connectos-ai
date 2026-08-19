@@ -1,0 +1,1 @@
+export const goalHorizon73={id:'goal-horizon-73',dimension:'credit-budget',weight:1};

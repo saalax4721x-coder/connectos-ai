@@ -1,0 +1,1 @@
+export const intent054={stage:'decision',rule:'surface-uncertainty'};

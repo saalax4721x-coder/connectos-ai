@@ -1,0 +1,1 @@
+export const goal094={id:'goal-094',signal:'completion-proof',priority:'required'};

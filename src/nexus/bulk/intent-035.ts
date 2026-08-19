@@ -1,0 +1,1 @@
+export const intent035={stage:'safety',rule:'no-unsupported-relationship-claim'};

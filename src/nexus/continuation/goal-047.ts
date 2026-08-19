@@ -1,0 +1,1 @@
+export const goal047={id:'goal-047',signal:'handoff-context',priority:'required'};

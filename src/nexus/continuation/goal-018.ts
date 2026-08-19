@@ -1,0 +1,1 @@
+export const goal018={id:'goal-018',signal:'review-state',priority:'medium'};

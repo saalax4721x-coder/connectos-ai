@@ -1,0 +1,1 @@
+export const goal027={id:'goal-027',signal:'freshness-window',priority:'medium'};

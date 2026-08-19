@@ -1,0 +1,1 @@
+export const goalHorizon75={id:'goal-horizon-75',dimension:'retry-budget',weight:1};

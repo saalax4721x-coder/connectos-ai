@@ -1,0 +1,1 @@
+export interface GoalOutcome{metric:string;target:number|string;unit?:string;deadline?:string;} export function isOutcomeComplete(o:GoalOutcome,value:number|string):boolean{return value===o.target;}

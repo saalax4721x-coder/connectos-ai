@@ -1,0 +1,1 @@
+export const goalHorizon05={id:'goal-horizon-05',dimension:'effort',weight:1};

@@ -1,0 +1,1 @@
+export const goalHorizon78={id:'goal-horizon-78',dimension:'idempotency',weight:1};

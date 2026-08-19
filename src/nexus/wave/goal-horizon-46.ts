@@ -1,0 +1,1 @@
+export const goalHorizon46={id:'goal-horizon-46',dimension:'timing',weight:1};

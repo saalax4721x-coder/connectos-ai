@@ -1,0 +1,1 @@
+export const goal008={id:'goal-008',signal:'resource',priority:'medium'};

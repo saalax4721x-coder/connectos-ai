@@ -1,0 +1,1 @@
+export const intent080={stage:'requirements',rule:'mark-derived-as-inferred'};

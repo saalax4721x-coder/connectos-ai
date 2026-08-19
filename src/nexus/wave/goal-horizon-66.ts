@@ -1,0 +1,1 @@
+export const goalHorizon66={id:'goal-horizon-66',dimension:'workflow-fit',weight:1};

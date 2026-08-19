@@ -1,0 +1,1 @@
+export const goalHorizon67={id:'goal-horizon-67',dimension:'approval-state',weight:1};

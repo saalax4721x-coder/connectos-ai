@@ -1,0 +1,1 @@
+export const goal056={id:'goal-056',signal:'source-count',priority:'medium'};

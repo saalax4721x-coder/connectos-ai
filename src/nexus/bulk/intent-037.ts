@@ -1,0 +1,1 @@
+export const intent037={stage:'safety',rule:'approval-for-external-send'};

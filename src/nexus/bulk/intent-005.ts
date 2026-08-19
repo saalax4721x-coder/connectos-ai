@@ -1,0 +1,1 @@
+export const intent005={stage:'entity-resolution',entity:'company',strategy:'normalized-name'};

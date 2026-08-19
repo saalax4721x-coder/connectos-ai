@@ -1,0 +1,1 @@
+export const goalHorizon96={id:'goal-horizon-96',dimension:'consent',weight:1};

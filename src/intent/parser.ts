@@ -22,12 +22,12 @@ export function parseGoalIntent(raw: string, now = Date.now()): GoalIntent {
   intent.location = match(text, /\b(?:in|from|within|across)\s+([A-Za-z][A-Za-z .,'-]{1,48})(?=\s+(?:for|who|with|that|and|to|$))/i);
   intent.industry = match(text, /\b(?:in the|within the|for the)\s+([A-Za-z][A-Za-z &/-]{2,40})\s+(?:industry|sector|market)\b/i);
 
-  const budget = match(text, /(?:budget|under|up to|max(?:imum)?)[^\d$]*(?:\$|USD\s*)?([\d,]+(?:\.\d+)?)(?:\s*(k|m|million|thousand))?/i);
-  if (budget) {
-    const value = Number(budget.replace(/,/g, '').replace(/\s*(k|m|million|thousand)$/i, ''));
-    const suffix = budget.match(/\s*(k|m|million|thousand)$/i)?.[1]?.toLowerCase();
+  const budgetMatch = text.match(/(?:budget|under|up to|max(?:imum)?)[^\d$]*(?:\$|USD\s*)?([\d,]+(?:\.\d+)?)(?:\s*(k|m|million|thousand))?/i);
+  if (budgetMatch) {
+    const value = Number(budgetMatch[1].replace(/,/g, ''));
+    const suffix = budgetMatch[2]?.toLowerCase();
     intent.budget = suffix === 'k' || suffix === 'thousand' ? value * 1_000 : suffix === 'm' || suffix === 'million' ? value * 1_000_000 : value;
-    intent.currency = /\$|USD/i.test(text) ? 'USD' : undefined;
+    intent.currency = /\$|USD/i.test(budgetMatch[0]) ? 'USD' : undefined;
   }
 
   intent.timeline = match(text, /\b(?:within|in|over)\s+(\d+\s*(?:days?|weeks?|months?|years?))\b/i);

@@ -4,6 +4,7 @@ export * from './opportunity';
 export * from './relationship';
 export * from './learning';
 export * from './outcome';
+export * from './intelligence/providers';
 export * from './execution/approval-gate';
 export * from './execution/state-store';
 export * from './execution/workflow-state';

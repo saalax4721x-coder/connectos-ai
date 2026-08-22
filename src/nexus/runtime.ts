@@ -9,12 +9,14 @@ import {RuntimeAgentRegistry} from '../agents/runtime-registry';
 import {isApproved, type ApprovalGate} from './execution/approval-gate';
 import {InMemoryNexusExecutionStateStore, type NexusExecutionStateStore} from './execution/state-store';
 import {deriveNextAction, InMemoryNexusOutcomeRecorder, type NexusOutcomeRecorder} from './outcome';
+import {rankOpportunities, type RankedOpportunity} from './opportunity';
+import {emptyIntelligenceSnapshot, type NexusIntelligenceProvider, type NexusIntelligenceSnapshot} from './intelligence/providers';
 
 export interface NexusPlanResult { intent: GoalIntent; requirements: IntentRequirement[]; plan: IntentPlan; approvals: ApprovalGate[]; unresolved: string[]; }
-export interface NexusRuntimeOptions { agents?: AgentRegistry; runtimeAgents?: RuntimeAgentRegistry; now?: () => number; stateStore?: NexusExecutionStateStore; outcomeRecorder?: NexusOutcomeRecorder; maxRetries?: number; }
+export interface NexusRuntimeOptions { agents?: AgentRegistry; runtimeAgents?: RuntimeAgentRegistry; now?: () => number; stateStore?: NexusExecutionStateStore; outcomeRecorder?: NexusOutcomeRecorder; maxRetries?: number; intelligence?: NexusIntelligenceProvider; }
 export interface NexusExecution { executionId: string; plan: NexusPlanResult; status: 'READY' | 'WAITING_APPROVAL' | 'NEEDS_CLARIFICATION'; steps: Array<IntentStep & {agent?: string}>; }
 export interface NexusStepResult { stepId:string; status:'COMPLETED'|'WAITING_APPROVAL'|'UNASSIGNED'|'FAILED'; agent?:string; output?:unknown; error?:string; attempts?:number; }
-export interface NexusRunResult { execution:NexusExecution; results:NexusStepResult[]; }
+export interface NexusRunResult { execution:NexusExecution; results:NexusStepResult[]; intelligence:NexusIntelligenceSnapshot; rankedOpportunities:RankedOpportunity[]; }
 
 const actionRequiresApproval = (purpose: string): boolean => /\b(send|contact|publish|share|create deal|financial|commit|external)\b/i.test(purpose);
 
@@ -55,6 +57,7 @@ export class NexusRuntime {
   private readonly stateStore: NexusExecutionStateStore;
   private readonly outcomeRecorder: NexusOutcomeRecorder;
   private readonly maxRetries: number;
+  private readonly intelligence?: NexusIntelligenceProvider;
 
   constructor(options: NexusRuntimeOptions = {}) {
     this.agents = options.agents ?? new AgentRegistry();
@@ -63,6 +66,7 @@ export class NexusRuntime {
     this.stateStore = options.stateStore ?? new InMemoryNexusExecutionStateStore();
     this.outcomeRecorder = options.outcomeRecorder ?? new InMemoryNexusOutcomeRecorder();
     this.maxRetries = Math.max(0, Math.floor(options.maxRetries ?? 1));
+    this.intelligence = options.intelligence;
   }
 
   plan(rawOrIntent: string | GoalIntent): NexusPlanResult {
@@ -92,9 +96,16 @@ export class NexusRuntime {
 
   async run(rawOrIntent: string | GoalIntent, actorId: string, approvals: ApprovalGate[] = []): Promise<NexusRunResult> {
     const execution = this.execute(rawOrIntent, approvals);
-    if (execution.status !== 'READY' || !this.runtimeAgents) {
-      return {execution,results:execution.steps.map((step) => ({stepId:step.id,status:execution.status === 'WAITING_APPROVAL' ? 'WAITING_APPROVAL' : 'UNASSIGNED',agent:step.agent}))};
-    }
+    const empty = emptyIntelligenceSnapshot(this.now());
+    if (execution.status !== 'READY' || !this.runtimeAgents) return {execution,results:execution.steps.map((step) => ({stepId:step.id,status:execution.status === 'WAITING_APPROVAL' ? 'WAITING_APPROVAL' : 'UNASSIGNED',agent:step.agent})),intelligence:empty,rankedOpportunities:[]};
+
+    const [opportunities, warmPaths, research] = await Promise.all([
+      this.intelligence?.discoverOpportunities?.(execution.plan.intent) ?? Promise.resolve([]),
+      this.intelligence?.findWarmPaths?.(execution.plan.intent) ?? Promise.resolve([]),
+      this.intelligence?.research?.(execution.plan.intent) ?? Promise.resolve(Object.freeze({})),
+    ]);
+    const intelligence: NexusIntelligenceSnapshot = {opportunities,warmPaths,research:Object.freeze({...research}),capturedAt:this.now()};
+    const rankedOpportunities = rankOpportunities(execution.plan.intent, opportunities);
 
     const executionState = this.stateStore.get(execution.executionId);
     const completed = new Set(executionState?.completedSteps ?? []);
@@ -103,29 +114,14 @@ export class NexusRuntime {
     const results: NexusStepResult[] = [];
     const outputs: Record<string, unknown> = {};
     const startedAt = this.now();
-    this.persistState(execution.executionId, execution.plan.intent.id, 'RUNNING', [...completed], [], [], {actorId, startedAt});
+    this.persistState(execution.executionId, execution.plan.intent.id, 'RUNNING', [...completed], [], [], {actorId, startedAt, intelligence});
 
     for (const step of execution.steps) {
-      if (completed.has(step.id)) {
-        results.push({stepId:step.id,status:'COMPLETED',agent:step.agent,attempts:0});
-        continue;
-      }
-      if (step.dependsOn.some((dependency) => !completed.has(dependency))) {
-        waiting.push(step.id);
-        results.push({stepId:step.id,status:'WAITING_APPROVAL',agent:step.agent,error:'dependency not completed'});
-        continue;
-      }
-      if (!step.agent) {
-        failed.push(step.id);
-        results.push({stepId:step.id,status:'UNASSIGNED'});
-        continue;
-      }
+      if (completed.has(step.id)) { results.push({stepId:step.id,status:'COMPLETED',agent:step.agent,attempts:0}); continue; }
+      if (step.dependsOn.some((dependency) => !completed.has(dependency))) { waiting.push(step.id); results.push({stepId:step.id,status:'WAITING_APPROVAL',agent:step.agent,error:'dependency not completed'}); continue; }
+      if (!step.agent) { failed.push(step.id); results.push({stepId:step.id,status:'UNASSIGNED'}); continue; }
       const requiredApproval = execution.plan.approvals.find((approval) => approval.id === `approval-${step.id}`);
-      if (step.approval && !isApproved(approvals.find((approval) => approval.id === requiredApproval?.id) ?? requiredApproval ?? {id:'',action:step.purpose,approver:'user',status:'pending'})) {
-        waiting.push(step.id);
-        results.push({stepId:step.id,status:'WAITING_APPROVAL',agent:step.agent});
-        continue;
-      }
+      if (step.approval && !isApproved(approvals.find((approval) => approval.id === requiredApproval?.id) ?? requiredApproval ?? {id:'',action:step.purpose,approver:'user',status:'pending'})) { waiting.push(step.id); results.push({stepId:step.id,status:'WAITING_APPROVAL',agent:step.agent}); continue; }
 
       let lastError: string | undefined;
       let attempts = 0;
@@ -137,45 +133,29 @@ export class NexusRuntime {
             actorId,
             goalId: execution.plan.intent.id,
             intentId: execution.plan.intent.id,
-            facts: Object.freeze({intent:execution.plan.intent,requirements:execution.plan.requirements,previousOutputs:outputs}),
+            facts: Object.freeze({intent:execution.plan.intent,requirements:execution.plan.requirements,previousOutputs:outputs,intelligence,rankedOpportunities}),
             constraints: Object.freeze(execution.plan.intent.constraints),
             approvals: Object.freeze(approvals.map((approval) => approval.id)),
             correlationId: execution.plan.intent.id,
           };
-          const output = await this.runtimeAgents.resolve(step.agent).execute(context, {purpose:step.purpose});
+          const output = await this.runtimeAgents.resolve(step.agent).execute(context, {purpose:step.purpose, rankedOpportunities});
           outputs[step.id] = output;
           completed.add(step.id);
           results.push({stepId:step.id,status:'COMPLETED',agent:step.agent,output,attempts});
           lastError = undefined;
           break;
-        } catch (error) {
-          lastError = error instanceof Error ? error.message : String(error);
-        }
+        } catch (error) { lastError = error instanceof Error ? error.message : String(error); }
       }
-      if (lastError) {
-        failed.push(step.id);
-        results.push({stepId:step.id,status:'FAILED',agent:step.agent,error:lastError,attempts});
-        break;
-      }
-      this.persistState(execution.executionId, execution.plan.intent.id, 'RUNNING', [...completed], [...failed], [...waiting], {actorId,startedAt,outputs});
+      if (lastError) { failed.push(step.id); results.push({stepId:step.id,status:'FAILED',agent:step.agent,error:lastError,attempts}); break; }
+      this.persistState(execution.executionId, execution.plan.intent.id, 'RUNNING', [...completed], [...failed], [...waiting], {actorId,startedAt,outputs,intelligence});
     }
 
     const status = failed.length ? (completed.size ? 'PARTIAL' : 'FAILED') : waiting.length ? 'PARTIAL' : 'COMPLETED';
     const completedIds = [...completed];
     const summary = failed.length ? `Execution stopped after ${failed.length} failed step(s).` : waiting.length ? `Execution paused with ${waiting.length} waiting step(s).` : `Execution completed ${completedIds.length} step(s).`;
-    this.persistState(execution.executionId, execution.plan.intent.id, status, completedIds, [...failed], [...waiting], {actorId,startedAt,outputs}, this.now());
-    this.outcomeRecorder.record({
-      executionId: execution.executionId,
-      status: status === 'COMPLETED' ? 'SUCCEEDED' : status === 'FAILED' ? 'FAILED' : 'PARTIAL',
-      completedStepIds: completedIds,
-      failedStepIds: [...failed],
-      summary,
-      nextAction: deriveNextAction(execution.plan.intent.goal, completedIds, failed),
-      confidence: Math.max(0, Math.min(1, execution.plan.intent.confidence)),
-      source: ['nexus-runtime'],
-      recordedAt: this.now(),
-    });
-    return {execution,results};
+    this.persistState(execution.executionId, execution.plan.intent.id, status, completedIds, [...failed], [...waiting], {actorId,startedAt,outputs,intelligence}, this.now());
+    this.outcomeRecorder.record({executionId:execution.executionId,status:status === 'COMPLETED' ? 'SUCCEEDED' : status === 'FAILED' ? 'FAILED' : 'PARTIAL',completedStepIds:completedIds,failedStepIds:[...failed],summary,nextAction:deriveNextAction(execution.plan.intent.goal,completedIds,failed),confidence:Math.max(0,Math.min(1,execution.plan.intent.confidence)),source:['nexus-runtime'],recordedAt:this.now()});
+    return {execution,results,intelligence,rankedOpportunities};
   }
 
   getExecutionState(executionId: string) { return this.stateStore.get(executionId); }

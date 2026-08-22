@@ -16,6 +16,9 @@ const researchAgent = (failures = 0, seen?: (input:unknown)=>void): RuntimeAgent
   },
 });
 
+const approved = (runtime: NexusRuntime, goal: string) =>
+  runtime.plan(goal).approvals.map((gate) => ({...gate, status:'approved' as const}));
+
 const opportunity: Opportunity = {
   id:'opp-1', type:'client', title:'Kenya distributor', description:'Distributor opportunity', people:['person-1'], companies:['company-1'], location:'Kenya', industry:'perfume', urgency:0.9,
   timestamp:new Date(fixedNow()).toISOString(), confidence:0.95, whyYou:['distribution fit'], whyThem:['market access'], whyNow:['expansion'], nextAction:'MESSAGE', provenance:[],
@@ -63,15 +66,16 @@ describe('NEXUS runtime', () => {
     const planned = runtime.plan('Find a client and prepare outreach');
     const pending = await runtime.run('Find a client and prepare outreach', 'user-1');
     expect(pending.results.some((result) => result.status === 'WAITING_APPROVAL')).toBe(true);
-    const approved = planned.approvals.map((gate) => ({...gate, status:'approved' as const}));
-    const completed = await runtime.run('Find a client and prepare outreach', 'user-1', approved);
+    const completed = await runtime.run('Find a client and prepare outreach', 'user-1', approved(runtime, 'Find a client and prepare outreach'));
     expect(completed.results.some((result) => result.status === 'COMPLETED')).toBe(true);
+    expect(planned.approvals.length).toBeGreaterThan(0);
   });
 
   it('persists completion state and records a measurable next action', async () => {
     const registry = new RuntimeAgentRegistry().register(researchAgent());
     const runtime = new NexusRuntime({now: fixedNow, runtimeAgents:registry});
-    const result = await runtime.run('Find investors for my AI company', 'user-1');
+    const goal = 'Find investors for my AI company';
+    const result = await runtime.run(goal, 'user-1', approved(runtime, goal));
     const state = runtime.getExecutionState(result.execution.executionId);
     const outcome = runtime.getOutcome(result.execution.executionId);
     expect(state?.status).toBe('COMPLETED');
@@ -83,7 +87,8 @@ describe('NEXUS runtime', () => {
   it('retries a transient agent failure without losing the execution', async () => {
     const registry = new RuntimeAgentRegistry().register(researchAgent(1));
     const runtime = new NexusRuntime({now: fixedNow, runtimeAgents:registry, maxRetries:1});
-    const result = await runtime.run('Find clients for my service', 'user-1');
+    const goal = 'Find clients for my service';
+    const result = await runtime.run(goal, 'user-1', approved(runtime, goal));
     expect(result.results.some((step) => step.status === 'COMPLETED')).toBe(true);
     expect(result.results.some((step) => step.attempts === 2)).toBe(true);
     expect(runtime.getOutcome(result.execution.executionId)?.status).toBe('SUCCEEDED');
@@ -101,7 +106,8 @@ describe('NEXUS runtime', () => {
         async research(){ return {source:'canonical-test-provider'}; },
       },
     });
-    const result = await runtime.run('Find a perfume distributor in Kenya', 'user-1');
+    const goal = 'Find a perfume distributor in Kenya';
+    const result = await runtime.run(goal, 'user-1', approved(runtime, goal));
     expect(result.rankedOpportunities[0]?.opportunity.id).toBe('opp-1');
     expect(result.intelligence.warmPaths).toHaveLength(1);
     expect(result.intelligence.research.source).toBe('canonical-test-provider');

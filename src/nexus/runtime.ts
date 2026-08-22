@@ -21,7 +21,7 @@ export interface NexusRuntimeOptions {
 
 export interface NexusExecution {
   plan: NexusPlanResult;
-  status: 'READY' | 'WAITING_APPROVAL';
+  status: 'READY' | 'WAITING_APPROVAL' | 'NEEDS_CLARIFICATION';
   steps: Array<IntentStep & {agent?: string}>;
 }
 
@@ -82,7 +82,7 @@ export class NexusRuntime {
 
   execute(rawOrIntent: string | GoalIntent, approvals: ApprovalGate[] = []): NexusExecution {
     const plan = this.plan(rawOrIntent);
-    if (plan.unresolved.length) return {plan, status: 'READY', steps: plan.plan.steps};
+    if (plan.unresolved.length) return {plan, status: 'NEEDS_CLARIFICATION', steps: plan.plan.steps};
 
     const waiting = plan.approvals.some((required) => !isApproved(approvals.find((provided) => provided.id === required.id) ?? required));
     return {plan, status: waiting ? 'WAITING_APPROVAL' : 'READY', steps: plan.plan.steps};

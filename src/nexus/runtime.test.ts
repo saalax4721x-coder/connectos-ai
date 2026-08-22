@@ -1,9 +1,18 @@
 import {describe, expect, it} from 'vitest';
 import {parseGoalIntent} from '../intent/parser';
-import {RuntimeAgentRegistry} from '../agents/runtime-registry';
+import {RuntimeAgentRegistry, type RuntimeAgent} from '../agents/runtime-registry';
 import {NexusRuntime} from './runtime';
 
 const fixedNow = () => 1720000000000;
+
+const researchAgent = (failures = 0): RuntimeAgent => ({
+  id:'research-agent', version:'1.0.0', name:'Research Agent', domain:'research', capabilities:['research'], permissions:['research'],
+  skills:['research','validate','evaluate','select'], tools:[], memory:['goal'], inputSchema:'unknown', outputSchema:'unknown', status:'active',
+  async execute(_ctx, input){
+    if (failures > 0) { failures -= 1; throw new Error('transient failure'); }
+    return {ok:true,input};
+  },
+});
 
 describe('NEXUS runtime', () => {
   it('extracts structured intent without inventing missing values', () => {
@@ -42,11 +51,7 @@ describe('NEXUS runtime', () => {
   });
 
   it('executes registered agents only after consequential approval', async () => {
-    const registry = new RuntimeAgentRegistry().register({
-      id:'research-agent', version:'1.0.0', domain:'research', capabilities:['research'], permissions:['research'],
-      skills:['research'], tools:[], memory:[], inputSchema:'unknown', outputSchema:'unknown', status:'active',
-      async execute(_ctx, input){ return {ok:true,input}; },
-    });
+    const registry = new RuntimeAgentRegistry().register(researchAgent());
     const runtime = new NexusRuntime({now: fixedNow, runtimeAgents:registry});
     const planned = runtime.plan('Find a client and prepare outreach');
     const pending = await runtime.run('Find a client and prepare outreach', 'user-1');
@@ -54,5 +59,26 @@ describe('NEXUS runtime', () => {
     const approved = planned.approvals.map((gate) => ({...gate, status:'approved' as const}));
     const completed = await runtime.run('Find a client and prepare outreach', 'user-1', approved);
     expect(completed.results.some((result) => result.status === 'COMPLETED')).toBe(true);
+  });
+
+  it('persists completion state and records a measurable next action', async () => {
+    const registry = new RuntimeAgentRegistry().register(researchAgent());
+    const runtime = new NexusRuntime({now: fixedNow, runtimeAgents:registry});
+    const result = await runtime.run('Find investors for my AI company', 'user-1');
+    const state = runtime.getExecutionState(result.execution.executionId);
+    const outcome = runtime.getOutcome(result.execution.executionId);
+    expect(state?.status).toBe('COMPLETED');
+    expect(state?.completedSteps.length).toBe(result.execution.steps.length);
+    expect(outcome?.status).toBe('SUCCEEDED');
+    expect(outcome?.nextAction).toBe('INVESTIGATE');
+  });
+
+  it('retries a transient agent failure without losing the execution', async () => {
+    const registry = new RuntimeAgentRegistry().register(researchAgent(1));
+    const runtime = new NexusRuntime({now: fixedNow, runtimeAgents:registry, maxRetries:1});
+    const result = await runtime.run('Find clients for my service', 'user-1');
+    expect(result.results.some((step) => step.status === 'COMPLETED')).toBe(true);
+    expect(result.results.some((step) => step.attempts === 2)).toBe(true);
+    expect(runtime.getOutcome(result.execution.executionId)?.status).toBe('SUCCEEDED');
   });
 });

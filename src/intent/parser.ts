@@ -1,6 +1,13 @@
-import type {GoalIntent} from './schema';
+import type { GoalIntent } from './schema';
 
 const match = (text: string, pattern: RegExp): string | undefined => text.match(pattern)?.[1]?.trim();
+
+const singularize = (term: string): string => {
+  if (term === 'people') return term;
+  if (term.endsWith('ies')) return `${term.slice(0, -3)}y`;
+  if (term.endsWith('s') && !term.endsWith('ss')) return term.slice(0, -1);
+  return term;
+};
 
 export const baseIntent = (goal: string): GoalIntent => ({
   id: `intent-${Date.now()}`,
@@ -35,9 +42,11 @@ export function parseGoalIntent(raw: string, now = Date.now()): GoalIntent {
   intent.urgency = urgency ? (urgency === 'critical' || urgency === 'immediately' || urgency === 'asap' ? 'critical' : 'high') : undefined;
 
   const peopleTerms = ['investors?', 'clients?', 'customers?', 'distributors?', 'suppliers?', 'founders?', 'cofounders?', 'collaborators?', 'talent', 'partners?'];
-  intent.peopleRequired = peopleTerms.filter((term) => new RegExp(`\\b${term}\\b`, 'i').test(text)).map((term) => term.replace(/\?$/, ''));
+  intent.peopleRequired = peopleTerms
+    .filter((term) => new RegExp(`\\b${term}\\b`, 'i').test(text))
+    .map((term) => singularize(term.replace(/\?$/, '')));
   const companyTerms = ['companies', 'startups', 'funds', 'agencies', 'manufacturers', 'studios', 'brands'];
-  intent.companiesRequired = companyTerms.filter((term) => new RegExp(`\\b${term}\\b`, 'i').test(text));
+  intent.companiesRequired = companyTerms.filter((term) => new RegExp(`\\b${term}\\b`, 'i').test(text)).map(singularize);
 
   const skillTerms = ['AI', 'engineering', 'marketing', 'sales', 'design', 'logistics', 'finance', 'legal', 'manufacturing'];
   intent.skillsRequired = skillTerms.filter((skill) => new RegExp(`\\b${skill}\\b`, 'i').test(text));

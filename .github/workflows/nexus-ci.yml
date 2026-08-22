@@ -23,4 +23,5 @@ jobs:
       - run: npm install
       - run: npm run typecheck
       - run: npm test
+      - run: npm run verify:nexus
       - run: npm run build

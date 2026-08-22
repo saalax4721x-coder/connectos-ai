@@ -12,6 +12,13 @@ describe('NEXUS runtime', () => {
     expect(intent.budget).toBeUndefined();
   });
 
+  it('parses budget multipliers and relative timelines', () => {
+    const intent = parseGoalIntent('Find investors in Kenya with a budget of $2m within 30 days', fixedNow());
+    expect(intent.budget).toBe(2_000_000);
+    expect(intent.currency).toBe('USD');
+    expect(intent.timeline).toBe('30 days');
+  });
+
   it('creates a dependency-ordered plan with guarded outreach', () => {
     const runtime = new NexusRuntime({now: fixedNow});
     const result = runtime.plan('Find three serious distributors in Kenya for my perfume brand');

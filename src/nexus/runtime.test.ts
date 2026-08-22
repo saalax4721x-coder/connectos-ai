@@ -27,6 +27,13 @@ describe('NEXUS runtime', () => {
     expect(result.approvals.length).toBeGreaterThan(0);
   });
 
+  it('blocks execution when a required goal is missing', () => {
+    const runtime = new NexusRuntime({now: fixedNow});
+    const result = runtime.execute('');
+    expect(result.status).toBe('NEEDS_CLARIFICATION');
+    expect(result.plan.unresolved).toContain('goal');
+  });
+
   it('never treats pending approval as approved', () => {
     const runtime = new NexusRuntime({now: fixedNow});
     const result = runtime.execute('Find a client and prepare outreach');

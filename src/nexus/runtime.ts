@@ -4,26 +4,15 @@ import {parseGoalIntent} from '../intent/parser';
 import {buildRequirements} from '../intent/requirements';
 import type {AgentDefinition} from '../agents/agent';
 import {AgentRegistry} from '../agents/registry';
+import type {AgentContext} from '../agents/context';
+import {RuntimeAgentRegistry} from '../agents/runtime-registry';
 import {isApproved, type ApprovalGate} from './execution/approval-gate';
 
-export interface NexusPlanResult {
-  intent: GoalIntent;
-  requirements: IntentRequirement[];
-  plan: IntentPlan;
-  approvals: ApprovalGate[];
-  unresolved: string[];
-}
-
-export interface NexusRuntimeOptions {
-  agents?: AgentRegistry;
-  now?: () => number;
-}
-
-export interface NexusExecution {
-  plan: NexusPlanResult;
-  status: 'READY' | 'WAITING_APPROVAL' | 'NEEDS_CLARIFICATION';
-  steps: Array<IntentStep & {agent?: string}>;
-}
+export interface NexusPlanResult { intent: GoalIntent; requirements: IntentRequirement[]; plan: IntentPlan; approvals: ApprovalGate[]; unresolved: string[]; }
+export interface NexusRuntimeOptions { agents?: AgentRegistry; runtimeAgents?: RuntimeAgentRegistry; now?: () => number; }
+export interface NexusExecution { plan: NexusPlanResult; status: 'READY' | 'WAITING_APPROVAL' | 'NEEDS_CLARIFICATION'; steps: Array<IntentStep & {agent?: string}>; }
+export interface NexusStepResult { stepId:string; status:'COMPLETED'|'WAITING_APPROVAL'|'UNASSIGNED'|'FAILED'; agent?:string; output?:unknown; error?:string; }
+export interface NexusRunResult { execution:NexusExecution; results:NexusStepResult[]; }
 
 const actionRequiresApproval = (purpose: string): boolean => /\b(send|contact|publish|share|create deal|financial|commit)\b/i.test(purpose);
 
@@ -55,10 +44,12 @@ function buildSteps(intent: GoalIntent, requirements: IntentRequirement[], agent
 
 export class NexusRuntime {
   private readonly agents: AgentRegistry;
+  private readonly runtimeAgents?: RuntimeAgentRegistry;
   private readonly now: () => number;
 
   constructor(options: NexusRuntimeOptions = {}) {
     this.agents = options.agents ?? new AgentRegistry();
+    this.runtimeAgents = options.runtimeAgents;
     this.now = options.now ?? Date.now;
   }
 
@@ -68,24 +59,49 @@ export class NexusRuntime {
     const unresolved: string[] = [];
     if (!intent.goal.trim()) unresolved.push('goal');
     if (intent.confidence < 0 || intent.confidence > 1) unresolved.push('confidence');
-
-    const steps = buildSteps(intent, requirements, this.agents.list());
-    const approvals = steps.filter((step) => step.approval).map((step) => ({
-      id: `approval-${step.id}`,
-      action: step.purpose,
-      approver: 'user',
-      status: 'pending' as const,
-    }));
-
-    return { intent, requirements, plan: {intentId: intent.id, steps}, approvals, unresolved };
+    const registered = this.runtimeAgents?.list() ?? [];
+    const agents = registered.length ? registered : this.agents.list();
+    const steps = buildSteps(intent, requirements, agents);
+    const approvals = steps.filter((step) => step.approval).map((step) => ({id:`approval-${step.id}`,action:step.purpose,approver:'user',status:'pending' as const}));
+    return {intent,requirements,plan:{intentId:intent.id,steps},approvals,unresolved};
   }
 
   execute(rawOrIntent: string | GoalIntent, approvals: ApprovalGate[] = []): NexusExecution {
     const plan = this.plan(rawOrIntent);
-    if (plan.unresolved.length) return {plan, status: 'NEEDS_CLARIFICATION', steps: plan.plan.steps};
-
+    if (plan.unresolved.length) return {plan,status:'NEEDS_CLARIFICATION',steps:plan.plan.steps};
     const waiting = plan.approvals.some((required) => !isApproved(approvals.find((provided) => provided.id === required.id) ?? required));
-    return {plan, status: waiting ? 'WAITING_APPROVAL' : 'READY', steps: plan.plan.steps};
+    return {plan,status:waiting ? 'WAITING_APPROVAL' : 'READY',steps:plan.plan.steps};
+  }
+
+  async run(rawOrIntent: string | GoalIntent, actorId: string, approvals: ApprovalGate[] = []): Promise<NexusRunResult> {
+    const execution = this.execute(rawOrIntent, approvals);
+    if (execution.status !== 'READY' || !this.runtimeAgents) return {execution,results:execution.steps.map((step) => ({stepId:step.id,status:execution.status === 'WAITING_APPROVAL' ? 'WAITING_APPROVAL' : 'UNASSIGNED',agent:step.agent}))};
+
+    const results: NexusStepResult[] = [];
+    const outputs: Record<string, unknown> = {};
+    for (const step of execution.steps) {
+      if (step.approval) { results.push({stepId:step.id,status:'WAITING_APPROVAL',agent:step.agent}); continue; }
+      if (!step.agent) { results.push({stepId:step.id,status:'UNASSIGNED'}); continue; }
+      try {
+        const context: AgentContext = {
+          requestId: `${execution.plan.intent.id}:${step.id}`,
+          actorId,
+          goalId: execution.plan.intent.goal,
+          intentId: execution.plan.intent.id,
+          facts: Object.freeze({intent:execution.plan.intent,requirements:execution.plan.requirements,previousOutputs:outputs}),
+          constraints: Object.freeze(execution.plan.intent.constraints),
+          approvals: Object.freeze(approvals.map((approval) => approval.id)),
+          correlationId: execution.plan.intent.id,
+        };
+        const output = await this.runtimeAgents.resolve(step.agent).execute(context, {purpose:step.purpose});
+        outputs[step.id] = output;
+        results.push({stepId:step.id,status:'COMPLETED',agent:step.agent,output});
+      } catch (error) {
+        results.push({stepId:step.id,status:'FAILED',agent:step.agent,error:error instanceof Error ? error.message : String(error)});
+        break;
+      }
+    }
+    return {execution,results};
   }
 }
 

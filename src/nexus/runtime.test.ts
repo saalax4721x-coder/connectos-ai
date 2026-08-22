@@ -1,5 +1,6 @@
 import {describe, expect, it} from 'vitest';
 import {parseGoalIntent} from '../intent/parser';
+import {RuntimeAgentRegistry} from '../agents/runtime-registry';
 import {NexusRuntime} from './runtime';
 
 const fixedNow = () => 1720000000000;
@@ -40,11 +41,18 @@ describe('NEXUS runtime', () => {
     expect(result.status).toBe('WAITING_APPROVAL');
   });
 
-  it('allows explicitly approved consequential steps to proceed', () => {
-    const runtime = new NexusRuntime({now: fixedNow});
+  it('executes registered agents only after consequential approval', async () => {
+    const registry = new RuntimeAgentRegistry().register({
+      id:'research-agent', version:'1.0.0', domain:'research', capabilities:['research'], permissions:['research'],
+      skills:['research'], tools:[], memory:[], inputSchema:'unknown', outputSchema:'unknown', status:'active',
+      async execute(_ctx, input){ return {ok:true,input}; },
+    });
+    const runtime = new NexusRuntime({now: fixedNow, runtimeAgents:registry});
     const planned = runtime.plan('Find a client and prepare outreach');
-    const approved = planned.approvals.map((gate) => ({...gate, status: 'approved' as const}));
-    const result = runtime.execute('Find a client and prepare outreach', approved);
-    expect(result.status).toBe('READY');
+    const pending = await runtime.run('Find a client and prepare outreach', 'user-1');
+    expect(pending.results.some((result) => result.status === 'WAITING_APPROVAL')).toBe(true);
+    const approved = planned.approvals.map((gate) => ({...gate, status:'approved' as const}));
+    const completed = await runtime.run('Find a client and prepare outreach', 'user-1', approved);
+    expect(completed.results.some((result) => result.status === 'COMPLETED')).toBe(true);
   });
 });

@@ -80,13 +80,17 @@ export class NexusRuntime {
     const results: NexusStepResult[] = [];
     const outputs: Record<string, unknown> = {};
     for (const step of execution.steps) {
-      if (step.approval) { results.push({stepId:step.id,status:'WAITING_APPROVAL',agent:step.agent}); continue; }
       if (!step.agent) { results.push({stepId:step.id,status:'UNASSIGNED'}); continue; }
+      const requiredApproval = execution.plan.approvals.find((approval) => approval.id === `approval-${step.id}`);
+      if (step.approval && !isApproved(approvals.find((approval) => approval.id === requiredApproval?.id) ?? requiredApproval ?? {id:'',action:step.purpose,approver:'user',status:'pending'})) {
+        results.push({stepId:step.id,status:'WAITING_APPROVAL',agent:step.agent});
+        continue;
+      }
       try {
         const context: AgentContext = {
           requestId: `${execution.plan.intent.id}:${step.id}`,
           actorId,
-          goalId: execution.plan.intent.goal,
+          goalId: execution.plan.intent.id,
           intentId: execution.plan.intent.id,
           facts: Object.freeze({intent:execution.plan.intent,requirements:execution.plan.requirements,previousOutputs:outputs}),
           constraints: Object.freeze(execution.plan.intent.constraints),

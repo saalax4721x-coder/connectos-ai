@@ -9,3 +9,4 @@ export * from './engine';
 export * from './qualification';
 export * from './ranking';
 export * from './store';
+export * from './service';

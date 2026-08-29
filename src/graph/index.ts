@@ -4,3 +4,5 @@ export * from './edge';
 export * from './query';
 export * from './repository';
 export * from './service';
+export * from './identity';
+export * from './strength';

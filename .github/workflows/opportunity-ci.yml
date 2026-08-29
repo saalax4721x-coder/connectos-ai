@@ -1,0 +1,27 @@
+name: Opportunity Engine CI
+
+on:
+  push:
+    branches:
+      - feature/opportunity-engine
+  pull_request:
+    branches:
+      - feature/nexus-core-foundation
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm install
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run verify:opportunities
+      - run: npm run build

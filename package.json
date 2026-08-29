@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "verify:nexus": "vitest run src/nexus"
+    "verify:nexus": "vitest run src/nexus",
+    "verify:opportunities": "vitest run src/opportunities"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",

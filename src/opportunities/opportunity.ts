@@ -1,2 +1,0 @@
-export type OpportunityType='client'|'job'|'investment'|'partnership'|'collaboration'|'supplier'|'buyer'|'distributor'|'funding'|'project'|'contract'|'event'|'market-entry'|'talent';
-export interface Opportunity{ id:string; type:OpportunityType; title:string; people:string[]; companies:string[]; location?:string; value?:number; urgency?:number; confidence:number; source:string; whyYou?:string; whyThem?:string; whyNow?:string; nextAction:string; }

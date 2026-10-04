@@ -11,7 +11,8 @@
     "test": "vitest run",
     "verify:nexus": "vitest run src/nexus",
     "verify:opportunities": "vitest run src/opportunities",
-    "verify:graph": "vitest run src/graph"
+    "verify:graph": "vitest run src/graph",
+    "verify:agents": "vitest run src/agents"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",

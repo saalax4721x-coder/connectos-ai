@@ -14,7 +14,8 @@
     "verify:graph": "vitest run src/graph",
     "verify:agents": "vitest run src/agents",
     "verify:workflows": "vitest run src/workflows",
-    "verify:memory": "vitest run src/memory"
+    "verify:memory": "vitest run src/memory",
+    "verify:autopilot": "vitest run src/autopilot"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",

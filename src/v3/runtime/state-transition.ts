@@ -1,12 +1,13 @@
 export type RuntimeState='queued'|'running'|'waiting_approval'|'completed'|'failed';
 
-const transitions:Record<RuntimeState,RuntimeState[]> = {
-  queued:['running'],
-  running:['waiting_approval','completed','failed'],
-  waiting_approval:['running','failed'],
-  completed:[],
-  failed:[],
+export const canTransition=(from:RuntimeState,to:RuntimeState):boolean=>{
+  if(from===to)return true;
+  switch(from){
+    case 'queued': return to==='running';
+    case 'running': return to==='waiting_approval'||to==='completed'||to==='failed';
+    case 'waiting_approval': return to==='running'||to==='failed';
+    case 'completed':
+    case 'failed':
+      return false;
+  }
 };
-
-export const canTransition=(from:RuntimeState,to:RuntimeState):boolean =>
-  from===to || transitions[from].includes(to);

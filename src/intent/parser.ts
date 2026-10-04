@@ -31,7 +31,7 @@ export function parseGoalIntent(raw: string, now = Date.now()): GoalIntent {
   }
 
   intent.timeline = match(text, /\b(?:within|in|over)\s+(\d+\s*(?:days?|weeks?|months?|years?))\b/i);
-  const urgency = text.match(/\b(critical|urgent|immediately|asap|high priority|this week|today)\b/i)?.[1]?.toLowerCase();
+  const urgency = text.match(/\b(critical|urgent|urgently|immediately|asap|high priority|this week|today)\b/i)?.[1]?.toLowerCase();
   intent.urgency = urgency ? (urgency === 'critical' || urgency === 'immediately' || urgency === 'asap' ? 'critical' : 'high') : undefined;
 
   const peopleTerms = ['investors?', 'clients?', 'customers?', 'distributors?', 'suppliers?', 'founders?', 'cofounders?', 'collaborators?', 'talent', 'partners?'];

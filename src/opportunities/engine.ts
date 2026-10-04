@@ -21,7 +21,7 @@ export function isExpired(record: Pick<OpportunityRecord,'expiresAt'|'status'>, 
 }
 
 function normalizeSignals(signals: OpportunitySignals): OpportunitySignals {
-  return Object.fromEntries(Object.entries(signals).map(([key,value])=>[key,clamp(value)])) as OpportunitySignals;
+  return Object.fromEntries(Object.entries(signals).map(([key,value])=>[key,clamp(value)])) as unknown as OpportunitySignals;
 }
 
 function makeAction(record: OpportunityRecord): OpportunityNextAction {

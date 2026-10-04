@@ -1,7 +1,6 @@
 name: Agents Verification
 on:
   pull_request:
-    branches: [main]
   push:
     branches: [feature/agent-system]
 jobs:

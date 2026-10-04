@@ -1,0 +1,19 @@
+name: Memory Verification
+on:
+  pull_request:
+  push:
+    branches: [feature/memory-engine]
+jobs:
+  memory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install -g npm@11
+      - run: npm install --no-audit --no-fund
+      - run: npm run verify:memory
+      - run: npm test
+      - run: npm run typecheck
+      - run: npm run build

@@ -18,7 +18,19 @@ describe('NEXUS opportunity and relationship integration', () => {
     const graph = new InMemoryGraph()
       .addNode({id:'a',displayName:'A',companyIds:[],skillIds:[],verified:true,source:'test',observedAt:'2026-10-04T12:00:00.000Z',confidence:1,provenance:[]})
       .addNode({id:'b',displayName:'B',companyIds:[],skillIds:[],verified:true,source:'test',observedAt:'2026-10-04T12:00:00.000Z',confidence:1,provenance:[]})
-      .addEdge({from:'a',to:'b',type:'can-introduce',source:'user-network',confidence:1});
+      .addEdge({
+        id:'edge-a-b',
+        from:'a',
+        to:'b',
+        type:'can-introduce',
+        source:'user-network',
+        confidence:1,
+        observedAt:'2026-10-04T12:00:00.000Z',
+        provenance:[],
+        strength:1,
+        consent:'unknown',
+        active:true,
+      });
     const paths = await findWarmPaths(graph, 'a', 'b');
     expect(paths).toHaveLength(0);
   });

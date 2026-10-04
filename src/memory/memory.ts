@@ -25,6 +25,6 @@ export const toMemoryItem=(memory:LegacyMemory):MemoryItem<string>=>({
   sensitivity:'private',
   tags:[],
   status:'active',
-  provenance:{sourceId:memory.sourceId??memory.source,observedAt:memory.createdAt,confidence:memory.confidence},
+  provenance:{sourceId:memory.source,observedAt:memory.createdAt,confidence:memory.confidence},
   expiresAt:memory.expiresAt
 });

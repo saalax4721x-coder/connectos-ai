@@ -3,7 +3,7 @@ export * from './runtime';
 export * from './opportunity';
 export * from './relationship';
 export * from './learning';
-export * from './outcome';
+export { NexusOutcome } from './outcome';
 export * from './intelligence/providers';
 export * from './execution/approval-gate';
 export * from './execution/state-store';

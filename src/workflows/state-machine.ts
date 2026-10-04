@@ -1,4 +1,15 @@
-import type { WorkflowRun, WorkflowState } from './types';
+import type {WorkflowRun,WorkflowState} from './types';
 const terminal=new Set<WorkflowState>(['succeeded','failed','cancelled']);
-export function transition(run:WorkflowRun,next:WorkflowState):WorkflowRun { if(terminal.has(run.state)) throw new Error(`workflow is terminal: ${run.state}`); if(next==='running'&&run.state!=='pending') throw new Error('running is only entered from pending'); if(next==='waiting-approval'&&run.state!=='running') throw new Error('approval wait requires running state'); return {...run,state:next,...(next==='running'?{startedAt:new Date().toISOString()}:{}),...(terminal.has(next)?{finishedAt:new Date().toISOString()}: {})}; }
+const transitions:Record<WorkflowState,WorkflowState[]>={pending:['running','cancelled'],running:['waiting-approval','succeeded','failed','cancelled'],'waiting-approval':['running','failed','cancelled'],succeeded:[],failed:[],cancelled:[]};
+export function transition(run:WorkflowRun,next:WorkflowState):WorkflowRun{
+  if(!transitions[run.state].includes(next))throw new Error(`invalid workflow transition: ${run.state} -> ${next}`);
+  const now=new Date().toISOString();
+  return {...run,state:next,...(next==='running'&&!run.startedAt?{startedAt:now}:{}),...(terminal.has(next)?{finishedAt:now}:{}),version:run.version+1};
+}
 export function readySteps(run:WorkflowRun){return run.steps.filter(s=>s.state==='pending'&&s.dependsOn.every(id=>run.steps.find(x=>x.id===id)?.state==='succeeded'));}
+export function refreshState(run:WorkflowRun):WorkflowRun{
+  if(run.state==='running'&&run.steps.length>0&&run.steps.every(s=>s.state==='succeeded'))return transition(run,'succeeded');
+  if(run.state==='running'&&run.steps.some(s=>s.state==='failed'&&s.attempts>s.retryLimit))return transition(run,'failed');
+  if(run.state==='running'&&run.steps.some(s=>s.state==='waiting-approval'))return transition(run,'waiting-approval');
+  return run;
+}

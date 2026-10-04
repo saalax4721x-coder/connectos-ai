@@ -7,7 +7,7 @@ export interface WorkflowRunStore{get(id:string):WorkflowRun|undefined;save(run:
 export class InMemoryWorkflowRunStore implements WorkflowRunStore{
   private runs=new Map<string,WorkflowRun>();
   get(id:string){return this.runs.get(id);}
-  save(run:WorkflowRun){this.runs.set(run.id,Object.freeze({...run,steps:run.steps.map(s=>Object.freeze({...s}))}));}
+  save(run:WorkflowRun){this.runs.set(run.id,Object.freeze({...run,steps:run.steps.map(s=>Object.freeze({...s,dependsOn:[...s.dependsOn]}))}));}
 }
 export class WorkflowEngine{
   constructor(private readonly store:WorkflowRunStore,private readonly executor:WorkflowStepExecutor){}
@@ -22,7 +22,8 @@ export class WorkflowEngine{
     while(true){
       const ready=readySteps(run);
       if(!ready.length){run=refreshState(run);this.store.save(run);return run;}
-      for(const current of ready){
+      for(const readyStep of ready){
+        const current={...readyStep,dependsOn:[...readyStep.dependsOn]};
         const def:WorkflowStepDefinition={id:current.id,name:current.name,kind:'sequential',dependsOn:current.dependsOn,agentId:current.agentId,requiresApproval:current.requiresApproval,retryLimit:current.retryLimit};
         if(current.requiresApproval){current.state='waiting-approval';run={...run,steps:run.steps.map(s=>s.id===current.id?{...current}:s),version:run.version+1};run=refreshState(run);this.store.save(run);return run;}
         let result:WorkflowExecutionResult|undefined;

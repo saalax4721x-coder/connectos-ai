@@ -1,1 +1,3 @@
 export interface ApprovalStep{stepId:string;summary:string;requiredPermission:string;status:'pending'|'approved'|'rejected';}
+export function approveStep(step:ApprovalStep):ApprovalStep{if(step.status==='rejected')throw new Error('rejected approval cannot be approved');return {...step,status:'approved'};}
+export function rejectStep(step:ApprovalStep):ApprovalStep{if(step.status==='approved')throw new Error('approved step cannot be rejected');return {...step,status:'rejected'};}

@@ -16,8 +16,8 @@ describe('NEXUS opportunity and relationship integration', () => {
 
   it('does not expose can-introduce paths without explicit consent', async () => {
     const graph = new InMemoryGraph()
-      .addNode({id:'a',displayName:'A',companyIds:[],skillIds:[],verified:true})
-      .addNode({id:'b',displayName:'B',companyIds:[],skillIds:[],verified:true})
+      .addNode({id:'a',displayName:'A',companyIds:[],skillIds:[],verified:true,source:'test'})
+      .addNode({id:'b',displayName:'B',companyIds:[],skillIds:[],verified:true,source:'test'})
       .addEdge({from:'a',to:'b',type:'can-introduce',source:'user-network',confidence:1});
     const paths = await findWarmPaths(graph, 'a', 'b');
     expect(paths).toHaveLength(0);

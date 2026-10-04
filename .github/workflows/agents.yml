@@ -5,6 +5,7 @@ on:
     branches: [feature/agent-system]
 jobs:
   agents:
+    if: github.head_ref == 'feature/agent-system' || github.ref == 'refs/heads/feature/agent-system'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

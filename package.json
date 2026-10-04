@@ -13,7 +13,8 @@
     "verify:opportunities": "vitest run src/opportunities",
     "verify:graph": "vitest run src/graph",
     "verify:agents": "vitest run src/agents",
-    "verify:workflows": "vitest run src/workflows"
+    "verify:workflows": "vitest run src/workflows",
+    "verify:memory": "vitest run src/memory"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",

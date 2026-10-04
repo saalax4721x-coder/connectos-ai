@@ -35,7 +35,7 @@ export function parseGoalIntent(raw: string, now = Date.now()): GoalIntent {
   intent.urgency = urgency ? (urgency === 'critical' || urgency === 'immediately' || urgency === 'asap' ? 'critical' : 'high') : undefined;
 
   const peopleTerms = ['investors?', 'clients?', 'customers?', 'distributors?', 'suppliers?', 'founders?', 'cofounders?', 'collaborators?', 'talent', 'partners?'];
-  intent.peopleRequired = peopleTerms.filter((term) => new RegExp(`\\b${term}\\b`, 'i').test(text)).map((term) => term.replace(/\?$/, ''));
+  intent.peopleRequired = peopleTerms.filter((term) => new RegExp(`\\b${term}\\b`, 'i').test(text)).map((term) => term.replace(/\?$/, '').replace(/s$/, ''));
   const companyTerms = ['companies', 'startups', 'funds', 'agencies', 'manufacturers', 'studios', 'brands'];
   intent.companiesRequired = companyTerms.filter((term) => new RegExp(`\\b${term}\\b`, 'i').test(text));
 

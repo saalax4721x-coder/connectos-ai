@@ -4,9 +4,9 @@ import { findDuplicate } from './dedup-engine';
 import { qualifyOpportunity } from './qualification';
 import { rankOpportunityRecords } from './ranking';
 
-const provenance=[{observedAt:'2026-08-29T10:00:00.000Z',kind:'public-source' as const,confidence:.9}];
+const provenance=[{observedAt:'2026-10-04T10:00:00.000Z',kind:'public-source' as const,confidence:.9}];
 const signals={relevance:.9,fit:.85,timing:.8,access:.7,value:.8,urgency:.7,competition:.2,effort:.3,risk:.2,confidence:.9};
-const candidate={type:'client' as const,title:'Enterprise creator partnership',description:'A verified partnership opportunity',people:['p1'],companies:['c1'],location:'Mogadishu',industry:'media',source:'public:example',confidence:.9,provenance,evidence:[{id:'e1',claim:'Company published a partnership brief',observedAt:'2026-08-29T10:00:00.000Z',quality:.9,provenance}],signals,rationale:{whyYou:['Matches stated creator goal'],whyThem:['Relevant creator capability'],whyNow:['Brief is current']}};
+const candidate={type:'client' as const,title:'Enterprise creator partnership',description:'A verified partnership opportunity',people:['p1'],companies:['c1'],location:'Mogadishu',industry:'media',source:'public:example',confidence:.9,provenance,evidence:[{id:'e1',claim:'Company published a partnership brief',observedAt:'2026-10-04T10:00:00.000Z',quality:.9,provenance}],signals,rationale:{whyYou:['Matches stated creator goal'],whyThem:['Relevant creator capability'],whyNow:['Brief is current']}};
 
 describe('Opportunity Engine',()=>{
   it('builds a canonical record with evidence, expiry, score and next action',()=>{

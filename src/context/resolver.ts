@@ -6,7 +6,7 @@ import {planContext} from './planner';
 const clamp=(n:number)=>Math.max(0,Math.min(1,n));
 
 export const resolveContext=async(intent:GoalIntent,options:ContextResolverOptions):Promise<ContextBundle>=>{
-  const plan=planContext(intent,options.entitySeeds?Object.values(options.entitySeeds)[0]:undefined);
+  const plan=planContext(intent,options.subjectId);
   const memories=[];
   const graphPaths=[];
   const gaps=[...plan.gaps];
@@ -19,10 +19,10 @@ export const resolveContext=async(intent:GoalIntent,options:ContextResolverOptio
       for(const item of found)for(const tag of item.tags){const group=grouped.get(tag)??[];group.push(item);grouped.set(tag,group);}
       for(const [tag,items] of grouped)if(new Set(items.map(item=>JSON.stringify(item.value))).size>1&&items.length>1)conflicts.push({kind:'memory',memoryIds:[...new Set(items.map(item=>item.id))],reason:`competing values for tag ${tag}`});
     }
-    if(need.kind==='graph'&&options.graph&&need.entity){
+    if(need.kind==='graph'&&need.entity){
       const seed=options.entitySeeds?.[need.entity];
       const target=options.graphTargets?.[need.entity];
-      if(seed&&target){
+      if(options.graph&&seed&&target){
         const paths=await options.graph.findWarmPaths(seed,target,4);
         if(paths.length===0) gaps.push(`no relationship path found for ${need.entity}`); else graphPaths.push(...paths);
       }else gaps.push(`graph identity or target for ${need.entity} is unresolved`);

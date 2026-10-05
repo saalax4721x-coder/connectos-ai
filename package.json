@@ -16,7 +16,8 @@
     "verify:workflows": "vitest run src/workflows",
     "verify:memory": "vitest run src/memory",
     "verify:autopilot": "vitest run src/autopilot",
-    "verify:intent": "vitest run src/intent"
+    "verify:intent": "vitest run src/intent",
+    "verify:context": "vitest run src/context"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",

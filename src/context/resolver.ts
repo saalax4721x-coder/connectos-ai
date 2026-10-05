@@ -21,15 +21,16 @@ export const resolveContext=async(intent:GoalIntent,options:ContextResolverOptio
     }
     if(need.kind==='graph'&&options.graph&&need.entity){
       const seed=options.entitySeeds?.[need.entity];
-      if(seed){
-        const paths=await options.graph.findWarmPaths(seed,seed,0);
-        graphPaths.push(...paths);
-      }else gaps.push(`graph identity for ${need.entity} is unresolved`);
+      const target=options.graphTargets?.[need.entity];
+      if(seed&&target){
+        const paths=await options.graph.findWarmPaths(seed,target,4);
+        if(paths.length===0) gaps.push(`no relationship path found for ${need.entity}`); else graphPaths.push(...paths);
+      }else gaps.push(`graph identity or target for ${need.entity} is unresolved`);
     }
   }
   const uniqueMemories=[...new Map(memories.map(item=>[item.id,item])).values()].sort((a,b)=>b.score-a.score);
   const uniquePaths=[...new Map(graphPaths.map(path=>[path.edges.map(edge=>edge.id).join('>'),path])).values()];
-  const missingRequired=plan.needs.some(need=>need.priority==='required'&&((need.kind==='memory'&&!need.subjectId)||(need.kind==='graph'&&!options.entitySeeds?.[need.entity??''])));
+  const missingRequired=plan.needs.some(need=>need.priority==='required'&&((need.kind==='memory'&&!need.subjectId)||(need.kind==='graph'&&(!options.entitySeeds?.[need.entity??'']||!options.graphTargets?.[need.entity??'']))));
   const coverage=plan.needs.length?Math.min(1,(uniqueMemories.length>0?0.45:0)+(uniquePaths.length>0?0.25:0)+(gaps.length===0?0.3:0)):1;
   return {plan,memories:uniqueMemories,graphPaths:uniquePaths,gaps:[...new Set(gaps)],conflicts,confidence:clamp(coverage),ready:!missingRequired&&gaps.length===0};
 };

@@ -21,7 +21,7 @@ describe('context intelligence',()=>{
     await service.remember({id:'m2',scope:'user',subjectId:'u2',value:'prefers Nairobi opportunities',createdAt:'2026-10-05T00:00:00.000Z',updatedAt:'2026-10-05T00:00:00.000Z',importance:.9,confidence:.9,sensitivity:'private',tags:['location'],status:'active'});
     const intent=baseIntent('Find opportunities');
     intent.outcome='qualified matches';
-    const bundle=await resolveContext(intent,{memory:service,entitySeeds:{},now:new Date('2026-10-05T00:00:00.000Z')});
+    const bundle=await resolveContext(intent,{memory:service,subjectId:'u1',entitySeeds:{},now:new Date('2026-10-05T00:00:00.000Z')});
     expect(bundle.memories.map(m=>m.id)).toContain('m1');
     expect(bundle.memories.map(m=>m.id)).not.toContain('m2');
   });

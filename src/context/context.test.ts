@@ -37,7 +37,7 @@ describe('context intelligence',()=>{
     const make=(id:string,value:string)=>service.remember({id,scope:'user',subjectId:'u1',value,createdAt:'2026-10-05T00:00:00.000Z',updatedAt:'2026-10-05T00:00:00.000Z',importance:.8,confidence:.8,sensitivity:'private',tags:['location'],status:'active'});
     await make('m1','London'); await make('m2','Nairobi');
     const intent=baseIntent('Find opportunities'); intent.outcome='qualified matches';
-    const bundle=await resolveContext(intent,{memory:service,entitySeeds:{x:'u1'},now:new Date('2026-10-05T00:00:00.000Z')});
+    const bundle=await resolveContext(intent,{memory:service,subjectId:'u1',now:new Date('2026-10-05T00:00:00.000Z')});
     expect(bundle.conflicts.length).toBeGreaterThan(0);
   });
 });

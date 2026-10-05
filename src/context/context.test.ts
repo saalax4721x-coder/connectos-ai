@@ -29,7 +29,7 @@ describe('context intelligence',()=>{
     const intent=baseIntent('Find founders');
     intent.outcome='qualified founders'; intent.peopleRequired=['founder'];
     const bundle=await resolveContext(intent,{memory:new MemoryService(new InMemoryMemoryStore())});
-    expect(bundle.gaps).toContain('graph identity for founder is unresolved');
+    expect(bundle.gaps).toContain('graph identity or target for founder is unresolved');
     expect(bundle.graphPaths).toHaveLength(0);
   });
   it('surfaces competing memory values for the same tag',async()=>{

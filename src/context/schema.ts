@@ -42,7 +42,9 @@ export interface ContextResolverOptions{
   memory:Pick<import('../memory/service').MemoryService,'retrieve'>;
   graph?:GraphService;
   now?:Date;
-  entitySeeds?:Record<string,string>;\n  graphTargets?:Record<string,string>;
+  subjectId?:string;
+  entitySeeds?:Record<string,string>;
+  graphTargets?:Record<string,string>;
 }
 
 export type ContextGraphResolver=Pick<GraphService,'findWarmPaths'>;

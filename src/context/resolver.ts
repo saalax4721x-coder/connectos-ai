@@ -1,6 +1,5 @@
-import {retrieveMemory} from '../memory/retrieval';
 import type {GoalIntent} from '../intent/schema';
-import type {ContextBundle,ContextNeed,ContextResolverOptions} from './schema';
+import type {ContextBundle,ContextResolverOptions,ContextConflict} from './schema';
 import {planContext} from './planner';
 
 const clamp=(n:number)=>Math.max(0,Math.min(1,n));
@@ -10,7 +9,7 @@ export const resolveContext=async(intent:GoalIntent,options:ContextResolverOptio
   const memories=[];
   const graphPaths=[];
   const gaps=[...plan.gaps];
-  const conflicts=[];
+  const conflicts:ContextConflict[]=[];
   for(const need of plan.needs){
     if(need.kind==='memory'&&need.scope&&need.subjectId){
       const found=await options.memory.retrieve({scope:need.scope,subjectId:need.subjectId,limit:10,now:(options.now??new Date()).toISOString()},need.query);
@@ -24,7 +23,7 @@ export const resolveContext=async(intent:GoalIntent,options:ContextResolverOptio
       const target=options.graphTargets?.[need.entity];
       if(options.graph&&seed&&target){
         const paths=await options.graph.findWarmPaths(seed,target,4);
-        if(paths.length===0) gaps.push(`no relationship path found for ${need.entity}`); else graphPaths.push(...paths);
+        if(paths.length===0)gaps.push(`no relationship path found for ${need.entity}`); else graphPaths.push(...paths);
       }else gaps.push(`graph identity or target for ${need.entity} is unresolved`);
     }
   }

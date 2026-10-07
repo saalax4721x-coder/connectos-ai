@@ -33,11 +33,13 @@ describe('context intelligence',()=>{
     expect(bundle.graphPaths).toHaveLength(0);
   });
   it('surfaces competing memory values for the same tag',async()=>{
-    const store=new InMemoryMemoryStore(); const service=new MemoryService(store);
-    const make=(id:string,value:string)=>service.remember({id,scope:'user',subjectId:'u1',value,createdAt:'2026-10-05T00:00:00.000Z',updatedAt:'2026-10-05T00:00:00.000Z',importance:.8,confidence:.8,sensitivity:'private',tags:['location'],status:'active'});
-    await make('m1','London'); await make('m2','Nairobi');
+    const competing=[
+      {id:'m1',scope:'user' as const,subjectId:'u1',value:'London',createdAt:'2026-10-05T00:00:00.000Z',updatedAt:'2026-10-05T00:00:00.000Z',importance:.8,confidence:.8,sensitivity:'private' as const,tags:['location'],status:'active' as const,score:.8},
+      {id:'m2',scope:'user' as const,subjectId:'u1',value:'Nairobi',createdAt:'2026-10-05T00:00:00.000Z',updatedAt:'2026-10-05T00:00:00.000Z',importance:.7,confidence:.8,sensitivity:'private' as const,tags:['location'],status:'active' as const,score:.7}
+    ];
+    const memory={retrieve:async()=>competing};
     const intent=baseIntent('Find opportunities'); intent.outcome='qualified matches';
-    const bundle=await resolveContext(intent,{memory:service,subjectId:'u1',now:new Date('2026-10-05T00:00:00.000Z')});
+    const bundle=await resolveContext(intent,{memory,subjectId:'u1',now:new Date('2026-10-05T00:00:00.000Z')});
     expect(bundle.conflicts.length).toBeGreaterThan(0);
   });
 });

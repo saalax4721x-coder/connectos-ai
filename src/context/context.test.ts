@@ -38,7 +38,9 @@ describe('context intelligence',()=>{
       {id:'m1',scope:'user',subjectId:'u1',value:'London',createdAt:'2026-10-05T00:00:00.000Z',updatedAt:'2026-10-05T00:00:00.000Z',importance:.8,confidence:.8,sensitivity:'private',tags:['location'],status:'active',score:.8,reasons:['tag match']},
       {id:'m2',scope:'user',subjectId:'u1',value:'Nairobi',createdAt:'2026-10-05T00:00:00.000Z',updatedAt:'2026-10-05T00:00:00.000Z',importance:.7,confidence:.8,sensitivity:'private',tags:['location'],status:'active',score:.7,reasons:['tag match']}
     ];
-    const memory:Pick<MemoryService,'retrieve'>={retrieve:async()=>competing};
+    const memory:Pick<MemoryService,'retrieve'>={
+      retrieve:async <T>()=>competing as MemoryRetrieval<T>[]
+    };
     const intent=baseIntent('Find opportunities'); intent.outcome='qualified matches';
     const bundle=await resolveContext(intent,{memory,subjectId:'u1',now:new Date('2026-10-05T00:00:00.000Z')});
     expect(bundle.conflicts.length).toBeGreaterThan(0);

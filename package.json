@@ -17,7 +17,8 @@
     "verify:memory": "vitest run src/memory",
     "verify:autopilot": "vitest run src/autopilot",
     "verify:intent": "vitest run src/intent",
-    "verify:context": "vitest run src/context"
+    "verify:context": "vitest run src/context",
+    "verify:research": "vitest run src/research"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",

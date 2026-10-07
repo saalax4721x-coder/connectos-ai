@@ -1,0 +1,25 @@
+name: Research Verification
+
+on:
+  push:
+    branches:
+      - feature/research-intelligence
+  pull_request:
+    branches:
+      - feature/research-intelligence
+      - feature/context-intelligence
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run verify:research
+      - run: npm test
+      - run: npm run typecheck
+      - run: npm run build

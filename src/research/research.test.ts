@@ -7,7 +7,7 @@ const provider=(evidenceSets:Record<string,any[]>):ResearchProvider=>({
   evidence:async(result)=>evidenceSets[result.entityId]??[]
 });
 
-const query={raw:'Find AI startups',entities:['startup'],filters:{}} as const;
+const query={raw:'Find AI startups',entities:['startup'],filters:{}};
 
 describe('research intelligence',()=>{
   it('synthesizes source-backed evidence deterministically',async()=>{

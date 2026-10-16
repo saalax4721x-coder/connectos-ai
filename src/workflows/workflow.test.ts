@@ -8,6 +8,17 @@ const workflow={id:'wf',name:'Opportunity execution',version:1,steps:[
 ]};
 const executor={execute:async(step:any)=>({stepId:step.id,output:{ok:true}})};
 describe('Workflow Engine',()=>{
+it('executes an approved step exactly once and saves the terminal state',async()=>{
+ let calls=0;const store=new InMemoryWorkflowRunStore();const engine=new WorkflowEngine(store,{execute:async step=>{calls++;return {stepId:step.id,output:'done'};}});
+ engine.create(workflow,'g','approval-regression');await engine.run('approval-regression');
+ engine.resume('approval-regression',['outreach']);expect((await engine.run('approval-regression')).state).toBe('succeeded');
+ expect(engine.get('approval-regression')?.state).toBe('succeeded');await engine.run('approval-regression');expect(calls).toBe(2);
+});
+it('persists failed state rather than leaving stored runs running',async()=>{
+ const store=new InMemoryWorkflowRunStore();const engine=new WorkflowEngine(store,{execute:async step=>({stepId:step.id,error:'failed'})});
+ engine.create(workflow,'g','failure-regression');expect((await engine.run('failure-regression')).state).toBe('failed');
+ expect(engine.get('failure-regression')?.state).toBe('failed');
+});
 it('rejects missing dependencies and cycles',()=>{expect(()=>validateWorkflow({...workflow,steps:[{...workflow.steps[0],dependsOn:['missing']}]})).toThrow();expect(()=>validateWorkflow({...workflow,steps:[{...workflow.steps[0],dependsOn:['outreach']},workflow.steps[1]]})).toThrow();});
 it('instantiates runs and exposes dependency-ready work',()=>{const run=instantiateRun(workflow,'goal-1','run-1');expect(readySteps(run).map(s=>s.id)).toEqual(['research']);});
 it('executes dependencies then stops at approval',async()=>{const store=new InMemoryWorkflowRunStore();const engine=new WorkflowEngine(store,executor);engine.create(workflow,'goal-1','run-1');const waiting=await engine.run('run-1');expect(waiting.state).toBe('waiting-approval');expect(waiting.steps.find(s=>s.id==='research')?.state).toBe('succeeded');expect(waiting.steps.find(s=>s.id==='outreach')?.state).toBe('waiting-approval');});

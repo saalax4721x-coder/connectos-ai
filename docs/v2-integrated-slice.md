@@ -31,11 +31,12 @@ Import `ConnectOSSlice`, `createSliceHttpHandler` and `createHttpResearchProvide
 
 | Method | Path | Body |
 | --- | --- | --- |
+| GET | `/api/v2/targets` | none; returns authorized contact labels without policy scores |
 | POST | `/api/v2/runs` | `{ goal, body, targetIds: string[] }` |
 | GET | `/api/v2/runs/:id` | none |
 | POST | `/api/v2/runs/:id/decision` | `{ decision: "approve" \| "reject" }` |
 
-The host implements `authenticate(request)` and `resolveTargets(actorId, entityIds)`. Authentication must enforce CSRF/session policy for mutations. Target resolution must authorize every ID and obtain qualification signals from trusted domain policy. Keep an instance per server process and mount the handler under the same authenticated application origin. Responses are private to the owner and use `Cache-Control: no-store`.
+The host implements `authenticate(request)`, `resolveTargets(actorId, entityIds)` and, for the command center, `listTargets(actorId)`. Authentication must enforce CSRF/session policy for mutations. Target resolution must authorize every ID and obtain qualification signals from trusted domain policy. Keep an instance per server process and mount the handler under the same authenticated application origin. Responses are private to the owner and use `Cache-Control: no-store`.
 
 The optional HTTP research adapter calls an existing research host service with `POST /search` (`{query, limit}`) and `POST /evidence` (`{result}`). Responses are arrays matching the existing `SearchResult` and `ResearchEvidence` types. It validates payloads, evidence entity/source lineage, timestamps and bounded scores; uses an abort deadline; rejects redirects; requires HTTPS except localhost. Credential headers come from a server-side callback. This defines a transport contract, not a claim that a live vendor integration has been configured.
 
@@ -45,11 +46,12 @@ Use Node 22.18+ and the package-manager version declared in `package.json`:
 
 ```sh
 pnpm install --frozen-lockfile
+pnpm exec playwright install chromium
 pnpm run test:e2e
 pnpm run release:gate
 ```
 
-`test:e2e` covers the application/service boundary, including a real localhost HTTP research service and authenticated request handler. Real stores and engines execute; research evidence, planning-agent output and delivery receipts are controlled fixtures. These are not browser or live-vendor smoke tests. The full test command includes these tests plus every existing engine regression suite.
+`test:e2e` covers the application/service boundary, including a real localhost HTTP research service and authenticated request handler. Real stores and engines execute; research evidence, planning-agent output and delivery receipts are controlled fixtures. `test:browser` adds Chromium coverage of the built command center against this real handler. These are not live-vendor smoke tests. The full release gate includes both test levels.
 
 `ConnectOS Release Gate` runs frozen dependency installation, typecheck, all tests and the production build for every PR and relevant branch push. Dependencies are pinned with a committed pnpm lockfile. Repository administrators must select this check as required in branch protection before claiming a merge is technically enforced. This PR does not deploy or merge anything.
 
@@ -59,7 +61,7 @@ Local verification passed: typecheck, **99 tests across 16 files**, and the Vite
 
 | Area | Remaining work before production release |
 | --- | --- |
-| V1 frontend | The shipped command center remains a planning surface. Mount the authenticated handler and connect the UI to review/approve/reject the real run; add browser end-to-end coverage. |
+| V1 frontend | The command center now uses the authenticated API with browser coverage. Mount the real authenticated host under the deployed application origin; static Vite hosting alone cannot execute runs. See `docs/v2-command-center.md`. |
 | V1 identity and tenancy | Supply real authentication, CSRF/session enforcement, authorized target resolution, and tenant-scoped persistent repositories. Caller-supplied actor IDs are not authentication. |
 | V1 integrations | Configure live research credentials and a real delivery agent; verify provider receipts and idempotency with a controlled live smoke test. No real messages were sent during verification. |
 | V1 release history | Research remains a large unmerged branch relative to main. Review its 208-commit history and replace/repair main's failed batch-generation automation before a mainline release. |

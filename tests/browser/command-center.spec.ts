@@ -11,7 +11,7 @@ async function prepare(page:Page){
 }
 test.beforeEach(async({context,request})=>{
   await request.post('/__test/reset');
-  await context.addCookies([{name:'test-session',value:'owner',url:'http://127.0.0.1:4173'}]);
+  await context.addCookies([{name:'test-session',value:'owner'.repeat(9),url:'http://127.0.0.1:4173'}]);
 });
 
 test('research, review, keyboard approval and outcome use the real handler',async({page,request},testInfo)=>{
@@ -45,7 +45,7 @@ test('expired sessions block research and recover after sign-in',async({page,con
   await context.clearCookies();await page.goto('/');
   await expect(page.getByRole('alert')).toContainText('Your session has expired.');
   await expect(page.getByRole('button',{name:'Research and prepare'})).toHaveCount(0);
-  await context.addCookies([{name:'test-session',value:'owner',url:'http://127.0.0.1:4173'}]);
+  await context.addCookies([{name:'test-session',value:'owner'.repeat(9),url:'http://127.0.0.1:4173'}]);
   await page.getByRole('button',{name:'Connect again'}).click();
   await expect(page.getByText('Workspace connected',{exact:true})).toBeVisible();
 });
@@ -92,7 +92,15 @@ test('consent changes stop delivery and show the failed step',async({page,reques
 
 test('a different actor cannot reopen the reviewed run',async({page,context})=>{
   await prepare(page);
-  await context.addCookies([{name:'test-session',value:'other',url:'http://127.0.0.1:4173'}]);
+  await context.addCookies([{name:'test-session',value:'other'.repeat(9),url:'http://127.0.0.1:4173'}]);
   await page.reload();await expect(page.getByRole('alert')).toContainText('belongs to another workspace');
   await expect(page.getByRole('button',{name:'Approve and send'})).toHaveCount(0);
+});
+
+test('forged CSRF tokens cannot authorize outreach',async({page,request})=>{
+  await prepare(page);
+  await page.route('**/decision',route=>route.continue({headers:{...route.request().headers(),'x-csrf-token':'forged'}}));
+  await page.getByRole('button',{name:'Approve and send'}).click();
+  await expect(page.getByRole('alert')).toContainText('did not authorize');
+  expect((await (await request.get('/__test/counts')).json()).sends).toBe(0);
 });

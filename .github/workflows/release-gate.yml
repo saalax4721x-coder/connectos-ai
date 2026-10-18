@@ -2,7 +2,7 @@ name: ConnectOS Release Gate
 on:
   pull_request:
   push:
-    branches: [main, feature/research-intelligence, feature/v2-integrated-slice]
+    branches: [main, feature/research-intelligence, feature/v2-integrated-slice, feature/v2-command-center]
   workflow_dispatch:
 permissions:
   contents: read
@@ -23,4 +23,5 @@ jobs:
         with:
           version: 11.25.0
       - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm run release:gate

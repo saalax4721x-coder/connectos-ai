@@ -6,6 +6,8 @@ export interface SliceHttpHost {
   authenticate(request:Request):Promise<string|undefined>;
   /** Resolve authorized targets and domain signals server-side; never trust client scores. */
   resolveTargets(actorId:string,entityIds:string[]):Promise<ResearchTarget[]>;
+  /** Return only targets this actor may research/contact. Scores remain server-side. */
+  listTargets?(actorId:string):Promise<ResearchTarget[]>;
 }
 const object=(v:unknown):v is Record<string,unknown>=>!!v&&typeof v==='object'&&!Array.isArray(v);
 const text=(v:unknown,max:number):v is string=>typeof v==='string'&&v.trim().length>0&&v.length<=max;
@@ -18,6 +20,11 @@ export function createSliceHttpHandler(slice:ConnectOSSlice,host:SliceHttpHost){
     if(!actorId)return json({error:'Authentication required'},401);
     const path=new URL(request.url).pathname;
     try{
+      if(path==='/api/v2/targets'&&request.method==='GET'){
+        if(!host.listTargets)return json({error:'Target discovery unavailable'},503);
+        const targets=await host.listTargets(actorId);
+        return json(targets.map(t=>({id:t.entityId,title:t.title,type:t.type})));
+      }
       if(path==='/api/v2/runs'&&request.method==='POST'){
         const body:unknown=await request.json();
         if(!object(body)||!text(body.goal,4000)||!text(body.body,20000)||!Array.isArray(body.targetIds)||

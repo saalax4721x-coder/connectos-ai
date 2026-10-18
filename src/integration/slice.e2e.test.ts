@@ -52,10 +52,12 @@ describe('ConnectOS V2 integrated application end-to-end',()=>{
   it('exposes authenticated start, review and approval using host-resolved targets',async()=>{
     const f=await fixture();
     const handler=createSliceHttpHandler(f.slice,{authenticate:async req=>req.headers.get('test-actor')??undefined,
-      resolveTargets:async()=>f.request.targets});
+      resolveTargets:async()=>f.request.targets,listTargets:async()=>f.request.targets});
     const call=(path:string,method:string,body?:unknown,actor='owner')=>handler(new Request(`https://connectos.example/api/v2/runs${path}`,
       {method,headers:{'test-actor':actor,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined}));
     expect((await call('','POST',{},'')).status).toBe(401);
+    const targets=await handler(new Request('https://connectos.example/api/v2/targets',{headers:{'test-actor':'owner'}}));
+    expect(await targets.json()).toEqual([{id:'person-1',title:'Distribution partner',type:'distributor'}]);
     const start=await call('','POST',{goal:f.request.goal,body:f.request.body,targetIds:['person-1'],actorId:'spoofed'});
     expect(start.status).toBe(201);
     const pending=await start.json();

@@ -24,6 +24,34 @@ const opportunity: Opportunity = {
 };
 
 describe('NEXUS runtime', () => {
+  it('resumes completed steps without replaying agents or losing outputs', async () => {
+    let calls=0;
+    const registry=new RuntimeAgentRegistry().register(researchAgent(0,()=>{calls++;}));
+    const runtime=new NexusRuntime({now:fixedNow,runtimeAgents:registry});
+    const intent={...parseGoalIntent('Find clients',fixedNow()),id:'resume-goal'};
+    const first=await runtime.run(intent,'owner');
+    const completed=first.results.filter(r=>r.status==='COMPLETED').length;
+    expect(calls).toBe(completed);
+    const gates=runtime.plan(intent).approvals.map(g=>({...g,status:'approved' as const}));
+    const second=await runtime.run(intent,'owner',gates);
+    expect(calls).toBe(second.results.length);
+    expect(second.results[0].output).toEqual(first.results[0].output);
+    await runtime.run(intent,'owner',gates);
+    expect(calls).toBe(second.results.length);
+    await expect(runtime.run(intent,'another',gates)).rejects.toThrow('another actor');
+  });
+
+  it('binds consequential approvals to intent and action', async () => {
+    const registry=new RuntimeAgentRegistry().register(researchAgent());
+    const runtime=new NexusRuntime({now:fixedNow,runtimeAgents:registry});
+    const intent={...parseGoalIntent('Find clients',fixedNow()),id:'goal-a'};
+    const gates=runtime.plan(intent).approvals.map(g=>({...g,status:'approved' as const}));
+    const other=await runtime.run({...intent,id:'goal-b'},'owner',gates);
+    expect(other.results.at(-1)?.status).toBe('WAITING_APPROVAL');
+    const changed=await runtime.run(intent,'owner',gates.map(g=>({...g,action:'unrelated action'})));
+    expect(changed.results.at(-1)?.status).toBe('WAITING_APPROVAL');
+  });
+
   it('extracts structured intent without inventing missing values', () => {
     const intent = parseGoalIntent('Find three distributors in Kenya for my perfume brand', fixedNow());
     expect(intent.location).toBe('Kenya');

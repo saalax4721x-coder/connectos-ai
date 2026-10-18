@@ -9,6 +9,8 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
+    "test:e2e": "vitest run src/integration",
+    "release:gate": "pnpm run typecheck && pnpm test && pnpm run build",
     "verify:nexus": "vitest run src/nexus",
     "verify:opportunities": "vitest run src/opportunities",
     "verify:graph": "vitest run src/graph",
@@ -21,17 +23,19 @@
     "verify:research": "vitest run src/research"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "latest",
-    "vite": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "lucide-react": "latest"
+    "@vitejs/plugin-react": "6.1.2",
+    "vite": "8.3.4",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "lucide-react": "1.57.0"
   },
   "devDependencies": {
-    "@types/node": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "typescript": "latest",
-    "vitest": "latest"
-  }
+    "@types/node": "26.6.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "typescript": "7.0.2",
+    "vitest": "5.0.5"
+  },
+  "packageManager": "pnpm@11.25.0",
+  "engines": {"node": ">=22.18.0"}
 }

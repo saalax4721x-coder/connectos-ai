@@ -36,8 +36,9 @@ export class WorkflowEngine{
         else if(result?.error)current.state='failed';
         else {current.state='succeeded';current.output=result?.output;}
         run={...run,steps:run.steps.map(s=>s.id===current.id?{...current}:s),version:run.version+1};this.store.save(run);
-        if(current.state==='waiting-approval')return refreshState(run);
-        if(current.state==='failed')return refreshState(run);
+        if(current.state==='waiting-approval'||current.state==='failed'){
+          run=refreshState(run);this.store.save(run);return run;
+        }
       }
     }
   }
@@ -46,7 +47,7 @@ export class WorkflowEngine{
     if(run.state!=='waiting-approval')return run;
     const approved=new Set(approvedStepIds);
     if(run.steps.some(s=>s.state==='waiting-approval'&&!approved.has(s.id)))return run;
-    run={...run,steps:run.steps.map(s=>approved.has(s.id)&&s.state==='waiting-approval'?{...s,state:'pending'}:s),version:run.version+1};
+    run={...run,steps:run.steps.map(s=>approved.has(s.id)&&s.state==='waiting-approval'?{...s,state:'pending',requiresApproval:false}:s),version:run.version+1};
     run=transition(run,'running');this.store.save(run);return run;
   }
   cancel(runId:string){let run=this.store.get(runId);if(!run)throw new Error('workflow run not found: '+runId);run=transition(run,'cancelled');this.store.save(run);return run;}

@@ -34,5 +34,6 @@ export const research=async(request:ResearchRequest,provider:ResearchProvider):P
     findings.push({entityId:items[0].entityId,claim:items[0].claim,value:items[0].value,confidence,evidenceIds:items.map(item=>item.id),sourceIds:[...new Set(items.flatMap(item=>item.sourceIds))],staleEvidenceIds:unique.filter(item=>item.entityId===items[0].entityId&&item.claim===items[0].claim&&item.freshness<minimumFreshness).map(item=>item.id)});
   }
   if(conflicts.length)gaps.push(...conflicts.map(c=>`conflicting evidence for ${c.entityId}: ${c.claim}`));
+  if(!findings.length)gaps.push('no usable findings meet the research thresholds');
   return {findings:findings.sort((a,b)=>b.confidence-a.confidence),evidence:unique,conflicts,gaps:[...new Set(gaps)],ready:gaps.length===0};
 };

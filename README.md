@@ -2,6 +2,8 @@
 
 AI-powered business operating system.
 
+The first V2 application slice composes Research, Graph, Opportunities, NEXUS, Agents, Workflows and Memory for research-to-approved-outreach. See [integration, verification and release blockers](docs/v2-integrated-slice.md). Run `pnpm run release:gate` for typecheck, all tests and the production build.
+
 ## Vision
 ConnectOS helps ambitious people:
 

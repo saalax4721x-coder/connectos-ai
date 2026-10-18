@@ -1,5 +1,6 @@
 import type {ConnectOSSlice} from './slice';
 import type {ResearchTarget} from './adapters';
+import {SessionRequestRejected} from './session-auth';
 
 export interface SliceHttpHost {
   /** Authenticate each request and enforce CSRF/session policy for mutations. */
@@ -16,7 +17,10 @@ const text=(v:unknown,max:number):v is string=>typeof v==='string'&&v.trim().len
 export function createSliceHttpHandler(slice:ConnectOSSlice,host:SliceHttpHost){
   const json=(body:unknown,status=200)=>Response.json(body,{status,headers:{'Cache-Control':'no-store'}});
   return async(request:Request):Promise<Response>=>{
-    const actorId=await host.authenticate(request);
+    let actorId:string|undefined;
+    try{actorId=await host.authenticate(request);}
+    catch(error){return error instanceof SessionRequestRejected?json({error:'Request is not authorized'},403):
+      json({error:'Authentication service unavailable'},503);}
     if(!actorId)return json({error:'Authentication required'},401);
     const path=new URL(request.url).pathname;
     try{

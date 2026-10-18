@@ -12,8 +12,10 @@ import {MemoryOpportunityStore} from '../../src/opportunities/store';
 import {MemoryService} from '../../src/memory/service';
 import {InMemoryMemoryStore} from '../../src/memory/store';
 import type {ResearchTarget} from '../../src/integration/adapters';
+import {createSessionAuthenticator,hashSessionToken} from '../../src/integration/session-auth';
 
 const origin='http://127.0.0.1:4173';
+const csrf='fixture-csrf'.repeat(4);
 const contact:ResearchTarget={entityId:'partner-1',title:'Amina — East Africa Distribution',type:'distributor',
   signals:{relevance:1,fit:.9,timing:.9,access:.9,value:.8,urgency:.8,competition:.1,effort:.1,risk:.1,confidence:.95}};
 
@@ -37,11 +39,10 @@ async function fixture(){
     agents:new RuntimeAgentRegistry().register(planner).register(sender),planningAgentId:'planner',actionAgentId:'sender',
     agentExecutions:new InMemoryAgentExecutionStore(),workflowRuns:new InMemoryWorkflowRunStore()});
   const handler=createSliceHttpHandler(slice,{
-    async authenticate(req){
-      const actor=req.headers.get('cookie')?.match(/(?:^|;\s*)test-session=(owner|other)(?:;|$)/)?.[1];
-      if(req.method==='POST'&&req.headers.get('x-csrf-token')!=='fixture-csrf')return undefined;
-      return actor;
-    },
+    authenticate:createSessionAuthenticator({origin,cookieName:'test-session',async lookupSession(hash){
+      const actor=['owner','other'].find(id=>hashSessionToken(id.repeat(9))===hash);
+      return actor?{actorId:actor,csrfToken:csrf,expiresAt:new Date(Date.now()+3600000).toISOString()}:undefined;
+    }}),
     async resolveTargets(actor,ids){return actor==='owner'&&ids.length===1&&ids[0]===contact.entityId?[contact]:[];},
     async listTargets(actor){return actor==='owner'?[contact]:[];},
   });
@@ -50,7 +51,7 @@ async function fixture(){
       observedAt:now,confidence:1,strength:1,consent:'declined',provenance:[]})};
 }
 let current=await fixture();
-const html=(await readFile('dist/index.html','utf8')).replace('</head>','<meta name="csrf-token" content="fixture-csrf"></head>');
+const html=(await readFile('dist/index.html','utf8')).replace('</head>',`<meta name="csrf-token" content="${csrf}"></head>`);
 
 await preview({configFile:false,root:process.cwd(),preview:{host:'127.0.0.1',port:4173,strictPort:true},plugins:[{
   name:'authenticated-browser-test-host',

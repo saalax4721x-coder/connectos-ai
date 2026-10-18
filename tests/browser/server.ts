@@ -13,6 +13,7 @@ import {MemoryService} from '../../src/memory/service';
 import {InMemoryMemoryStore} from '../../src/memory/store';
 import type {ResearchTarget} from '../../src/integration/adapters';
 import {createSessionAuthenticator,hashSessionToken} from '../../src/integration/session-auth';
+import {createNodeApiListener} from '../../src/integration/node-http';
 
 const origin='http://127.0.0.1:4173';
 const csrf='fixture-csrf'.repeat(4);
@@ -51,6 +52,7 @@ async function fixture(){
       observedAt:now,confidence:1,strength:1,consent:'declined',provenance:[]})};
 }
 let current=await fixture();
+const apiListener=createNodeApiListener({publicOrigin:origin,handler:request=>current.handler(request)});
 const html=(await readFile('dist/index.html','utf8')).replace('</head>',`<meta name="csrf-token" content="${csrf}"></head>`);
 
 await preview({configFile:false,root:process.cwd(),preview:{host:'127.0.0.1',port:4173,strictPort:true},plugins:[{
@@ -71,16 +73,9 @@ await preview({configFile:false,root:process.cwd(),preview:{host:'127.0.0.1',por
         await current.revoke();res.setHeader('Content-Type','application/json');res.end('{}');return;
       }
       if(!url.pathname.startsWith('/api/'))return next();
-      try{
-        const chunks:Buffer[]=[];for await(const chunk of req)chunks.push(Buffer.from(chunk));
-        const headers=new Headers();for(const [key,value] of Object.entries(req.headers))if(value)headers.set(key,Array.isArray(value)?value.join(','):value);
-        if(url.pathname==='/api/v2/runs'&&req.method==='POST')current.start();
-        if(url.pathname.endsWith('/decision')&&req.method==='POST')current.decision();
-        const response=await current.handler(new Request(url,{method:req.method,headers,
-          body:chunks.length?Buffer.concat(chunks).toString():undefined}));
-        res.statusCode=response.status;response.headers.forEach((value,key)=>res.setHeader(key,value));
-        res.end(await response.text());
-      }catch{res.statusCode=500;res.end('Browser fixture failure');}
+      if(url.pathname==='/api/v2/runs'&&req.method==='POST')current.start();
+      if(url.pathname.endsWith('/decision')&&req.method==='POST')current.decision();
+      apiListener(req,res);
     });
   },
 }]});

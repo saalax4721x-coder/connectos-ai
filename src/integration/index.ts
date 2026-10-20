@@ -5,3 +5,4 @@ export * from './http-api';
 export * from './session-auth';
 export * from './node-http';
 export * from './authenticated-document';
+export * from './application-host';

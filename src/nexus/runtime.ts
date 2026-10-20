@@ -78,7 +78,7 @@ export class NexusRuntime {
     const registered = this.runtimeAgents?.list() ?? [];
     const agents = registered.length ? registered : this.agents.list();
     const steps = buildSteps(intent, requirements, agents);
-    const approvals = steps.filter((step) => step.approval).map((step) => ({id:`approval-${step.id}`,action:step.purpose,approver:'user',status:'pending' as const}));
+    const approvals = steps.filter((step) => step.approval).map((step) => ({id:`approval-${intent.id}-${step.id}`,action:step.purpose,approver:'user',status:'pending' as const}));
     return {intent,requirements,plan:{intentId:intent.id,steps},approvals,unresolved};
   }
 
@@ -89,15 +89,17 @@ export class NexusRuntime {
       this.persistState(executionId, plan.intent.id, 'NEEDS_CLARIFICATION', [], [], plan.plan.steps.map((step) => step.id), {});
       return {executionId,plan,status:'NEEDS_CLARIFICATION',steps:plan.plan.steps};
     }
-    const waiting = plan.approvals.some((required) => !isApproved(approvals.find((provided) => provided.id === required.id) ?? required));
-    this.persistState(executionId, plan.intent.id, waiting ? 'WAITING_APPROVAL' : 'PLANNED', [], [], waiting ? plan.plan.steps.filter((step) => step.approval).map((step) => step.id) : [], {});
+    const waiting = plan.approvals.some((required) => !isApproved(approvals.find((provided) => provided.id === required.id && provided.action === required.action && provided.approver === required.approver) ?? required));
+    if (!this.stateStore.get(executionId)) this.persistState(executionId, plan.intent.id, waiting ? 'WAITING_APPROVAL' : 'PLANNED', [], [], waiting ? plan.plan.steps.filter((step) => step.approval).map((step) => step.id) : [], {});
     return {executionId,plan,status:waiting ? 'WAITING_APPROVAL' : 'READY',steps:plan.plan.steps};
   }
 
   async run(rawOrIntent: string | GoalIntent, actorId: string, approvals: ApprovalGate[] = []): Promise<NexusRunResult> {
     const execution = this.execute(rawOrIntent, approvals);
+    const prior = this.stateStore.get(execution.executionId);
+    if (prior?.metadata.actorId && prior.metadata.actorId !== actorId) throw new Error('execution belongs to another actor');
     const empty = emptyIntelligenceSnapshot(this.now());
-    if (execution.status !== 'READY' || !this.runtimeAgents) return {execution,results:execution.steps.map((step) => ({stepId:step.id,status:execution.status === 'WAITING_APPROVAL' ? 'WAITING_APPROVAL' : 'UNASSIGNED',agent:step.agent})),intelligence:empty,rankedOpportunities:[]};
+    if (execution.status === 'NEEDS_CLARIFICATION' || !this.runtimeAgents) return {execution,results:execution.steps.map((step) => ({stepId:step.id,status:execution.status === 'WAITING_APPROVAL' ? 'WAITING_APPROVAL' : 'UNASSIGNED',agent:step.agent})),intelligence:empty,rankedOpportunities:[]};
 
     const [opportunities, warmPaths, research] = await Promise.all([
       this.intelligence?.discoverOpportunities?.(execution.plan.intent) ?? Promise.resolve([]),
@@ -112,16 +114,16 @@ export class NexusRuntime {
     const failed: string[] = [];
     const waiting: string[] = [];
     const results: NexusStepResult[] = [];
-    const outputs: Record<string, unknown> = {};
+    const outputs: Record<string, unknown> = {...(executionState?.metadata.outputs as Record<string, unknown> | undefined)};
     const startedAt = this.now();
     this.persistState(execution.executionId, execution.plan.intent.id, 'RUNNING', [...completed], [], [], {actorId, startedAt, intelligence});
 
     for (const step of execution.steps) {
-      if (completed.has(step.id)) { results.push({stepId:step.id,status:'COMPLETED',agent:step.agent,attempts:0}); continue; }
+      if (completed.has(step.id)) { results.push({stepId:step.id,status:'COMPLETED',agent:step.agent,output:outputs[step.id],attempts:0}); continue; }
       if (step.dependsOn.some((dependency) => !completed.has(dependency))) { waiting.push(step.id); results.push({stepId:step.id,status:'WAITING_APPROVAL',agent:step.agent,error:'dependency not completed'}); continue; }
       if (!step.agent) { failed.push(step.id); results.push({stepId:step.id,status:'UNASSIGNED'}); continue; }
-      const requiredApproval = execution.plan.approvals.find((approval) => approval.id === `approval-${step.id}`);
-      if (step.approval && !isApproved(approvals.find((approval) => approval.id === requiredApproval?.id) ?? requiredApproval ?? {id:'',action:step.purpose,approver:'user',status:'pending'})) { waiting.push(step.id); results.push({stepId:step.id,status:'WAITING_APPROVAL',agent:step.agent}); continue; }
+      const requiredApproval = execution.plan.approvals.find((approval) => approval.id === `approval-${execution.plan.intent.id}-${step.id}`);
+      if (step.approval && !isApproved(approvals.find((approval) => approval.id === requiredApproval?.id && approval.action === requiredApproval.action && approval.approver === requiredApproval.approver) ?? requiredApproval ?? {id:'',action:step.purpose,approver:'user',status:'pending'})) { waiting.push(step.id); results.push({stepId:step.id,status:'WAITING_APPROVAL',agent:step.agent}); continue; }
 
       let lastError: string | undefined;
       let attempts = 0;

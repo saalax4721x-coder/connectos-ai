@@ -23,6 +23,7 @@ export class InMemoryMemoryStore implements MemoryStore {
     const now=q.now?Date.parse(q.now):Date.now();
     return [...this.items.values()]
       .filter(x=>x.scope===q.scope&&x.subjectId===q.subjectId)
+      .filter(x=>x.status!=='deleted')
       .filter(x=>q.includeSuperseded||x.status!=='superseded')
       .filter(x=>q.includeExpired||x.status!=='expired')
       .filter(x=>!x.expiresAt||q.includeExpired||Date.parse(x.expiresAt)>now)

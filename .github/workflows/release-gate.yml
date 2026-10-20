@@ -1,0 +1,27 @@
+name: ConnectOS Release Gate
+on:
+  pull_request:
+  push:
+    branches: [main, feature/research-intelligence, feature/v2-integrated-slice, feature/v2-command-center]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: release-gate-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  release-gate:
+    name: Typecheck, end-to-end tests and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm run release:gate

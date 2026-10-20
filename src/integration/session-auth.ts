@@ -22,8 +22,8 @@ const opaque=/^[A-Za-z0-9_-]{32,256}$/;
 export const hashSessionToken=(token:string):string=>createHash('sha256').update(token).digest('hex');
 const tokenEqual=(a:string,b:string)=>timingSafeEqual(createHash('sha256').update(a).digest(),createHash('sha256').update(b).digest());
 
-/** Server-only adapter over the host's session backend; does not implement login or session issuance. */
-export function createSessionAuthenticator(options:SessionGuardOptions):SliceHttpHost['authenticate']{
+/** Shared read-only session lookup for API authentication and authenticated documents. */
+export function createSessionResolver(options:SessionGuardOptions){
   const url=new URL(options.origin);
   if(url.username||url.password||url.pathname!=='/'||url.search||url.hash||
     (url.protocol!=='https:'&&!(url.protocol==='http:'&&['localhost','127.0.0.1','[::1]'].includes(url.hostname))))
@@ -31,10 +31,8 @@ export function createSessionAuthenticator(options:SessionGuardOptions):SliceHtt
   const cookieName=options.cookieName??'__Host-connectos-session';
   if(!/^[A-Za-z0-9_-]+$/.test(cookieName))throw new Error('Invalid session cookie name');
   const origin=url.origin;
-  return async request=>{
+  return async(request:Request):Promise<WorkspaceSession|undefined>=>{
     if(new URL(request.url).origin!==origin)throw new SessionRequestRejected();
-    const site=request.headers.get('Sec-Fetch-Site');
-    if(site&&site!=='same-origin')throw new SessionRequestRejected();
     const cookies=(request.headers.get('Cookie')??'').split(';').map(s=>s.trim())
       .filter(s=>s.slice(0,s.indexOf('='))===cookieName);
     if(cookies.length!==1)return undefined;
@@ -44,6 +42,19 @@ export function createSessionAuthenticator(options:SessionGuardOptions):SliceHtt
     const now=(options.now??Date.now)();
     if(!session||session.revoked||!session.actorId.trim()||!Number.isFinite(now)||
       !Number.isFinite(Date.parse(session.expiresAt))||Date.parse(session.expiresAt)<=now||!opaque.test(session.csrfToken))return undefined;
+    return session;
+  };
+}
+
+/** Server-only adapter over the host's session backend; does not implement login or session issuance. */
+export function createSessionAuthenticator(options:SessionGuardOptions):SliceHttpHost['authenticate']{
+  const resolveSession=createSessionResolver(options);
+  const origin=new URL(options.origin).origin;
+  return async request=>{
+    const site=request.headers.get('Sec-Fetch-Site');
+    if(site&&site!=='same-origin')throw new SessionRequestRejected();
+    const session=await resolveSession(request);
+    if(!session)return undefined;
     if(!['GET','HEAD','OPTIONS'].includes(request.method)){
       const csrf=request.headers.get('X-CSRF-Token')??'';
       if(request.headers.get('Origin')!==origin||

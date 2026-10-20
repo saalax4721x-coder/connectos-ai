@@ -42,12 +42,24 @@ test('pending approval survives a browser reload',async({page,request})=>{
 });
 
 test('expired sessions block research and recover after sign-in',async({page,context})=>{
-  await context.clearCookies();await page.goto('/');
-  await expect(page.getByRole('alert')).toContainText('Your session has expired.');
+  await context.clearCookies();const response=await page.goto('/');
+  expect(response?.status()).toBe(401);
+  await expect(page.locator('body')).toContainText('Sign in to your workspace');
   await expect(page.getByRole('button',{name:'Research and prepare'})).toHaveCount(0);
   await context.addCookies([{name:'test-session',value:'owner'.repeat(9),url:'http://127.0.0.1:4173'}]);
-  await page.getByRole('button',{name:'Connect again'}).click();
+  await page.reload();
   await expect(page.getByText('Workspace connected',{exact:true})).toBeVisible();
+});
+
+test('HTML contains only the current session CSRF token and cannot be cached',async({page,context,request})=>{
+  const first=await page.goto('/');
+  expect(first?.headers()['cache-control']).toBe('private, no-store');
+  const owner=await page.locator('meta[name="csrf-token"]').getAttribute('content');
+  expect(owner).toBe(`owner_${'fixture-csrf'.repeat(4)}`);
+  await context.addCookies([{name:'test-session',value:'other'.repeat(9),url:'http://127.0.0.1:4173'}]);
+  await page.reload();
+  expect(await page.locator('meta[name="csrf-token"]').getAttribute('content')).toBe(`other_${'fixture-csrf'.repeat(4)}`);
+  expect((await request.get('/index.html')).status()).toBe(404);
 });
 
 test('a lost approval response requires a status refresh without resending',async({page,request})=>{

@@ -1,6 +1,5 @@
 /** Test-only loopback host. Never mount these fixture routes in a deployed application. */
-import {preview} from 'vite';
-import {readFile} from 'node:fs/promises';
+import {createServer} from 'node:http';
 import {ConnectOSSlice} from '../../src/integration/slice';
 import {createSliceHttpHandler} from '../../src/integration/http-api';
 import {RuntimeAgentRegistry,type RuntimeAgent} from '../../src/agents/runtime-registry';
@@ -14,7 +13,7 @@ import {InMemoryMemoryStore} from '../../src/memory/store';
 import type {ResearchTarget} from '../../src/integration/adapters';
 import {createSessionAuthenticator,hashSessionToken} from '../../src/integration/session-auth';
 import {createNodeApiListener} from '../../src/integration/node-http';
-import {createAuthenticatedDocumentHandler} from '../../src/integration/authenticated-document';
+import {createApplicationHandler} from '../../src/integration/application-host';
 
 const origin='http://127.0.0.1:4173';
 const csrf='fixture-csrf'.repeat(4);
@@ -54,14 +53,10 @@ async function fixture(){
       observedAt:now,confidence:1,strength:1,consent:'declined',provenance:[]})};
 }
 let current=await fixture();
-const documentHandler=createAuthenticatedDocumentHandler({...sessions,html:await readFile('dist/index.html','utf8')});
-const appListener=createNodeApiListener({publicOrigin:origin,handler:request=>new URL(request.url).pathname.startsWith('/api/')?
-  current.handler(request):documentHandler(request)});
-
-await preview({configFile:false,root:process.cwd(),preview:{host:'127.0.0.1',port:4173,strictPort:true},plugins:[{
-  name:'authenticated-browser-test-host',
-  configurePreviewServer(server){
-    server.middlewares.use(async(req,res,next)=>{
+const handler=await createApplicationHandler({...sessions,buildDirectory:'dist',apiHandler:request=>current.handler(request)});
+const appListener=createNodeApiListener({publicOrigin:origin,handler});
+const server=createServer({requestTimeout:15000,headersTimeout:10000},async(req,res)=>{
+    try{
       const url=new URL(req.url??'/',origin);
       if(url.pathname==='/'){appListener(req,res);return;}
       if(url.pathname==='/__test/reset'&&req.method==='POST'){
@@ -73,14 +68,10 @@ await preview({configFile:false,root:process.cwd(),preview:{host:'127.0.0.1',por
       if(url.pathname==='/__test/revoke-consent'&&req.method==='POST'){
         await current.revoke();res.setHeader('Content-Type','application/json');res.end('{}');return;
       }
-      if(!url.pathname.startsWith('/api/')){
-        if(url.pathname.startsWith('/assets/'))return next();
-        appListener(req,res);return;
-      }
       if(url.pathname==='/api/v2/runs'&&req.method==='POST')current.start();
       if(url.pathname.endsWith('/decision')&&req.method==='POST')current.decision();
       appListener(req,res);
-    });
-  },
-}]});
+    }catch{res.writeHead(500);res.end('Fixture unavailable');}
+});
+await new Promise<void>((resolve,reject)=>{server.once('error',reject);server.listen(4173,'127.0.0.1',resolve);});
 console.log(`Browser fixture ready at ${origin}`);
